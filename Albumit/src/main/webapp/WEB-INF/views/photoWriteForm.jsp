@@ -47,7 +47,8 @@
 			var dialog, form;
 			
 		function confirm(){
-			
+			var valid = true;
+			return valid;
 		}
 			
 		dialog = $("#dialog").dialog({
@@ -68,7 +69,7 @@
 				}
 			});
 			
-			form = dialog.find("form").on("submit", function(event){
+			form = dialog.find("#prephoto").on("submit", function(event){
 				event.preventDefault();
 				confirm();
 			});
@@ -85,8 +86,8 @@
 	
 	<body>
 		<div id="photo">
-		<div id="dialog" style="background-color: blue">
-		<form method="post" action="preaddPhoto" enctype="multipart/form-data">
+		<div id="dialog" style="background-color: skyblue">
+		<form method="post" action="preaddPhoto" enctype="multipart/form-data" id="prephoto">
 		<input type="hidden" name="album_no" value="${album_no}"/>
 				<p>첨부</p>
 				<input type="file" name="attach"/>
