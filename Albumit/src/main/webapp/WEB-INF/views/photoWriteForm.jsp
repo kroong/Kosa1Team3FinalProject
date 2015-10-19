@@ -16,14 +16,14 @@
 				font-size: 12px;
 			}
 			
-			#photo{
+			#wrapper{
 				background-color: pink;
 				padding: 10px;
 				display:inline-block;
 				width: 1000px;
 				height: 500px;
 				display: flex;
-				margin:50% auto;
+				margin:0, auto;
 				
 			}
 			
@@ -44,29 +44,48 @@
 		
 		<script>
 		$(function() {
-			var dialog, form;
+			// Variable to store your files
+			var files;
+
+			// Add events
+			$('#attach').on('change', prepareUpload);
+
+			// Grab the files and set them to our variable
+			function prepareUpload(event) {
+				files = event.target.files;
+			 
+				var data = new FormData();
+				$.each(files, function(key, value) {
+				    data.append("attach", value);
+				});
+			  
+				$.ajax({
+				      url: 'preaddPhoto',
+				      type: 'POST',
+				      data: data,
+				      cache: false,
+				      dataType: 'json',
+				      processData: false, 
+				      contentType: false,
+				      success: function(data) {
+				          $("#photo").attr("src", "/albumit/resources/uploadfiles/photo_download.jsp?fileName="+data.fileName);
+				      },
+				      error: function(jqXHR, textStatus, errorThrown) {
+				          alert("error");
+				      }
+				});
+				
+			}
 			
-		function confirm(){
-			var valid = true;
-			return valid;
-		}
 			
-		dialog = $("#dialog").dialog({
+			/* var dialog, form;
+			
+			dialog = $("#dialog").dialog({
 				autoOpen : false,
-				height : 500,
-				width : 350,
+				height : 200,
+				width : 300,
 				left : 0,
-				modal: true,
-				buttons:{
-					"확인": confirm,
-					cancel: function(){
-						dialog.dialog("close");
-					}
-				},
-				close: function(){
-					form[0].reset();
-					
-				}
+				modal: true
 			});
 			
 			form = dialog.find("#prephoto").on("submit", function(event){
@@ -78,6 +97,23 @@
 				dialog.dialog("open");
 			});
 			
+			$("#btnUpload").on("click", function(){
+				$.ajax({
+				    url: "preaddPhoto",
+				    type: "POST",
+				    //data: formdata,
+				    processData: false,
+				    contentType: false,
+				    success: function (res) {
+				      //document.getElementById("response").innerHTML = res; 
+				    }
+				});
+			});
+			
+			$("#btnCancel").on("click", function(){
+				dialog.dialog("close");
+			}); */
+			
 		});
 		
 		</script>
@@ -85,19 +121,12 @@
 	</head>
 	
 	<body>
-		<div id="photo">
-		<div id="dialog" style="background-color: skyblue">
-		<form method="post" action="preaddPhoto" enctype="multipart/form-data" id="prephoto">
-		<input type="hidden" name="album_no" value="${album_no}"/>
-				<p>첨부</p>
-				<input type="file" name="attach"/>
-		</form>
-		</div>
+		<div id="wrapper">
+	
 		<div id="image">
-			<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px" height="300px"/>
+			<img id="photo" width="300px" height="300px"/>
 		</div>
 		
-
 		<div id="content">
 		<form method="post" action="addPhoto" enctype="multipart/form-data">
 			<table>
@@ -121,8 +150,8 @@
 					<td><input type="hidden" name="album_no" value="${album_no}"/></td>
 				</tr>
 				<tr>
-					<td>
-					<input type="button" id="button" value="사진등록"/>
+					<td colspan="2">
+					<input type="file" id="attach" name="attach" value="사진등록"/>
 					</td>
 				</tr>
 				<tr>

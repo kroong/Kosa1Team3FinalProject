@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 
 import com.team03.albumit.dto.*;
 import com.team03.albumit.service.*;
@@ -26,40 +27,54 @@ public class PhotoController {
 	@RequestMapping(value="/addPhoto",method=RequestMethod.GET)
 	public String PhotoWriteForm(int album_no, Model model) {
 		model.addAttribute("album_no",album_no);
-		
-		
-		
 		return "/photoWriteForm";
 	}
 	
 	//사진 미리보기 등록
-		@RequestMapping(value="/preaddPhoto",method=RequestMethod.POST)
-		public String PhotoWriteForm2(Photo photo, Model model, HttpSession session) {
-			Member m = (Member)session.getAttribute("loginmember");
-			photo.setUid(m.getUid());
-			
-			//파일 정보 얻기
-			ServletContext application = session.getServletContext();
-			String dirPath = application.getRealPath("/resources/uploadfiles");
-			if(photo.getAttach() != null) {
-				String photo_original_file_name = photo.getAttach().getOriginalFilename();
-				String photo_filesystem_name = System.currentTimeMillis() + "-" + photo_original_file_name;
-				String photo_content_type = photo.getAttach().getContentType();
-				if(!photo.getAttach().isEmpty()) {	
-					//파일에 저장하기
-					try {
-						photo.getAttach().transferTo(new File(dirPath + "/" + photo_filesystem_name));
-					} catch (Exception e) { e.printStackTrace(); }
-				}
-				photo.setPhoto_original_file_name(photo_original_file_name);
-				photo.setPhoto_filesystem_name(photo_filesystem_name);
-				photo.setPhoto_content_type(photo_content_type);
+	@RequestMapping(value="/preaddPhoto",method=RequestMethod.POST)
+	public String PhotoReg(MultipartFile attach, Model model, HttpServletRequest request) throws IOException {
+		/*Member m = (Member)session.getAttribute("loginmember");
+		photo.setUid(m.getUid());
+		
+		//파일 정보 얻기
+		ServletContext application = session.getServletContext();
+		String dirPath = application.getRealPath("/resources/uploadfiles");
+		if(photo.getAttach() != null) {
+			String photo_original_file_name = photo.getAttach().getOriginalFilename();
+			String photo_filesystem_name = System.currentTimeMillis() + "-" + photo_original_file_name;
+			String photo_content_type = photo.getAttach().getContentType();
+			if(!photo.getAttach().isEmpty()) {	
+				//파일에 저장하기
+				try {
+					photo.getAttach().transferTo(new File(dirPath + "/" + photo_filesystem_name));
+				} catch (Exception e) { e.printStackTrace(); }
 			}
-			
-			photoService.addPhoto(photo);
-			
-			return "/photoWriteForm";
+			photo.setPhoto_original_file_name(photo_original_file_name);
+			photo.setPhoto_filesystem_name(photo_filesystem_name);
+			photo.setPhoto_content_type(photo_content_type);
 		}
+		
+		photoService.addPhoto(photo);*/
+		
+		
+		String originalFilename = attach.getOriginalFilename();
+		String saveFilename = request.getRealPath("/resources/uploadfiles/"+originalFilename);
+		FileOutputStream fos = new FileOutputStream(saveFilename);
+		
+		InputStream is = attach.getInputStream();
+		
+		int byteNo;
+		byte[] data = new byte[1024];
+		while((byteNo = is.read(data)) != -1) {
+			fos.write(data, 0, byteNo);
+		}
+		fos.flush();
+		fos.close();
+
+		model.addAttribute("fileName", originalFilename);
+		
+		return "/photoReg";
+	}
 	
 	//사진 등록 
 	@RequestMapping(value="/addPhoto",method=RequestMethod.POST)	
