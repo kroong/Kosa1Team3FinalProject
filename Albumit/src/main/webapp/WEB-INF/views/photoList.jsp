@@ -7,6 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<style type="text/css">
 			body {
 			
@@ -70,6 +71,13 @@
 			#pager a.pageNo.selected {
 				color: aqua;
 			}
+			.fa{
+				size:20px;
+			}
+			.fa a:hover{
+				size:20px;
+				color:red;
+			}
 			
 			
 		</style>
@@ -129,8 +137,11 @@
 					<td>${photo.album_no}</td>
 					<td>${photo.photo_title}</td>
 					<td>${photo.photo_content}</td> --%>
-					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
-						<img src="${pageContext.request.contextPath}/resources/image/${photo.photo_filesystem_name}" width="300px"/></a></td>
+					<td>
+						<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
+						<img src="${pageContext.request.contextPath}/resources/image/${photo.photo_filesystem_name}" width="300px"/></a>
+						<i class="fa fa-heart-o"></i>
+					</td>
 					<%-- <td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td> --%>
 				</c:forEach>
