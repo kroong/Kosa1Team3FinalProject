@@ -75,7 +75,7 @@ public class PhotoService {
 		List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
 		
 		if(sharedphoto == null){
-			photoDao.updateHitcount(photo_no);
+			photoDao.updateHitcount(photo_no, album_no);
 			
 		}else{
 			
@@ -88,7 +88,7 @@ public class PhotoService {
 		List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
 		
 		if(sharedphoto == null){
-			photoDao.updateLike(photo_no);
+			photoDao.updateLike(photo_no, album_no);
 			
 		}else{
 			

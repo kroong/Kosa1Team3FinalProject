@@ -118,14 +118,14 @@ public class PhotoDao {
 		return rows;
 	}
 	
-	public int updateHitcount(int photo_no) {
-		String sql = "update Photo set photo_hitcount=photo_hitcount+1 where photo_no=?";
+	public int updateHitcount(int photo_no, int album_no) {
+		String sql = "update Photo set photo_hitcount=photo_hitcount+1 where photo_no=? and album_no=?";
 		int rows = jdbcTemplate.update(sql, photo_no);
 		return rows;
 	}	
 	
-	public int updateLike(int photo_no) {
-		String sql = "update Photo set photo_like=photo_like+1 where photo_no=?";
+	public int updateLike(int photo_no, int album_no) {
+		String sql = "update Photo set photo_like=photo_like+1 where photo_no=? and album_no=?";
 		int rows = jdbcTemplate.update(sql, photo_no);
 		return rows;
 	}

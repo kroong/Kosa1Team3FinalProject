@@ -180,6 +180,13 @@ public class PhotoController {
 		return "redirect:/photoDetail?photo_no=" + photo.getPhoto_no();
 	}
 	
-
+	//좋아요 누르기
+	@RequestMapping("/addLike")
+	public String addLike(int album_no, int photo_no, HttpSession session){
+		photoService.addLike(photo_no, album_no);
+		
+		return "redirect:/photoDetail?photo_no=" + photo_no;
+	}
+	
 	
 }
