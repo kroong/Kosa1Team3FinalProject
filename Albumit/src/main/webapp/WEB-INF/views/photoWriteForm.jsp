@@ -16,7 +16,7 @@
 				font-size: 12px;
 			}
 			
-			div{
+			#photo{
 				background-color: pink;
 				padding: 10px;
 				display:inline-block;
@@ -84,7 +84,7 @@
 	</head>
 	
 	<body>
-		<div>
+		<div id="photo">
 		<div id="dialog" style="background-color: blue">
 		<form method="post" action="preaddPhoto" enctype="multipart/form-data">
 		<input type="hidden" name="album_no" value="${album_no}"/>
