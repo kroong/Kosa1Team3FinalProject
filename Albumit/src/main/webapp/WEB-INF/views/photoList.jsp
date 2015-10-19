@@ -129,10 +129,10 @@
 			</tr> -->
 			
 
-			<c:forEach  var="photo" items="${laList}">
+			<c:forEach  var="photo" items="${laList}" begin="1" end="3">
 			
 				<tr>
-				<c:forEach var="i" begin="1" end="3">
+				
 					<%-- <td>${photo.photo_no}</a></td>
 					<td>${photo.album_no}</td>
 					<td>${photo.photo_title}</td>
@@ -144,7 +144,7 @@
 					</td>
 					<%-- <td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td> --%>
-				</c:forEach>
+			
 				</tr>
 			</c:forEach>
 		</table>
@@ -162,7 +162,7 @@
 				<th style="width:150px">사진</th>
 				<th style="width:60px">글쓴이</th>
 				<th style="width:100px">날짜</th>
-				
+				<th style="width:100px">좋아요</th>
 				
 			</tr>
 
@@ -177,7 +177,7 @@
 					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_original_file_name}</a></td>
 					<td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td>
-				
+					<td>${photo.photo_like}</td>
 					
 				</tr>
 			</c:forEach>

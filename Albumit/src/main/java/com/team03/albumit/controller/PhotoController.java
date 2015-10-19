@@ -33,29 +33,6 @@ public class PhotoController {
 	//사진 미리보기 등록
 	@RequestMapping(value="/preaddPhoto",method=RequestMethod.POST)
 	public String PhotoReg(MultipartFile attach, Model model, HttpServletRequest request) throws IOException {
-		/*Member m = (Member)session.getAttribute("loginmember");
-		photo.setUid(m.getUid());
-		
-		//파일 정보 얻기
-		ServletContext application = session.getServletContext();
-		String dirPath = application.getRealPath("/resources/uploadfiles");
-		if(photo.getAttach() != null) {
-			String photo_original_file_name = photo.getAttach().getOriginalFilename();
-			String photo_filesystem_name = System.currentTimeMillis() + "-" + photo_original_file_name;
-			String photo_content_type = photo.getAttach().getContentType();
-			if(!photo.getAttach().isEmpty()) {	
-				//파일에 저장하기
-				try {
-					photo.getAttach().transferTo(new File(dirPath + "/" + photo_filesystem_name));
-				} catch (Exception e) { e.printStackTrace(); }
-			}
-			photo.setPhoto_original_file_name(photo_original_file_name);
-			photo.setPhoto_filesystem_name(photo_filesystem_name);
-			photo.setPhoto_content_type(photo_content_type);
-		}
-		
-		photoService.addPhoto(photo);*/
-		
 		
 		String originalFilename = attach.getOriginalFilename();
 		String saveFilename = request.getRealPath("/resources/uploadfiles/"+originalFilename);
