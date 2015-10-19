@@ -108,9 +108,135 @@
 			<option value="latest" selected="selected" >최신순</option>
 			<option value="popularity">인기순</option>
 		</select>
+<!-- //////////////////////////////////////////////////////////////////// -->		
+		<div class="content">
+			<div class="grid">
+				<div class="grid__item" data-size="1280x961">
+					<a href="img/original/4.jpg" class="img-wrap"><img src="img/thumbs/4.jpg" alt="img04" />
+						<div class="description description--grid">Propinquity</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x1131">
+					<a href="img/original/5.jpg" class="img-wrap"><img src="img/thumbs/5.jpg" alt="img05" />
+						<div class="description description--grid">Ephemeral</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x857">
+					<a href="img/original/6.jpg" class="img-wrap"><img src="img/thumbs/6.jpg" alt="img06" />
+						<div class="description description--grid">Surreptitious</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x1280">
+					<a href="img/original/7.jpg" class="img-wrap"><img src="img/thumbs/7.jpg" alt="img07" />
+						<div class="description description--grid">Scintilla</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x853">
+					<a href="img/original/8.jpg" class="img-wrap"><img src="img/thumbs/8.jpg" alt="img08" />
+						<div class="description description--grid">Vestigial</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="865x1280">
+					<a href="img/original/9.jpg" class="img-wrap"><img src="img/thumbs/9.jpg" alt="img09" />
+						<div class="description description--grid">Zephyr</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x1280">
+					<a href="img/original/10.jpg" class="img-wrap"><img src="img/thumbs/10.jpg" alt="img10" />
+						<div class="description description--grid">Desideratum</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x850">
+					<a href="img/original/11.jpg" class="img-wrap"><img src="img/thumbs/11.jpg" alt="img11" />
+						<div class="description description--grid">Quixotic</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x853">
+					<a href="img/original/1.jpg" class="img-wrap"><img src="img/thumbs/1.jpg" alt="img01" />
+						<div class="description description--grid">Assemblage</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="958x1280">
+					<a href="img/original/2.jpg" class="img-wrap"><img src="img/thumbs/2.jpg" alt="img02" />
+						<div class="description description--grid">Demesne</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="837x1280">
+					<a href="img/original/3.jpg" class="img-wrap"><img src="img/thumbs/3.jpg" alt="img03" />
+						<div class="description description--grid">Felicity</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x961">
+					<a href="img/original/4.jpg" class="img-wrap"><img src="img/thumbs/4.jpg" alt="img04" />
+						<div class="description description--grid">Propinquity</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x1131">
+					<a href="img/original/5.jpg" class="img-wrap"><img src="img/thumbs/5.jpg" alt="img05" />
+						<div class="description description--grid">Ephemeral</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x857">
+					<a href="img/original/6.jpg" class="img-wrap"><img src="img/thumbs/6.jpg" alt="img06" />
+						<div class="description description--grid">Surreptitious</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x1280">
+					<a href="img/original/7.jpg" class="img-wrap"><img src="img/thumbs/7.jpg" alt="img07" />
+						<div class="description description--grid">Scintilla</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x853">
+					<a href="img/original/8.jpg" class="img-wrap"><img src="img/thumbs/8.jpg" alt="img08" />
+						<div class="description description--grid">Vestigial</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="865x1280">
+					<a href="img/original/9.jpg" class="img-wrap"><img src="img/thumbs/9.jpg" alt="img09" />
+						<div class="description description--grid">Zephyr</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x1280">
+					<a href="img/original/10.jpg" class="img-wrap"><img src="img/thumbs/10.jpg" alt="img10" />
+						<div class="description description--grid">Desideratum</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x850">
+					<a href="img/original/11.jpg" class="img-wrap"><img src="img/thumbs/11.jpg" alt="img11" />
+						<div class="description description--grid">Quixotic</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x853">
+					<a href="img/original/1.jpg" class="img-wrap"><img src="img/thumbs/1.jpg" alt="img01" />
+						<div class="description description--grid">Assemblage</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="958x1280">
+					<a href="img/original/2.jpg" class="img-wrap"><img src="img/thumbs/2.jpg" alt="img02" />
+						<div class="description description--grid">Demesne</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="837x1280">
+					<a href="img/original/3.jpg" class="img-wrap"><img src="img/thumbs/3.jpg" alt="img03" />
+						<div class="description description--grid">Felicity</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x961">
+					<a href="img/original/4.jpg" class="img-wrap"><img src="img/thumbs/4.jpg" alt="img04" />
+						<div class="description description--grid">Propinquity</div>
+					</a>
+				</div>
+				<div class="grid__item" data-size="1280x1131">
+					<a href="img/original/5.jpg" class="img-wrap"><img src="img/thumbs/5.jpg" alt="img05" />
+						<div class="description description--grid">Ephemeral</div>
+					</a>
+				</div>
+			</div>
 		
 		
 		
+		
+<!-- /////////////////////////////////////////////////////////////////   -->
 		<div id="latest">
 		<h4>최신순</h4>
 		<hr/>
@@ -129,7 +255,7 @@
 			</tr> -->
 			
 
-			<c:forEach  var="photo" items="${laList}" begin="1" end="3">
+			<c:forEach  var="photo" items="${laList}">
 			
 				<tr>
 				
@@ -140,7 +266,8 @@
 					<td>
 						<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
 						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
-						<i class="fa fa-heart-o"></i>
+						<i id="like" class="fa fa-heart-o"></i>
+						<i id="share" class="fa fa-share-square-o"></i>
 					</td>
 					<%-- <td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td> --%>
