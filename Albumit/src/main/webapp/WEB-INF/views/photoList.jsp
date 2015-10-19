@@ -139,7 +139,7 @@
 					<td>${photo.photo_content}</td> --%>
 					<td>
 						<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
-						<img src="${pageContext.request.contextPath}/resources/image/${photo.photo_filesystem_name}" width="300px"/></a>
+						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
 						<i class="fa fa-heart-o"></i>
 					</td>
 					<%-- <td>${photo.uid}</td>
