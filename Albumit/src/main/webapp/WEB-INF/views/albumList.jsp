@@ -59,6 +59,7 @@
 			});	
 			
 			$("#addfriend").click(function(){
+				$("#friends").css("display","none");
 				var femail = $("#femail").val();
 				var loginEmail= $("#loginEmail").val();
 				if(femail == loginEmail){
@@ -106,6 +107,18 @@
 			});
 			
 		});
+			
+		function block(){
+			var contextpath = $("#contextpath").val();
+			$.ajax({
+				url:contextpath+"/blockFriend",
+				type:"post",
+				datatype:"html",
+				success:function(data){
+					$("#frtable").html(data);			
+				}
+			});
+		}
 		
 		function search() {
 			var selection = $("#search").val();
@@ -614,11 +627,29 @@
 					
 		<!-- --------------------------------------------------------------------------------------------------------- -->
 					<div id="flist">
+					<div id="friends">
+					<table>
+					<tr>
+					<td>email</td>
+					<td>profile</td>
+					<td>block</td>
+					</tr>
+						<c:forEach var="fr" items="${sessionScope.friendList}" >
+					<tr>
+						<td><c:out value="${fr.member_email }"></c:out></td>
+						<td><c:out value="${fr.member_profile }"></c:out></td>
+						<td> <c:out value="${fr.friend_block }"></c:out></td>
+					</tr>
+						</c:forEach></table>
+					</div>
+						
 						<input type="text" id="femail" placeholder="Enter Friend's email"/>
 						<input type="hidden" id="contextpath" value="${pageContext.request.contextPath}"/>
 						<button id="addfriend">Add Friend</button>
 							<div id="frtable">
 							</div>
+							
+						<button id="block">block!!</button>	
 					</div>
 				</div>
 			</div>
@@ -671,20 +702,9 @@
 		
 	<div>
 		<p>앨범 예시</p>
-		
 		<a href="photoList?album_no=1">album1</a>	
 		<a href="photoList?album_no=2">album2</a>	
-		
-
 	</div>
-
-	
-	
 </div>	
-	
-	
-	
-	
-	
 </body>
 </html>
