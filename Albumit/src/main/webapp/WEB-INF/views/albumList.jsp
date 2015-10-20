@@ -22,7 +22,7 @@
 			$("#dialog").dialog({
 				autoOpen : false,
 				height : 500,
-				width : 350,
+				width : 600,
 				left : 0,
 				aspectRatio : true,
 				show : {
@@ -109,9 +109,11 @@
 		});
 			
 		function block(){
+			
+		alert("block누름!");
 			var contextpath = $("#contextpath").val();
 			$.ajax({
-				url:contextpath+"/blockFriend",
+				url:contextpath+"/blockPage",
 				type:"post",
 				datatype:"html",
 				success:function(data){
@@ -649,7 +651,7 @@
 							<div id="frtable">
 							</div>
 							
-						<button id="block">block!!</button>	
+						<button onclick="block()">block!!</button>	
 					</div>
 				</div>
 			</div>
