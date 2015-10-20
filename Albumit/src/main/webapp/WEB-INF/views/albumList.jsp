@@ -283,7 +283,7 @@
 				float: left;
 				margin: 10px 0px 0px 10px;
 			}
-			::-webkit-input-placeholder{color:rgba(255,255,255,0.7);}
+			::-webkit-input-placeholder{color:rgba(255,255,255,1);}
 			 #btn_search{
 				height: 35px;
 				border: none;
