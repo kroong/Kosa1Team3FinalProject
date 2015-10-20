@@ -2,14 +2,17 @@ package com.team03.albumit.service;
 
 import java.util.*;
 
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
+import com.team03.albumit.controller.*;
 import com.team03.albumit.dao.*;
 import com.team03.albumit.dto.*;
 
 @Component
 public class PhotoService {
+	private static final Logger logger = LoggerFactory.getLogger(PhotoController.class);
 	
 	@Autowired
 	private PhotoDao photoDao;
@@ -74,7 +77,7 @@ public class PhotoService {
 	public void addHitcount(int photo_no, int album_no) {
 		List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
 		
-		if(sharedphoto == null){
+		if(sharedphoto.size() == 0){
 			photoDao.updateHitcount(photo_no, album_no);
 			
 		}else{
@@ -84,15 +87,20 @@ public class PhotoService {
 	}	
 	
 	//사진 좋아요 증가
-	public void addLike(int photo_no, int album_no) {
+	public void addLike(int album_no, int photo_no) {
 		List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
 		
-		if(sharedphoto == null){
-			photoDao.updateLike(photo_no, album_no);
-			
+		
+		
+		if(sharedphoto.size() == 0){
+			photoDao.updateLike(album_no,photo_no);
+			logger.info("null");
+			logger.info("photo_no"+photo_no);
+			logger.info("album_no"+album_no);
 		}else{
 			
 			sharedPhotoDao.updateLike(photo_no, album_no);
+			logger.info("not null");
 		}
 	}
 	
