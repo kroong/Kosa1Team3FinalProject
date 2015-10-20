@@ -34,7 +34,7 @@ function commitBlock(){
 
 $(function() {
 	
-	 $( ".slider-range-max" ).slider({
+/* 	 $( ".slider-range-max" ).slider({
 	      range: "max",
 	      min: 1,
 	      max: 2,
@@ -58,7 +58,7 @@ $(function() {
 	    				data: {"blockFriend" : email },
 	    				dataType : "html",
 	    				success : function(data){
-	    					$("#frtable").html(data);
+	    					$("#frtable3").html(data);
 	    				}
 	    			});
 	    	  }
@@ -66,9 +66,9 @@ $(function() {
 	    		  $( "input[name=amount]" ).eq(row-1).val("차단해제");
 	    	  }
 	      }
-	    });
+	    }); */
 	 
-	 
+ 
 	 /* 차단된 친구   */
 	  $( ".slider-range-min" ).slider({
 	      range: "max",
@@ -83,30 +83,25 @@ $(function() {
 	    	  console.log("email:"+email);
 	    	  
 	    	  if(ui.value ==1){
-	    		  $( "input[name=amount2]" ).eq(row-1).val("차단");
-	    		  alert("차단을 선택하셨습니다. ");
 	    		  
-	    		  var contextpath = $("#contextpath").val();
+	    		 $( "input[name=amount2]" ).eq(row-1).val("차단");
+
+/* 	    		  var contextpath = $("#contextpath").val();
 	    			alert("ajax에서 email::"+email);
 	    			$.ajax({
 	    				type: "post",
 	    				url: contextpath+"/blockFriend",
 	    				data: {"blockFriend" : email },
-	    				dataType : "html",
-	    				success : function(data){
-	    					$("#frtable").html(data);
-	    				}
-	    			});
+	   
+	    			}); */
 	    	  }
-	    	  else if(ui.value == 2){
+	    	  else {
 	    		  $( "input[name=amount2]" ).eq(row-1).val("차단해제");
-	    	  }
-	      }
-	    });
-	 
-	 
-	  $( "input[name=amount]" ).val("차단해제");
-	  $( "input[name=amount2]" ).val("차단");
+	    	  }	     
+			}
+	    }); 
+	  $("input[name=amount2]" ).eq(row-1).val( $( ".slider-range-min" ).slider( "value" ) );
+
   }); 
 </script>
 <div id="ftable"></div>
@@ -123,24 +118,22 @@ $(function() {
 			<td id="email">${f.member_email}</td>
 			<td>${f.member_nickname}</td>
 			
-			<c:if test="${f.friend_block == 'false'}">
  			<td>
 			<p>
   				<input type="text" name="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
 			</p>
 			<div class="slider-range-min"></div></td>
-			</c:if>
-			<c:if test="${f.friend_block == 'true'}">
 			<td>
-			<p>
+		<!-- 	<p>
   				<input type="text" name="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 			</p>
-			<div class="slider-range-max"></div></td>
-			</c:if>
+			<div class="slider-range-max"></div></td> -->
 		</tr>
        
 	</c:forEach>
 </table>
+<div id="frtable3">
 
+</div>
 
 <input type="hidden" id="contextpath" value="${pageContext.request.contextPath}"/>

@@ -137,6 +137,7 @@ public class MemberController {
 			logger.info("친구추가");
 			List<FriendList> flist= memberService.friendList(mem);
 			model.addAttribute("friends",flist);
+			session.setAttribute("editFriends", flist);
 			return "confirmAad";
 		}
 
@@ -209,7 +210,7 @@ public class MemberController {
 		Member member = (Member) session.getAttribute("loginmember");
 		System.out.println("blockFriend 컨트롤러에서 :"+blockFriend);
 		memberService.block(member, blockFriend);
-		return "Blockfriend";
+		return "friendTable";
 	
 	}
 	

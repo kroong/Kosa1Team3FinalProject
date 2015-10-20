@@ -2,6 +2,8 @@ package com.team03.albumit.controller;
 
 import java.util.*;
 
+import javax.servlet.http.*;
+
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -23,14 +25,14 @@ public class AlbumController {
 	private MemberService memberService;
 	
 	@RequestMapping("/allAlbumList")
-	public String allAlbumList(@ModelAttribute("member") Member member, Model model) {
+	public String allAlbumList(@ModelAttribute("member") Member member, Model model,HttpSession session) {
 		Map<Album, Thumbnail> albumList = albumService.showAllAlbumList();
 		model.addAttribute(albumList);
 		
 		//친구목록 모델에 추가하기!!
 		List<FriendList> friends = memberService.friendList(member);
-		//System.out.println("컨트롤러에서 친구목록: "+friends.get(0).getMember_email()+"  ->이게 d이여야 한다!");
-		model.addAttribute("friendList", friends);
+		session.setAttribute("friendList", friends);
+		
 		return "albumList";
 	}
 	
