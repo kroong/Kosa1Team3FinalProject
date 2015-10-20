@@ -135,112 +135,6 @@
 	
 	</script>
 	
-<!-- <script type="text/javascript"> //헤더부분 애니메이션 추가
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-7243260-2']);
-		_gaq.push(['_trackPageview']);
-		(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-	
-	<script type="text/javascript">
-	(function() {
-	    var width, height, largeHeader, canvas, ctx, circles, target, animateHeader = true;
-
-	    // Main
-	    initHeader();
-	    addListeners();
-
-	    function initHeader() {
-	        width = window.innerWidth;
-	        height = window.innerHeight;
-	        target = {x: 0, y: height};
-
-	        largeHeader = document.getElementById('large-header');
-	        largeHeader.style.height = height+'px';
-
-	        canvas = document.getElementById('demo-canvas');
-	        canvas.width = width;
-	        canvas.height = height;
-	        ctx = canvas.getContext('2d');
-
-	        // create particles
-	        circles = [];
-	        for(var x = 0; x < width*0.5; x++) {
-	            var c = new Circle();
-	            circles.push(c);
-	        }
-	        animate();
-	    }
-
-	    // Event handling
-	    function addListeners() {
-	        window.addEventListener('scroll', scrollCheck);
-	        window.addEventListener('resize', resize);
-	    }
-
-	    function scrollCheck() {
-	        if(document.body.scrollTop > height) animateHeader = false;
-	        else animateHeader = true;
-	    }
-
-	    function resize() {
-	        width = window.innerWidth;
-	        height = window.innerHeight;
-	        largeHeader.style.height = height+'px';
-	        canvas.width = width;
-	        canvas.height = height;
-	    }
-
-	    function animate() {
-	        if(animateHeader) {
-	            ctx.clearRect(0,0,width,height);
-	            for(var i in circles) {
-	                circles[i].draw();
-	            }
-	        }
-	        requestAnimationFrame(animate);
-	    }
-
-	    // Canvas manipulation
-	    function Circle() {
-	        var _this = this;
-
-	        // constructor
-	        (function() {
-	            _this.pos = {};
-	            init();
-	            console.log(_this);
-	        })();
-
-	        function init() {
-	            _this.pos.x = Math.random()*width;
-	            _this.pos.y = height+Math.random()*100;
-	            _this.alpha = 0.1+Math.random()*0.3;
-	            _this.scale = 0.1+Math.random()*0.3;
-	            _this.velocity = Math.random();
-	        }
-
-	        this.draw = function() {
-	            if(_this.alpha <= 0) {
-	                init();
-	            }
-	            _this.pos.y -= _this.velocity;
-	            _this.alpha -= 0.0005;
-	            ctx.beginPath();
-	            ctx.arc(_this.pos.x, _this.pos.y, _this.scale*10, 0, 2 * Math.PI, false);
-	            ctx.fillStyle = 'rgba(255,255,255,'+ _this.alpha+')';
-	            ctx.fill();
-	        };
-	    }
-
-	})(); 
-	
-	</script>-->
-	
 		<style type="text/css">
 		
 			* {
@@ -256,7 +150,7 @@
 		     }
 		      
 		     #pagewrapper{
-		 	  margin: 0px;
+		 	  margin: 0px auto;
 		      padding: 0px;
 		     }
 		     
@@ -271,8 +165,8 @@
 		     	left: 0;
 		     	z-index: 10; 
 		     	display: block;
-		     	/* background-color: #666699; */
-		     	background-image:url('${pageContext.request.contextPath}/resources/image/watercolor.jpg');
+		     	/* background-color: #666699;  */
+		     	background-image:url('${pageContext.request.contextPath}/resources/image/menubg.PNG'); 
 		     	background-repeat: no-repeat;
            		background-size: cover;
 		     	height: 100px;
@@ -282,7 +176,7 @@
 		     #menu_wrapper{
 		     	min-width: 1083px;
 		     	position: fixed;
-		     	top: 0;
+		     	top: 5px;
 		     	right: 0;
 		     	left: 0;
 		     	z-index: 10; 
@@ -293,23 +187,14 @@
 		     
 		     #small_wrapper{
 				height: 80px;
-				background-color: green;
+				background-color: rgba(255,255,255,0)/* green */;
 				padding: 5px;
-				margin: 5px;
-				width: 600px;
+				width: 650px;
 				float: left;
+				margin: 0px auto;
+				display: table-cell;
+				vertical-align: middle;
 			}
-	/* 	     #demo-canvas{
-				position: fixed;
-		     	top: 0;
-		     	right: 0;
-		     	left: 0;
-		     	z-index: 10; 
-		     	display: block;
-		 	   background-color: black;
-	 	    	height: 150px; 
-		     } */
-		     
 			.menu {
 				 display: inline; 
 				 float: left; 
@@ -334,43 +219,44 @@
 			    z-index: 10000;
 			}
 			
-			
 			/* 로고부분  */
 			#albumitlogo{
 				width: 210px;
 				height: 70px;
 				float: left;
-				margin: 5px;
-				padding: 5px;
+				margin: 5px auto;
+				padding: 5px 5px 5px 15px;
 			}
 			#logo{
 				 width: 200px;
 				 height: 60px;
 				 float:left;
-				 margin: 10px;
+				 margin: 5px auto;
 			}
 			
 			/* 내정보버튼 */
 			#btn_myinfo{
-				 background-color: black;
+				 background-color: rgba(255,255,255,0)/* black */;
 				 width: 200px;
 				 height: 60px;
 				 border: none;
 				 float: left;
-				 margin: 5px;
+				 margin: 5px auto;
 				 padding: 5px;
 			}
 			#myinfo{
 				height: 35px;
 				width:180px;
-				background-color: red;
+				margin: 0px auto;
+				background-color: rgba(255,255,255,0)/* red */;
 				border: none;
-				text-align: center;
+				text-align: left;
 				color: white;
-				padding: 3px;
+				padding: 5px 10px 5px 10px;
 				float: left;
-				margin: 5px;
-				padding: 5px;
+				left: 5px;
+				margin: 10px 5px 0px 10px;
+				font-size: 20px;
 			}
 			.menu{
 				background-color: none;
@@ -379,33 +265,36 @@
 			/* 검색부분  */
 			#search{
 				padding: 5px;
-				width: 300px;
+				width: 400px;
 				height: 60px; 
-				background-color: blue;
+				background-color: rgba(255,255,255,0)/* blue */;
 				border: none;
 				float: left;
-				margin: 5px;
+				margin: 5px auto;
 			}
 			#searchContent{
-				width: 200px;
-				height: 40px;
+				width: 300px;
+				height: 35px;
 				padding: 0px 2px 0px 2px;
 				text-align: center;
 				color: rgba(255,255,255,1);
 				background-color: rgba(255,255,255,0.5); 
 				border: none;
 				float: left;
+				margin: 10px 0px 0px 10px;
 			}
 			::-webkit-input-placeholder{color:rgba(255,255,255,0.7);}
-			#btn_search{
-				height: 40px;
+			 #btn_search{
+				height: 35px;
 				border: none;
 				text-align: center;
-				color: white;
-				background-color: orange/* rgba(255,255,255,0.5) */; 
+				color: rgba(255,255,255,1);
+				background-color: rgba(255,255,255,0.5); 
 				border: none;
 				float: left;
-			}
+				margin: 10px 0px 10px 0px;
+				padding: 0px 2px 0px 2px;
+			} 
 			
 			.album{
 			  display: inline-block;
@@ -422,7 +311,7 @@
 			#small_wapper{
 			 height: 30px;
 			 width: 500px;
-			 margin: 10px; 
+			 margin: 5px auto; 
 			 padding: 10px;
 			 display: block;
 			 float: left;
@@ -432,40 +321,84 @@
 			.fa{
 				font-size: 25px;
 				color: white;
-				padding: 0px;
-				margin: 10px;
+				margin: 5px auto;
+				background-color: rgba(255,255,255,0.0) /* yellow */;
+				margin: 0 auto;
+				padding: 2px;
 			}
-			
+			/* 오른쪽 부분 */
 			#right{
 				float: right;
 				border: none;
-				background-color: purple;
+				background-color: rgba(255,255,255,0)/* purple */;
+				padding: 5px;
+				width: 400px;
+				height: 80px; 
+				margin: 0px auto;
+				display: table-cell;
+				vertical-align: middle;
+				
+			}
+			#addalbumchat{
+				float: right;
+				border:none;
+				background-color: rgba(255,255,255,0)/* fuchsia */;
+				padding: 5px;
+				margin: 5px auto;
+				width: 150px;
+				height: 60px;
+				border: none;
+			}
+				
+			#addalbum{
+				height: 35px;
+				width: 100px;
+				border: none;
+				text-align: right;
+				color: rgba(255,255,255,1);
+				background-color: rgba(255,255,255,0)/* red */; 
+				border: none;
+				float: left;
+				margin: 10px 0px 10px 0px;
+				padding: 0px 2px 0px 2px;
 			}
 			
-			#menu{
-				width: 100px;
-				height: 50px;
+			.menu{
+				height: 35px;
+				border: none;
+				text-align: center;
+				color: rgba(255,255,255,1);
+				background-color: rgba(255,255,255,0) /* blue */; 
+				border: none;
+				float: left;
+				margin: 10px 0px 10px 0px;
+				padding: 0px 2px 0px 2px;
 			}
+			
+		
 			
 			/* 선택박스 */
 			#selectex { 
-			    margin: 10px;
-			    padding: 3px; 
-			    border: none/* 2px solid rgba(255,255,255,1) */; 
+			    margin: 22px 10px 10px 10px;
+			    padding: 7px; 
+			    border: none; 
 			    width: 200px;
-			    float: right;
+			    float: left;
 			    text-align: center;
-			    background-color: rgba(255,255,255,1);
+			    background-color: /* aqua */rgba(255,255,255,03);
 			    z-index: 15;
+			    font-family: Verdana,sans-serif;
 			}
 			#selectex > ul {
 				 display: none;
-				 background-color: white;
+				 background-color: rgba(255,255,255,03);
+				 border: none;
 			  }
 			#selectex:hover > ul {
 				display: block;
 				background: none;
 				border-top: 1px solid rgba(255,255,255,0);
+				list-style:none;
 			 }
 			#selectex:hover > ul > li {
 				 padding: 3px;
@@ -473,21 +406,17 @@
 			  }
 			#selectex:hover > ul > li:hover {
 				 background: white;
+				list-style:none; 
 			 }
 			#selectex:hover > ul > li:hover > a {
-				 color: red; 
+				 color: green; 
 			 }
 		
 		.validation{
-		float: 11;
 		text-align: center;
-		color: red;
 		}
 		
-		#dialog{
-		border-color: red;
-		background-color: gray;
-		}
+	
 		</style>
 	
 	</head>
@@ -501,29 +430,21 @@
 			
 			<!-- <div id="header" > -->
 			<!-- -------------------------------------------------------------------------------------------------------------------- -->
-			
 				<div id="menu_wrapper">
-				
-						
 				<!-- ------ 1. Albumit 로고 --------------------------------------------------------------------------------------------- -->
 				
 					<div id="albumitlogo">
 						<img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="Albumit" title="Albumit" id="logo" >
 					</div>
-
-					
 					<!-- -------------------------------------------------------------------------------------------------------------------- -->
 					<div id="small_wrapper">
 				<!-- -------2. 내정보----------------------------------------------------------------------------------------------------- -->
-				
 					<!-- <div class="menu"> -->
 					<div id="btn_myinfo"  class="menu">
 						<%-- <input type="button" id="opener" value="${member.member_email}" /> --%>
 						<input type="button"  id="myinfo" value="Hi, ${member.member_email}" />
 					</div>
-				
 				<!-- --------3. 검색------------------------------------------------------------------------------------------------------- -->
-				
 				<!-- <div class="input-group margin-bottom-sm menu"> -->
 					<div id="search" class="input-group margin-bottom-sm menu">
 					<!-- 	 <span class="input-group-addon">
@@ -531,17 +452,15 @@
 						</span> -->
 						<input id="searchContent" type="text" placeholder="Search">
 						<button id="btn_search" onclick="search()"><i class="fa fa-search fa-fw"></i></button>
-						
+						<br/>
 						<p id="validation">
 							<em title="Please enter something you want to search" class="validation"></em>
 						</p>
-			
 						<div id="validation-content"></div>
 					</div>
 				</div>	
 				<!-- -------- 4. album/friend 옵션 선택 ----------------------------------------------------------------------------------- -->
 				<div id="right">
-				
 					<!-- <div id="menu" class="menu">
 						<select id="option">	
 							<option> ALBUM </option>
@@ -549,28 +468,30 @@
 						</select>
 					</div>
 					 -->
+					 
 					<div id="selectex">
-					    Select
+					 SELECT
 					    <ul>
 					        <li><a href="#">ALBUM</a></li>
 					        <li><a href="#">PHOTO</a></li>
 					    </ul>
 					</div>
-					
+					<!-- --------------------------------------------------------------------------------------------------------- -->
+				<div id="addalbumchat">
 				<!-- ------ 5. 앨범추가 --------------------------------------------------------------------------------------------------- -->
 				
-					<div class="menu">
+					<div id="addalbum" class="menu">
 						<a href="#" id="addAlbumButton"><i class="fa fa-plus-square"></i></a>
 					</div>
 		        <!-- ------ 6. 채팅 ------------------------------------------------------------------------------------------------------- -->
-					<div class="menu">
+					<div id="chat" class="menu">
 						<a href="#" id="chat_btn"><i class="fa fa-comments-o"></i></a>
 					</div>
 					
 					</div>
 					
 					<!-- --------------------------------------------------------------------------------------------------------------------- -->
-				
+				</div>
 				 <!-- --------------------------------------------------------------------------------------------------------------------- -->
 				 </div>
 			 <!-- --------------------------------------------------------------------------------------------------------------------- -->	
