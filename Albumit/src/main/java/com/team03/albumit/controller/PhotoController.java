@@ -182,10 +182,11 @@ public class PhotoController {
 	
 	//좋아요 누르기
 	@RequestMapping("/addLike")
-	public String addLike(int album_no, int photo_no, HttpSession session){
+	public String addLike(int album_no, int photo_no, Model model, HttpSession session){
 		photoService.addLike(photo_no, album_no);
+		model.addAttribute("album_no",album_no);
 		
-		return "redirect:/photoDetail?photo_no=" + photo_no;
+		return "redirect:/photoList?album_no="+album_no;
 	}
 	
 	

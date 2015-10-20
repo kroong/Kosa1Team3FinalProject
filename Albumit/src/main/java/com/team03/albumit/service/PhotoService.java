@@ -95,6 +95,7 @@ public class PhotoService {
 			sharedPhotoDao.updateLike(photo_no, album_no);
 		}
 	}
+	
 	//사진신고
 	public void reportPhoto(ReportedPhoto reportedPhoto){
 		reportedPhotoDao.insert(reportedPhoto);		

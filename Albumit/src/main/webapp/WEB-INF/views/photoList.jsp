@@ -177,7 +177,7 @@
 					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_original_file_name}</a></td>
 					<td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td>
-					<td>${photo.photo_like}</td>
+					<td><a href="addLike?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_like}</a></td>
 					
 				</tr>
 			</c:forEach>
