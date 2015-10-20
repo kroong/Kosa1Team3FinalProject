@@ -8,6 +8,7 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
 		<style type="text/css">
 			body {
 			
@@ -108,9 +109,7 @@
 			<option value="latest" selected="selected" >최신순</option>
 			<option value="popularity">인기순</option>
 		</select>
-		
-		
-		
+
 		<div id="latest">
 		<h4>최신순</h4>
 		<hr/>
@@ -129,7 +128,7 @@
 			</tr> -->
 			
 
-			<c:forEach  var="photo" items="${laList}" begin="1" end="3">
+			<c:forEach  var="photo" items="${laList}">
 			
 				<tr>
 				
@@ -140,7 +139,8 @@
 					<td>
 						<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
 						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
-						<i class="fa fa-heart-o"></i>
+						<i id="like" class="fa fa-heart-o"></i>
+						<i id="share" class="fa fa-share-square-o"></i>
 					</td>
 					<%-- <td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td> --%>
