@@ -7,6 +7,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
 		<style type="text/css">
 			body {
 			
@@ -70,6 +72,13 @@
 			#pager a.pageNo.selected {
 				color: aqua;
 			}
+			.fa{
+				size:20px;
+			}
+			.fa a:hover{
+				size:20px;
+				color:red;
+			}
 			
 			
 		</style>
@@ -100,9 +109,7 @@
 			<option value="latest" selected="selected" >최신순</option>
 			<option value="popularity">인기순</option>
 		</select>
-		
-		
-		
+
 		<div id="latest">
 		<h4>최신순</h4>
 		<hr/>
@@ -124,16 +131,20 @@
 			<c:forEach  var="photo" items="${laList}">
 			
 				<tr>
-				<c:forEach var="i" begin="1" end="3">
+				
 					<%-- <td>${photo.photo_no}</a></td>
 					<td>${photo.album_no}</td>
 					<td>${photo.photo_title}</td>
 					<td>${photo.photo_content}</td> --%>
-					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
-						<img src="${pageContext.request.contextPath}/resources/image/${photo.photo_filesystem_name}" width="300px"/></a></td>
+					<td>
+						<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
+						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
+						<i id="like" class="fa fa-heart-o"></i>
+						<i id="share" class="fa fa-share-square-o"></i>
+					</td>
 					<%-- <td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td> --%>
-				</c:forEach>
+			
 				</tr>
 			</c:forEach>
 		</table>
@@ -151,7 +162,7 @@
 				<th style="width:150px">사진</th>
 				<th style="width:60px">글쓴이</th>
 				<th style="width:100px">날짜</th>
-				
+				<th style="width:100px">좋아요</th>
 				
 			</tr>
 
@@ -166,7 +177,7 @@
 					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_original_file_name}</a></td>
 					<td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td>
-				
+					<td><a href="addLike?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_like}</a></td>
 					
 				</tr>
 			</c:forEach>
