@@ -16,7 +16,7 @@
 	
 	<script>
 		$(function() {		
-			function loadPageinDIV(url) {
+			/* function loadPageinDIV(url) {
 				var $showDiv = $("#showListBody");
 				$showDiv.load(url, function() {
 					$showDiv.find("a").on("click", function(evt) {
@@ -28,7 +28,7 @@
 				});
 			}
 			
-			loadPageinDIV("allAlbumList");
+			loadPageinDIV("allAlbumList"); */
 			
 			$("#dialog").dialog({
 				autoOpen : false,
@@ -470,7 +470,8 @@
 			}
 		
 			#showListBody {
-				position: fixed; width: 100%; top: 110px;
+				position: fixed; width: 100%; height: 100%; top: 110px; left: 0px;
+				border: none;
 			}
 		</style>
 	
@@ -553,9 +554,7 @@
 			</div>
 		
 <!-- ////////////////////////-메뉴바 끝///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-		
-		
-		
+		<iframe id="showListBody" src="allAlbumList"></iframe>
 		
 		<!-- -----내정보-------------------------------------------------------------------------------------------- -->
 			<div id="dialog">
@@ -635,8 +634,6 @@
 					</fieldset>
 				</form>
 			</div>
-			
-			<div id="showListBody"></div>
-		</div>	
+		</div>
 	</body>
 </html>
