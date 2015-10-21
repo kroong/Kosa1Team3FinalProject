@@ -25,7 +25,7 @@
 
 		<script type="text/javascript">
 
-			$(document).ready(function(){
+			/* $(document).ready(function(){
 				
 				for(var i=0; i<100; i++){
 					$('.main_photo').css({
@@ -34,7 +34,7 @@
 					}).appendTo('body');
 				}
 				
-			});
+			}); */
 			
 
 			function arrayfun(sel) {
