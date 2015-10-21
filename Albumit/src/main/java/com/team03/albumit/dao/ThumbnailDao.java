@@ -68,10 +68,10 @@ public class ThumbnailDao {
 	public List<Thumbnail> selectInAlbumList(String incluase) {
 		List<Thumbnail> list = null;
 		String sql = "SELECT a.thumbnail_no, thumbnail_original_file_name, "
-				+ "thumbnail_content_type, thumbnail_filesystem_name "
+				+ "thumbnail_content_type, thumbnail_filesystem_name, album_no "
 				+ "FROM Thumbnail a, Album b WHERE a.thumbnail_no IN"
-				+ "(SELECT b.thumbnail_no FROM Album WHERE album_no IN(" + incluase
-				+ "))";
+				+ "(SELECT thumbnail_no FROM Album WHERE album_no IN(" + incluase
+				+ ")) AND album_publicity=1 ORDER BY album_no DESC";
 		list = jdbcTemplate.query(sql, new RowMapper<Thumbnail>(){
 
 			@Override

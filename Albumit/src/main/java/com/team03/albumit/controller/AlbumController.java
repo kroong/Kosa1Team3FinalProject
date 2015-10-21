@@ -33,8 +33,6 @@ public class AlbumController {
 		return "main";
 	}
 
-	
-	
 	@RequestMapping("/allAlbumList")
 	public String allAlbumList(@ModelAttribute("member") Member member, Model model) {
 		Map<Album, Thumbnail> albumList = albumService.showAllAlbumList();
