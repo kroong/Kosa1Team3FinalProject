@@ -109,15 +109,15 @@ public class PhotoController {
 	}
 	
 	//저장된 사진 보여주기 
-	/*@RequestMapping("/fileDownload")
+	@RequestMapping("/fileDownload")
 	public void fileDownload(Photo photo, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//응답헤더(3개: 1)순수파일이름, 2)파일타입, 3)파일크기)
 		String originalFilename = photo.getAttach().getOriginalFilename();;
-		String saveFilename = this.saveFilename;
+		String saveFilename = photo.getPhoto_filesystem_name();
 		
 		
 		
-		String fileType = this.fileType;
+		String fileType = photo.getPhoto_content_type();
 		File file = new File(saveFilename);
 		long fileSize = file.length();
 		
@@ -142,22 +142,14 @@ public class PhotoController {
 		FileInputStream fis = new FileInputStream(file);
 		OutputStream os = response.getOutputStream();
 		
-		//how1
-		byte[] data = new byte[1024];
-		int byteNum;
-		while((byteNum = fis.read(data)) != -1) {
-			os.write(data, 0, byteNum);
-		}
-		os.flush();
-		os.close();
-		fis.close();
+
 		
 		//how2
 		FileCopyUtils.copy(fis, os);
 		os.flush();
 		os.close();
 		fis.close();
-	}*/
+	}
 	
 	
 	//사진 큰화면 보여주기
