@@ -193,7 +193,8 @@
 			        <div class="paper"> 
 			            <div class="paper-holder"> 
 			               <%-- <a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}"> --%>
-						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a> 
+						<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
+						<img src="fileDownload"/></a>
 			            </div> 
 			            <p class="paper-description">Lorem ipsum dolor sit amet</p> 
 			            </div> 

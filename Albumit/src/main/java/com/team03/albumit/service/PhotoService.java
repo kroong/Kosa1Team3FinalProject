@@ -173,6 +173,11 @@ public class PhotoService {
 		return photo;
 	}
 
+	public Photo getPhotoBy(int photo_no, int album_no){
+		Photo photo = photoDao.selectByPhotoAlbum(photo_no, album_no);
+	
+		return photo;
+	}
 	
 	//사진등록
 	public void add(Photo photo) {
