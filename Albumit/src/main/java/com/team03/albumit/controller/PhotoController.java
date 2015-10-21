@@ -181,13 +181,20 @@ public class PhotoController {
 	}
 	
 	//좋아요 누르기
-	@RequestMapping("/addLike")
-	public String addLike(int album_no, int photo_no, Model model, HttpSession session){
-		photoService.addLike(album_no, photo_no);
+	@RequestMapping(value="/addLike", method=RequestMethod.GET)
+	public String addLike(@RequestParam("album_no")String album_no, @RequestParam("photo_no")int photo_no, Model model, HttpSession session){
+		System.out.println("들어왔져");
+		int ano = Integer.parseInt(album_no);
+		System.out.println("ano:"+ano);
+		photoService.addLike(ano, photo_no);
 		logger.info("photo_no"+photo_no);
 		logger.info("album_no"+album_no);
 		
-		return "redirect:/photoList?album_no="+album_no;
+		Photo photo = photoService.getPhoto(photo_no);
+		int photo_like = photo.getPhoto_like();
+		model.addAttribute("photo_like", photo_like);
+		
+		return "/like";
 	}
 	
 }
