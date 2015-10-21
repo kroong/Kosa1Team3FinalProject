@@ -47,10 +47,10 @@
 	
 			});
 	
-			//$("#opener").click(function() {
 				$("#myinfo").click(function(){
 				$("#dialog").dialog("open");
 				$("#tabs").tabs();
+				
 			});
 		
 			$("#modifyProfile").click(function(){
@@ -147,7 +147,6 @@
 			
 		function block(){
 			
-		alert("block누름!");
 		$("#friends").css("display","none");
 			var contextpath = $("#contextpath").val();
 			$.ajax({
@@ -497,7 +496,6 @@
 				<!-- -------2. 내정보----------------------------------------------------------------------------------------------------- -->
 					<!-- <div class="menu"> -->
 					<div id="btn_myinfo"  class="menu">
-						<%-- <input type="button" id="opener" value="${member.member_email}" /> --%>
 						<input type="button"  id="myinfo" value="Hi, ${member.member_email}" />
 					</div>
 				<!-- --------3. 검색------------------------------------------------------------------------------------------------------- -->

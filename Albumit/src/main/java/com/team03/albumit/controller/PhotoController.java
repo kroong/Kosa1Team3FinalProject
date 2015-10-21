@@ -79,9 +79,6 @@ public class PhotoController {
 			photo.getAttach().transferTo(new File(dirPath + "/" + photo.getPhoto_filesystem_name()));
 		}
 		
-		logger.info("이건되냐ㅠㅠ?"+photo.getAttach().getOriginalFilename());
-		
-		
 		photoService.addPhoto(photo);
 		
 		return "redirect:/photoList?album_no="+photo.getAlbum_no();
@@ -117,9 +114,6 @@ public class PhotoController {
 		//응답헤더(3개: 1)순수파일이름, 2)파일타입, 3)파일크기)
 		
 		Photo photo = photoService.getPhotoBy(photo_no, album_no);
-		
-		logger.info("여기봐랏"+photo.getAttach());
-		
 		
 		String originalFilename = photo.getAttach().getOriginalFilename();
 		String saveFilename = photo.getPhoto_filesystem_name();
@@ -208,6 +202,14 @@ public class PhotoController {
 		
 		return "redirect:/photoList?album_no="+album_no;
 	}
+	//사진 검색
+	@RequestMapping("/searchPhoto")
+	public String searchPhoto(String photo_title, HttpSession session){
+		photoService.searchPhoto(photo_title);
+		
+		return "redirect:/photoList?";
+	}
+	
 	
 	//댓글 달기
 	@RequestMapping("/addComment")

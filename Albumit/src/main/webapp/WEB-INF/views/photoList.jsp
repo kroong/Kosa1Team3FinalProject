@@ -21,6 +21,18 @@
 	        	background: gray;
 	        	box_shadow: 0 1px 3px rgba(34,25,25,0.4);
 	        }
+	        nav {
+	        display:inline;
+	        	width:20%;
+	        }
+	       	nav ul{padding-left:5px; }                   
+         	nav ul li {
+            	display:inline;                        
+            	border-left:1px solid #999;            
+            	font:bold 12px Dotum;                    
+            	padding:0 10px;                        
+        	}
+         	nav ul li:first-child{border-left:none;}  
 		</style>
 
 		<script type="text/javascript">
@@ -93,11 +105,23 @@
 	</head>
 	
 	<body>
-		
-		<select id="photoArray" size="1" onchange="arrayfun(this)">
+	
+		<nav>
+		<ul>
+			<li>Post </li>
+			<li>Move to  </li>
+			<li>Share Album</li>
+			<li>
+				<select id="photoArray" size="1" onchange="arrayfun(this)">
 			<option value="latest" selected="selected" >최신순</option>
 			<option value="popularity">인기순</option>
-		</select>
+		</select></li>
+		</ul>
+
+		</nav>
+				
+		
+		
 
 		<div id="latest">
 		<h4>최신순</h4>
@@ -107,7 +131,8 @@
 				<div class="main_photo"> 
 					<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
 					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
-					<i id="like" class="fa fa-heart-o"></i>
+					<hr/>
+					<i id="like" class="fa fa-heart-o" style="color:white"></i>
 					<i id="share" class="fa fa-share-square-o"></i>
 				</div> 
 			
@@ -120,7 +145,7 @@
 		
 		
 		
-		<div id="1">
+		
 		<table id="myTable">
 			<tr>
 				<th style="width:50px">사진번호</th>
@@ -152,7 +177,7 @@
 		</table> 
 		</div>
 		
-		</div>
+	
 		
 		
 		
