@@ -40,7 +40,7 @@ $(function() {
 	      max: 2,
 	      value: 2,
 	      slide: function( event, ui ) {
-	    	  var row= $(this).parents("tr").index();
+	    	   row= $(this).parents("tr").index();
 	    	  console.log("row1:::::"+row);
 	    	  var email = document.getElementById("myTable").rows[row].cells.namedItem("email").innerHTML;
 	    	  console.log("email:"+email);
@@ -109,7 +109,7 @@ $(function() {
 	    }); 
 	    
 	  $("input[name=amount2]" ).eq(row-1).val( $( ".slider-range-min" ).slider( "value" ));
-
+	  $("input[name=amount]" ).eq(row-1).val( $( ".slider-range-max" ).slider( "value" ));
   }); 
 </script>
 <div id="ftable"></div>
