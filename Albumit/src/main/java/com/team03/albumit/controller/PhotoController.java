@@ -205,9 +205,9 @@ public class PhotoController {
 	//사진 검색
 	@RequestMapping("/searchPhoto")
 	public String searchPhoto(String photo_title, HttpSession session){
+		photoService.searchPhoto(photo_title);
 		
-		
-		return "redirect:/photoList";
+		return "redirect:/photoList?";
 	}
 	
 	

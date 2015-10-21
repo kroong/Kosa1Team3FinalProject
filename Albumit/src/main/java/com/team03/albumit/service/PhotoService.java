@@ -220,9 +220,10 @@ public class PhotoService {
 	}
 	
 	//사진 검색 
-	public void searchPhoto(String photo_title){
-		photoDao.selectByTitle(photo_title);
+	public List<Photo> searchPhoto(String photo_title){
+		List<Photo> photo = photoDao.selectByTitle(photo_title);
 		
+		return photo;
 	}
 	
 	//---------------------댓글-----------------------------

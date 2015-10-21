@@ -87,4 +87,12 @@ public class AlbumController {
 		
 		return "showFriendsList_json";
 	}
+	
+	@RequestMapping("/searchAlbum")
+	public String searchAlbum(String album_name, Model model){
+		List<Album> albumList = albumService.searchAlbum(album_name);
+		model.addAttribute("albumList",albumList);
+		
+		return "albumList";
+	}
 }
