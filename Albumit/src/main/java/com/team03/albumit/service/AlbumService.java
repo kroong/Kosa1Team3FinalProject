@@ -24,6 +24,7 @@ public class AlbumService {
 	
 	// C
 	public Integer makeAlbum(Album album) {
+		album.setThumbnail_no(1);
 		Integer albumNo = albumDao.insert(album);
 		
 		return albumNo;		
@@ -45,7 +46,7 @@ public class AlbumService {
 		}
 		List<Thumbnail> thList = thumbnailDao.selectInAlbumList(sql);
 		
-		Map<Album, Thumbnail> map = new HashMap<Album, Thumbnail>();
+		Map<Album, Thumbnail> map = new LinkedHashMap<Album, Thumbnail>();
 		for(int i = 0; i < list.size(); i++) {
 			map.put(list.get(i), thList.get(i));
 		}
@@ -68,7 +69,7 @@ public class AlbumService {
 		}
 		List<Thumbnail> thList = thumbnailDao.selectInAlbumList(incluase);
 		
-		Map<Album, Thumbnail> map = new HashMap<>();
+		Map<Album, Thumbnail> map = new LinkedHashMap<>();
 		for(int i = 0; i < list.size(); i++) {
 			map.put(list.get(i), thList.get(i));
 		}
@@ -92,7 +93,7 @@ public class AlbumService {
 		}
 		List<Thumbnail> thList = thumbnailDao.selectInAlbumList(incluase);
 		
-		Map<Album, Thumbnail> map = new HashMap<>();
+		Map<Album, Thumbnail> map = new LinkedHashMap<>();
 		for(int i = 0; i < list.size(); i++) {
 			map.put(list.get(i), thList.get(i));
 		}
@@ -113,7 +114,7 @@ public class AlbumService {
 		}
 		List<Thumbnail> thList = thumbnailDao.selectInAlbumList(incluase);
 		
-		Map<Album, Thumbnail> map = new HashMap<>();
+		Map<Album, Thumbnail> map = new LinkedHashMap<>();
 		for(int i = 0; i < list.size(); i++) {
 			map.put(list.get(i), thList.get(i));
 		}

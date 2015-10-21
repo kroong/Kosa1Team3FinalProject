@@ -10,15 +10,26 @@
 	<!-- 파비콘설정 -->
 	<link rel="icon"  href="${pageContext.request.contextPath}/resources/image/favicon.ico" type="image/x-icon"/> 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<script type="text/javascript"
-		src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
-	<link rel="stylesheet"
-		href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script type="text/javascript" src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
 	<script>
-		$(function() {
+		$(function() {		
+			function loadPageinDIV(url) {
+				var $showDiv = $("#showListBody");
+				$showDiv.load(url, function() {
+					$showDiv.find("a").on("click", function(evt) {
+						var $link = $(this);
+						loadPageinDIV($link.attr("href"));
+						evt.preventDefault();
+						return false;
+					});
+				});
+			}
+			
+			loadPageinDIV("allAlbumList");
+			
 			$("#dialog").dialog({
 				autoOpen : false,
 				height : 500,
@@ -362,7 +373,7 @@
 			/* 아이콘 */
 			.fa{
 				font-size: 25px;
-				color: white;
+				color: grey;
 				margin: 5px auto;
 				background-color: rgba(255,255,255,0.0) /* yellow */;
 				margin: 0 auto;
@@ -454,11 +465,13 @@
 				 color: green; 
 			 }
 		
-		.validation{
-		text-align: center;
-		}
+			.validation{
+				text-align: center;
+			}
 		
-	
+			#showListBody {
+				position: fixed; width: 100%; top: 110px;
+			}
 		</style>
 	
 	</head>
@@ -606,65 +619,24 @@
 		
 		
 		<!-- --------[+]앨범만들기부분---------------------------------------------------------------------------------------- -->
-		<div id="addAlbumBox" title="Create a new Album">
-			<form method="post" action="makeAlbum">
-				<fieldset id="addAlbumField">
-					<label for="album_name">Album Name</label>
-					<input type="text" id="album_name" name="album_name" size="20"/><br/>
-					<input type="hidden" name="uid" value="${member.uid }"/>
-					<hr/>
-					<p>Would you like to open this album to public?</p>
-					<input type="radio" name="album_publicity" value="true"/>yes
-					<input type="radio" name="album_publicity" value="false"/>no<br/>
-					<hr/>
-					<p>Invite Your friends to this Album!!!</p>
-					<a href="#" id="showMyFriendsList">show my friends</a>
-				</fieldset>
-			</form>
-		</div>
-	<!-- -----앨범 보기 부분 ------------------------------------------------------------------------------------- -->
-		<c:forEach var="albumEntry" items="${albumList}">
-			<div id="albumThumbnail">
-				<p>${albumEntry.value.thumbnail_no}</p>
-				<p>${albumEntry.key.album_name}</p>
+			<div id="addAlbumBox" title="Create a new Album">
+				<form method="post" action="makeAlbum">
+					<fieldset id="addAlbumField">
+						<label for="album_name">Album Name</label>
+						<input type="text" id="album_name" name="album_name" size="20"/><br/>
+						<input type="hidden" name="uid" value="${member.uid }"/>
+						<hr/>
+						<p>Would you like to open this album to public?</p>
+						<input type="radio" name="album_publicity" value="true"/>yes
+						<input type="radio" name="album_publicity" value="false"/>no<br/>
+						<hr/>
+						<p>Invite Your friends to this Album!!!</p>
+						<a href="#" id="showMyFriendsList">show my friends</a>
+					</fieldset>
+				</form>
 			</div>
-		</c:forEach>
-	<!-- --------------------------------------------------------------------------------------------------------- -->
-		<!-- <div>
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>	
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>	
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>		
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>	
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>	
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>	
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>	
-			<a href="photoList" class="album">
-				<input type="image" />
-			</a>	
-		</div> -->
-		<div id="showAlbumList">
-		
-		</div>
-		
-	<div>
-		<p>앨범 예시</p>
-		<a href="photoList?album_no=1">album1</a>	
-		<a href="photoList?album_no=2">album2</a>	
-	</div>
-</div>	
-</body>
+			
+			<div id="showListBody"></div>
+		</div>	
+	</body>
 </html>
