@@ -62,39 +62,24 @@ public class PhotoController {
 	
 	//사진 등록 
 	@RequestMapping(value="/addPhoto",method=RequestMethod.POST)	
-	public String write(Photo photo, MultipartFile attach, HttpSession session) throws IOException {	
+	public String write(Photo photo, HttpSession session) throws IOException {	
 		logger.info("addPhoto()");
 		
 		Member m = (Member)session.getAttribute("loginmember");
 		photo.setUid(m.getUid());
 	
-		String photo_original_file_name;
-		String photo_filesystem_name;
-		String photo_content_type;
-		
 		//파일 정보 얻기
 		ServletContext application = session.getServletContext();
 		String dirPath = application.getRealPath("/resources/uploadfiles");
-		if(photo.getAttach() != null) {
-			photo_original_file_name = photo.getAttach().getOriginalFilename();
-			photo_filesystem_name = System.currentTimeMillis() + "-" + photo_original_file_name;
-			photo_content_type = photo.getAttach().getContentType();
-			if(!photo.getAttach().isEmpty()) {	
-				//파일에 저장하기
-				try {
-					photo.getAttach().transferTo(new File(dirPath + "/" + photo_filesystem_name));
-				} catch (Exception e) { e.printStackTrace(); }
-			}
-			photo.setPhoto_original_file_name(photo_original_file_name);
-			photo.setPhoto_filesystem_name(photo_filesystem_name);
-			photo.setPhoto_content_type(photo_content_type);
+		if(!photo.getAttach().isEmpty()) {
+			
+			photo.setPhoto_original_file_name(photo.getAttach().getOriginalFilename());
+			photo.setPhoto_filesystem_name(System.currentTimeMillis() + "-" + photo.getPhoto_original_file_name());
+			photo.setPhoto_content_type(photo.getAttach().getContentType());
+			photo.getAttach().transferTo(new File(dirPath + "/" + photo.getPhoto_filesystem_name()));
 		}
 		
 		photoService.addPhoto(photo);
-		photo_filesystem_name = application.getRealPath("/resources/uploadfiles/"+photo_filesystem_name);
-		File saveFile = new File(photo_filesystem_name);
-		attach.transferTo(saveFile);
-		
 		
 		return "redirect:/photoList?album_no="+photo.getAlbum_no();
 	}
@@ -124,7 +109,7 @@ public class PhotoController {
 	}
 	
 	//저장된 사진 보여주기 
-	@RequestMapping("/fileDownload")
+	/*@RequestMapping("/fileDownload")
 	public void fileDownload(Photo photo, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//응답헤더(3개: 1)순수파일이름, 2)파일타입, 3)파일크기)
 		String originalFilename = photo.getAttach().getOriginalFilename();;
@@ -158,21 +143,21 @@ public class PhotoController {
 		OutputStream os = response.getOutputStream();
 		
 		//how1
-		/*byte[] data = new byte[1024];
+		byte[] data = new byte[1024];
 		int byteNum;
 		while((byteNum = fis.read(data)) != -1) {
 			os.write(data, 0, byteNum);
 		}
 		os.flush();
 		os.close();
-		fis.close();*/
+		fis.close();
 		
 		//how2
 		FileCopyUtils.copy(fis, os);
 		os.flush();
 		os.close();
 		fis.close();
-	}
+	}*/
 	
 	
 	//사진 큰화면 보여주기
