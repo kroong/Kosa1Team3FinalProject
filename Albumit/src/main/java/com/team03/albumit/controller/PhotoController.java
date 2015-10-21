@@ -1,6 +1,7 @@
 package com.team03.albumit.controller;
 
 import java.io.*;
+import java.net.*;
 import java.util.*;
 
 import javax.servlet.*;
@@ -10,6 +11,7 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
+import org.springframework.util.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
@@ -53,22 +55,30 @@ public class PhotoController {
 		return "/photoReg";
 	}
 	
+	@Autowired
+	ServletContext servletContext;
+	
+
+	
 	//사진 등록 
 	@RequestMapping(value="/addPhoto",method=RequestMethod.POST)	
-	public String write(Photo photo, HttpSession session) {	
+	public String write(Photo photo, MultipartFile attach, HttpSession session) throws IOException {	
 		logger.info("addPhoto()");
 		
 		Member m = (Member)session.getAttribute("loginmember");
 		photo.setUid(m.getUid());
 	
+		String photo_original_file_name;
+		String photo_filesystem_name;
+		String photo_content_type;
 		
 		//파일 정보 얻기
 		ServletContext application = session.getServletContext();
 		String dirPath = application.getRealPath("/resources/uploadfiles");
 		if(photo.getAttach() != null) {
-			String photo_original_file_name = photo.getAttach().getOriginalFilename();
-			String photo_filesystem_name = System.currentTimeMillis() + "-" + photo_original_file_name;
-			String photo_content_type = photo.getAttach().getContentType();
+			photo_original_file_name = photo.getAttach().getOriginalFilename();
+			photo_filesystem_name = System.currentTimeMillis() + "-" + photo_original_file_name;
+			photo_content_type = photo.getAttach().getContentType();
 			if(!photo.getAttach().isEmpty()) {	
 				//파일에 저장하기
 				try {
@@ -81,6 +91,10 @@ public class PhotoController {
 		}
 		
 		photoService.addPhoto(photo);
+		photo_filesystem_name = application.getRealPath("/resources/uploadfiles/"+photo_filesystem_name);
+		File saveFile = new File(photo_filesystem_name);
+		attach.transferTo(saveFile);
+		
 		
 		return "redirect:/photoList?album_no="+photo.getAlbum_no();
 	}
@@ -108,6 +122,58 @@ public class PhotoController {
 	
 
 	}
+	
+	//저장된 사진 보여주기 
+	@RequestMapping("/fileDownload")
+	public void fileDownload(Photo photo, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//응답헤더(3개: 1)순수파일이름, 2)파일타입, 3)파일크기)
+		String originalFilename = photo.getAttach().getOriginalFilename();;
+		String saveFilename = this.saveFilename;
+		
+		
+		
+		String fileType = this.fileType;
+		File file = new File(saveFilename);
+		long fileSize = file.length();
+		
+		//1)순수 파일 이름 설정
+		String userAgent = request.getHeader("User-Agent");
+		if(userAgent.indexOf("MSIE") != -1) {
+			originalFilename = URLEncoder.encode(originalFilename, "UTF-8");
+		} else {
+			originalFilename = new String(
+				originalFilename.getBytes("UTF-8"),
+				"ISO-8859-1"
+			);
+		}
+		response.setHeader("Content-Disposition", "attachment; filename=\""+originalFilename+"\";");
+		//2)파일 타입
+		response.setContentType(fileType);
+		//3)파일 크기
+		response.setContentLength((int)fileSize);
+		
+		//응답본문(파일의 데이터)
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		FileInputStream fis = new FileInputStream(file);
+		OutputStream os = response.getOutputStream();
+		
+		//how1
+		/*byte[] data = new byte[1024];
+		int byteNum;
+		while((byteNum = fis.read(data)) != -1) {
+			os.write(data, 0, byteNum);
+		}
+		os.flush();
+		os.close();
+		fis.close();*/
+		
+		//how2
+		FileCopyUtils.copy(fis, os);
+		os.flush();
+		os.close();
+		fis.close();
+	}
+	
 	
 	//사진 큰화면 보여주기
 	@RequestMapping("/photoDetail")
@@ -181,13 +247,20 @@ public class PhotoController {
 	}
 	
 	//좋아요 누르기
-	@RequestMapping("/addLike")
-	public String addLike(int album_no, int photo_no, Model model, HttpSession session){
-		photoService.addLike(album_no, photo_no);
+	@RequestMapping(value="/addLike", method=RequestMethod.GET)
+	public String addLike(@RequestParam("album_no")String album_no, @RequestParam("photo_no")int photo_no, Model model, HttpSession session){
+		System.out.println("들어왔져");
+		int ano = Integer.parseInt(album_no);
+		System.out.println("ano:"+ano);
+		photoService.addLike(ano, photo_no);
 		logger.info("photo_no"+photo_no);
 		logger.info("album_no"+album_no);
 		
-		return "redirect:/photoList?album_no="+album_no;
+		Photo photo = photoService.getPhoto(photo_no);
+		int photo_like = photo.getPhoto_like();
+		model.addAttribute("photo_like", photo_like);
+		
+		return "/like";
 	}
 	
 }
