@@ -28,24 +28,30 @@
 				margin: 0 auto;
 				padding: 0px;
 		    }
-		     
+		    
 		    body{
 			    width: 100%;
 				height : 100%;
 				background-color: white;
 				margin: 0 auto;
 		    }
+		    a, a:hover, a:FOCUS, a:VISITED {
+		    	color: black;
+		    	text-decoration: none;
+		    }
 		    
 			#albumThumbnail {
 				display: inline-block;
 			}
-			#albumThumbnail p {
+			#albumThumbnail {
 				text-align: center;
 				margin: 1px 15px;
 			}
 			#albumThumbnail img {
 				width: 150px; height: 150px;
+				display: block;
 			}
+			
 	
 		</style>
 	
@@ -55,17 +61,12 @@
 	<!-- -----앨범 보기 부분 ------------------------------------------------------------------------------------- -->
 		<c:forEach var="albumEntry" items="${albumList}">
 			<div id="albumThumbnail">
-				<p>
+				<a href="photoList?album_no=${albumEntry.key.album_no}">
 					<img src="${pageContext.request.contextPath}/resources/thumb/${albumEntry.value.thumbnail_original_file_name}"/>
-				</p>
-				<p>${albumEntry.key.album_name}</p>
+					<span>${albumEntry.key.album_name}</span>
+				</a>
 			</div>
 		</c:forEach>
 	<!-- --------------------------------------------------------------------------------------------------------- -->
-		<div>
-			<p>앨범 예시</p>
-			<a href="photoList?album_no=1">album1</a>	
-			<a href="photoList?album_no=2">album2</a>	
-		</div>
 	</body>
 </html>

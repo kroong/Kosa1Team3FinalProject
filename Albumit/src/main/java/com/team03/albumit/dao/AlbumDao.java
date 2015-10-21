@@ -66,7 +66,7 @@ public class AlbumDao {
 	}
 	
 	public List<Album> selectAllAlbum() {
-		String sql = "SELECT * FROM Album WHERE album_publicity=1";
+		String sql = "SELECT * FROM Album WHERE album_publicity=1 ORDER BY album_no DESC";
 		List<Album> list = jdbcTemplate.query(sql, 
 				new RowMapper<Album>() {
 	
@@ -87,7 +87,7 @@ public class AlbumDao {
 	}
 	
 	public List<Album> selectAlbumByUid(int uid) {
-		String sql = "SELECT * FROM Album a WHERE a.uid=?";
+		String sql = "SELECT * FROM Album a WHERE a.uid=? ORDER BY album_no DESC";
 		List<Album> list = jdbcTemplate.query(sql, new Object[] {uid}, 
 				new RowMapper<Album>() {
 					@Override
@@ -107,7 +107,7 @@ public class AlbumDao {
 	}
 	
 	public List<Album> selectAlbumByUid(int uid, String whereClause) {
-		String sql = "SELECT * FROM Album a WHERE " + whereClause;
+		String sql = "SELECT * FROM Album a WHERE " + whereClause + " ORDER BY album_no DESC";
 		List<Album> list = jdbcTemplate.query(sql, new Object[] {uid}, 
 				new RowMapper<Album>() {
 					@Override
