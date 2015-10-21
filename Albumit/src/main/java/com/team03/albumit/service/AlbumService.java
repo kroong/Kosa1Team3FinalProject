@@ -179,5 +179,11 @@ public class AlbumService {
 		sharedAlbumDao.delete(album_no, f_uid);
 	}
 	
+	//앨범 검색
+	public List<Album> searchAlbum(String album_name){
+		List<Album> album = albumDao.selectByName(album_name);
+		
+		return album;
+	}
 	
 }

@@ -219,6 +219,13 @@ public class PhotoService {
 		reportedPhotoDao.selectAll();
 	}
 	
+	//사진 검색 
+	public List<Photo> searchPhoto(String photo_title){
+		List<Photo> photo = photoDao.selectByTitle(photo_title);
+		
+		return photo;
+	}
+	
 	//---------------------댓글-----------------------------
 	//댓글달기
 	public void addComment(Comment comment){
