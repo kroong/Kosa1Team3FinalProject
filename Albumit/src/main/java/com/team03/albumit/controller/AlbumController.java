@@ -27,7 +27,7 @@ public class AlbumController {
 	@RequestMapping("/allAlbumList")
 	public String allAlbumList(@ModelAttribute("member") Member member, Model model,HttpSession session) {
 		Map<Album, Thumbnail> albumList = albumService.showAllAlbumList();
-		model.addAttribute(albumList);
+		model.addAttribute("albumList", albumList);
 		
 		//친구목록 모델에 추가하기!!
 		List<FriendList> friends = memberService.friendList(member);
@@ -39,7 +39,7 @@ public class AlbumController {
 	@RequestMapping("/myAlbumList")
 	public String myAlbumList(@ModelAttribute("member") Member member, Model model) {
 		Map<Album, Thumbnail> albumList = albumService.showMyAlbumList(member);
-		model.addAttribute(albumList);
+		model.addAttribute("albumList", albumList);
 		
 		return "albumList";
 	}
@@ -47,7 +47,7 @@ public class AlbumController {
 	@RequestMapping("/sharedAlbumList")
 	public String sharedAlbumList(@ModelAttribute("member") Member member, Model model) {
 		Map<Album, Thumbnail> albumList = albumService.showMySharedAlbumList(member);
-		model.addAttribute(albumList);
+		model.addAttribute("albumList", albumList);
 		
 		return "albumList";
 	}
@@ -55,7 +55,7 @@ public class AlbumController {
 	@RequestMapping("/likedAlbumList")
 	public String likedAlbumList(@ModelAttribute("member") Member member, Model model) {
 		Map<Album, Thumbnail> albumList = albumService.showMyLikedAlbumList(member);
-		model.addAttribute(albumList);
+		model.addAttribute("albumList", albumList);
 		
 		return "albumList";
 	}

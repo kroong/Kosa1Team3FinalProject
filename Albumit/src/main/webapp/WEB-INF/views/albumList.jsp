@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*, com.team03.albumit.dto.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
@@ -87,13 +87,15 @@
 				width : 500,
 				modal: true,
 				buttons: {
-					Create : function() {},
+					Create : function() {
+						$("#addAlbumBox form").submit();
+					},
 					Cancel: function() {
 						addAlbumBox.dialog("close");
 					}
 				},
 				close: function() {
-					form[0].reset();
+					$("#addAlbumBox form").reset();
 				}
 			});
 			
@@ -102,8 +104,32 @@
 				$("#addAlbumBox").dialog("open");
 			});
 			
-			form = addAlbumBox.find("form").on("submit", function(event){
+			/* form = addAlbumBox.find("form").on("submit", function(event){
 				event.preventDefault();
+				
+			}); */
+			
+			$("#showMyFriendsList").on("click", function() {
+				$.ajax({
+					url: "showFriendsList",
+					dataType: "json",
+					success: function(data) {
+						console.log("ajax");
+						console.log(data);
+						var html = '';
+						for(var i = 0; i < data.length; i++) {
+							html += '<p><input type="checkbox" name="memberList[' + i + '].uid" id="cboxfor_' 
+										+ data[i].uid + '" value="' + data[i].uid + '"/>';
+							html += '<label for="cboxfor_"' + data[i].uid + '">&nbsp&nbsp&nbsp';
+							html += data[i].member_email + '</label>&nbsp&nbsp&nbsp';
+							html += '<span>' + data[i].member_nickname + '</span></p>';
+						}
+						$("#addAlbumField").append(html);
+					},
+					error: function(data) {
+						console.log(data);
+					}
+				});
 			});
 			
 		});
@@ -657,10 +683,11 @@
 		
 		<!-- --------[+]앨범만들기부분---------------------------------------------------------------------------------------- -->
 		<div id="addAlbumBox" title="Create a new Album">
-			<form>
-				<fieldset>
+			<form method="post" action="makeAlbum">
+				<fieldset id="addAlbumField">
 					<label for="album_name">Album Name</label>
 					<input type="text" id="album_name" name="album_name" size="20"/><br/>
+					<input type="hidden" name="uid" value="${member.uid }"/>
 					<hr/>
 					<p>Would you like to open this album to public?</p>
 					<input type="radio" name="album_publicity" value="true"/>yes
@@ -671,8 +698,15 @@
 				</fieldset>
 			</form>
 		</div>
+	<!-- -----앨범 보기 부분 ------------------------------------------------------------------------------------- -->
+		<c:forEach var="albumEntry" items="${albumList}">
+			<div id="albumThumbnail">
+				<p>${albumEntry.value.thumbnail_no}</p>
+				<p>${albumEntry.key.album_name}</p>
+			</div>
+		</c:forEach>
 	<!-- --------------------------------------------------------------------------------------------------------- -->
-		<div>
+		<!-- <div>
 			<a href="photoList" class="album">
 				<input type="image" />
 			</a>	
@@ -697,7 +731,7 @@
 			<a href="photoList" class="album">
 				<input type="image" />
 			</a>	
-		</div>
+		</div> -->
 		
 		
 	<div>
