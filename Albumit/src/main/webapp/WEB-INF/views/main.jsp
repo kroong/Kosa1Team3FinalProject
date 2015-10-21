@@ -137,6 +137,7 @@
 		function block(){
 			
 		alert("block누름!");
+		$("#friends").css("display","none");
 			var contextpath = $("#contextpath").val();
 			$.ajax({
 				url:contextpath+"/blockPage",
@@ -184,7 +185,7 @@
 		      }
 		     
 		     body{
-		      width: 100%;
+		      width: 1000px;
 		      height : 100%;
 		      background-color: white;
 		      margin: 0 auto;
@@ -444,25 +445,19 @@
 			#selectex:hover > ul > li {
 				 padding: 3px;
 				 border-bottom: 1px solid rgba(255,255,255,0);
-			}
+			  }
 			#selectex:hover > ul > li:hover {
-				background: white;
+				 background: white;
 				list-style:none; 
-			}
+			 }
 			#selectex:hover > ul > li:hover > a {
 				 color: green; 
-			}
+			 }
 		
-			.validation{
-				text-align: center;
-			}
-			
-			#albumThumbnail {
-				display: inline-block;
-			}
-			#albumThumbnail img {
-				width: 150px; height: 150px;
-			}
+		.validation{
+		text-align: center;
+		}
+		
 	
 		</style>
 	
@@ -630,18 +625,46 @@
 	<!-- -----앨범 보기 부분 ------------------------------------------------------------------------------------- -->
 		<c:forEach var="albumEntry" items="${albumList}">
 			<div id="albumThumbnail">
-				<p>
-					<img src="${pageContext.request.contextPath}/resources/thumb/${albumEntry.value.thumbnail_original_file_name}"/>
-				</p>
+				<p>${albumEntry.value.thumbnail_no}</p>
 				<p>${albumEntry.key.album_name}</p>
 			</div>
 		</c:forEach>
 	<!-- --------------------------------------------------------------------------------------------------------- -->
-		<div>
-			<p>앨범 예시</p>
-			<a href="photoList?album_no=1">album1</a>	
-			<a href="photoList?album_no=2">album2</a>	
+		<!-- <div>
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>	
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>	
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>		
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>	
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>	
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>	
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>	
+			<a href="photoList" class="album">
+				<input type="image" />
+			</a>	
+		</div> -->
+		<div id="showAlbumList">
+		
 		</div>
-	</div>	
+		
+	<div>
+		<p>앨범 예시</p>
+		<a href="photoList?album_no=1">album1</a>	
+		<a href="photoList?album_no=2">album2</a>	
+	</div>
+</div>	
 </body>
 </html>

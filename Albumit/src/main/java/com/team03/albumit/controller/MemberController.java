@@ -52,7 +52,7 @@ public class MemberController {
 		
 			
 			logger.info("로그인성공");
-			return "redirect:/allAlbumList";
+			return "redirect:/main";
 		}
 		logger.info("로그인 실패");
 		return "redirect:/login";	
@@ -202,7 +202,7 @@ public class MemberController {
 		}
 		
 		System.out.println("멤버 수정 완료  modify- 컨트롤러!!!");
-		return  "redirect:/allAlbumList";
+		return  "redirect:/main";
 	}
 	
 	@RequestMapping(value="blockFriend", method={RequestMethod.GET,RequestMethod.POST})

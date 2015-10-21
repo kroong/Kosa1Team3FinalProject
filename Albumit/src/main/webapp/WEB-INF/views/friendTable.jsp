@@ -33,6 +33,8 @@ function commitBlock(){
 }
 
 $(function() {
+	
+	  
 	var row;
 	 $( ".slider-range-max" ).slider({
 	      range: "max",
@@ -107,9 +109,10 @@ $(function() {
 	    	  }	     
 			}
 	    }); 
-	    
-	  $("input[name=amount2]" ).eq(row-1).val( $( ".slider-range-min" ).slider( "value" ));
-	  $("input[name=amount]" ).eq(row-1).val( $( ".slider-range-max" ).slider( "value" ));
+
+	
+	  $("input[name=amount2]").eq(row-1).val( $( ".slider-range-min" ).slider( "value" ));
+	  $("input[name=amount]").eq(row-1).val( $( ".slider-range-max" ).slider( "value" ));
   }); 
 </script>
 <div id="ftable"></div>
