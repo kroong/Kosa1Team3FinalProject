@@ -214,7 +214,7 @@ public class MemberController {
 		
 		System.out.println("차단상태 컨트롤러에서 "+blocked.isFrined_block());
 		model.addAttribute("blockFriend",blocked.isFrined_block());
-		return "blocked";
+		return "";
 	
 	}
 	
@@ -226,7 +226,7 @@ public class MemberController {
 		Friend UnBlocked =  memberService.friendStatus(member, UnBlockFriend);
 		
 		System.out.println("차단해제 컨트롤러에서 "+UnBlocked.isFrined_block());
-		return "blocked";
+		return "";
 	
 	}
 	
@@ -239,6 +239,7 @@ public class MemberController {
 	
 		return "friendLists";
 	}
+	
 	@RequestMapping(value="blockPage", method={RequestMethod.GET, RequestMethod.POST })
 	public String blockPage(HttpSession session, Model model){
 		Member mem = (Member) session.getAttribute("loginmember");
