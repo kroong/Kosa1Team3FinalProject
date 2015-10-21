@@ -24,14 +24,21 @@ public class AlbumController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/allAlbumList")
-	public String allAlbumList(@ModelAttribute("member") Member member, Model model,HttpSession session) {
-		Map<Album, Thumbnail> albumList = albumService.showAllAlbumList();
-		model.addAttribute("albumList", albumList);
-		
+	@RequestMapping("/main")
+	public String main(@ModelAttribute("member") Member member, Model model,HttpSession session) {
 		//친구목록 모델에 추가하기!!
 		List<FriendList> friends = memberService.friendList(member);
 		session.setAttribute("friendList", friends);
+		
+		return "main";
+	}
+
+	
+	
+	@RequestMapping("/allAlbumList")
+	public String allAlbumList(@ModelAttribute("member") Member member, Model model) {
+		Map<Album, Thumbnail> albumList = albumService.showAllAlbumList();
+		model.addAttribute("albumList", albumList);
 		
 		return "albumList";
 	}
