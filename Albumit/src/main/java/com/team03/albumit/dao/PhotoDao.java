@@ -104,22 +104,34 @@ public class PhotoDao {
 	}
 	
 	public int update(Photo photo) {
-		String sql = "update Photo set photo_place=? photo_title=?, photo_content=? where photo_no=?";
+		String sql = "update Photo set photo_title=?, photo_content=? where photo_no=? and album_no=?";
 		int rows = jdbcTemplate.update(
 			sql,
-			photo.getPhoto_place(),
 			photo.getPhoto_title(),
 			photo.getPhoto_content(),
-			photo.getPhoto_no()
+			photo.getPhoto_no(),
+			photo.getAlbum_no()
 		);
 		return rows;
 	}
 	
 	public int updateUid(Photo photo, int uid) {
-		String sql = "update Photo set uid=? where photo_no=?";
+		String sql = "update Photo set uid=? where photo_no=? and album_no=?";
 		int rows = jdbcTemplate.update(
 			sql,
-			photo.getUid(),
+			uid,
+			photo.getPhoto_no(),
+			photo.getAlbum_no()
+		);
+		return rows;
+	}
+	
+	public int updateAlbum_no(Photo photo, int album_no) {
+		String sql = "update Photo set album_no=? where album_no=? and photo_no=?";
+		int rows = jdbcTemplate.update(
+			sql,
+			album_no,
+			photo.getAlbum_no(),
 			photo.getPhoto_no()
 		);
 		return rows;
@@ -218,6 +230,34 @@ public class PhotoDao {
 		);
 		return list;
 		
+	}
+	
+	//상단바에서 사진검색
+	public List<Photo> selectByTitle(String photo_title) {
+		String sql = "select * from Photo where photo_title=?";
+		List<Photo> list = jdbcTemplate.query(
+			sql,
+			new Object[] {photo_title},
+			new RowMapper<Photo>() {
+				@Override
+				public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Photo photo = new Photo();
+					photo.setPhoto_no(rs.getInt("photo_no"));
+					photo.setAlbum_no(rs.getInt("album_no"));
+					photo.setPhoto_date(rs.getDate("photo_date"));
+					photo.setPhoto_original_file_name(rs.getString("photo_original_file_name"));
+					photo.setPhoto_filesystem_name(rs.getString("photo_filesystem_name"));
+					photo.setPhoto_content_type(rs.getString("photo_content_type"));  
+					photo.setPhoto_like(rs.getInt("photo_like"));
+					photo.setPhoto_hitcount(rs.getInt("photo_hitcount"));
+					photo.setPhoto_content(rs.getString("photo_content"));
+					photo.setPhoto_title(rs.getString("photo_title"));
+					photo.setUid(rs.getInt("uid"));
+					return photo;
+				}
+			}
+		);
+		return list;
 	}
 
 

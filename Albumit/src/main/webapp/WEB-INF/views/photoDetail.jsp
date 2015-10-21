@@ -73,6 +73,11 @@
 		</style>
 	</head>
 	
+	<script type="text/javascript"
+		src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	
 	<body>
 		<h4>게시물 보기</h4>
 		<div id="part1">
@@ -99,7 +104,6 @@
 			<div id="part1_2">
 				<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="100px" height="100px"/>
 				<button>다운로드</button>
-				
 			</div>
 		</div>
 		
@@ -108,10 +112,24 @@
 			<pre>${photo.photo_content}</pre>
 		</div>
 		
+		<div>
+		
+			${comment.comment_content}
+		
+		</div>
+		
+		<div>
+			<form method="post" action="addComment">
+				<textarea name="photo_content" rows="5" cols="50"></textarea>
+			</form>
+		</div>
+		
+		<input type="text" name="comment_content" value="${photo.photo_title}"/>
+		
 		<div id="buttonGroup">
 			<a href="photoList?album_no=${photo.album_no }">목록</a>
 			<a href="photoUpdateForm?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">수정</a>
-			<a href="delete?album_no=${photo.album_no }&&photo_no=${photo.photo_no}">삭제</a>
+			<a href="removePhoto?album_no=${photo.album_no }&&photo_no=${photo.photo_no}">삭제</a>
 		</div>		
 	</body>
 </html>

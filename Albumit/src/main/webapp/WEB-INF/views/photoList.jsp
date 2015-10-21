@@ -9,66 +9,45 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<style type="text/css">
-		#darken-background {
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 100%; 
-
-            display: none;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            overflow-y: scroll;
-        }
-
-        #lightbox {
-            width: 700px;
-            margin: 20px auto; padding: 15px;
-
-            border: 1px solid #333333;
-            border-radius: 5px;
-            background: white;
-            box-shadow: 0 5px 5px rgba(34, 25, 25, 0.4);
-
-            text-align: center;
-        }
-         .paper {
-            width: 190px;
-            margin-top: 10px;
-            padding: 15px 15px 0;
-            font-size: 11px;
-            background: #FFFFFF;
-            box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
-        }
-
-       
-
-        
-
-      
+			body{
+				
+			}
+			
+	        .main_photo{
+	        	display:inline-block;
+	        	width:300px;
+	        	height:500px;
+	        	margin: 10px;
+	        	background: gray;
+	        	box_shadow: 0 1px 3px rgba(34,25,25,0.4);
+	        }
+	        nav {
+	        display:inline;
+	        	width:20%;
+	        }
+	       	nav ul{padding-left:5px; }                   
+         	nav ul li {
+            	display:inline;                        
+            	border-left:1px solid #999;            
+            	font:bold 12px Dotum;                    
+            	padding:0 10px;                        
+        	}
+         	nav ul li:first-child{border-left:none;}  
 		</style>
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    	<script src="resources/js/jquery.masonry.min.js"></script>
-   		<script src="resources/js/jquery.imagesloaded.min.js"></script>
-		
-		
 		<script type="text/javascript">
 
 			/* $(document).ready(function(){
 				
 				for(var i=0; i<100; i++){
-					$('<div></div>').addClass('box').css({
+					$('.main_photo').css({
 						width:100,
 						height: Math.floor(Math.random()*100)+50
 					}).appendTo('body');
 				}
 				
-				$('body').masonry({
-					columnWidth:100
-				});
-				
-			});
-			 */
+			}); */
+			
 
 			function arrayfun(sel) {
 			    var x = sel.options[sel.selectedIndex].value;
@@ -121,105 +100,43 @@
 			            { alert(err.responseText)}
 			        });
 			    }); 
-		
-		
-		        // 페이지
-		        $(document).ready(function () {
-		            // 이미지 로드 확인
-		             $('#main-section').imagesLoaded(function () { 
-		                // jQuery Masonry 플러그인 적용
-		                $('#main-section').masonry({
-		                    itemSelector: '.paper',
-		                    columnWidth: 500,
-		                    height: Math.floor(Math.random()*100)+50,
-		                    isAnimated: true
-		                });
-		            });
-		 		}); 
-		         
-		     // 라이트 박스
-		        $(document).ready(function () {
-		            function showLightBox() {
-		                // 라이트박스를 보이게 합니다.
-		                $('#darken-background').show();
-		                $('#darken-background').css('top', $(window).scrollTop());
-		                // 스크롤을 못하게 합니다.
-		                $('body').css('overflow', 'hidden');
-		            }
-
-		            function hideLightBox() {
-		                // 라이트박스를 안 보이게 합니다.
-		                $('#darken-background').hide();
-
-		                // 스크롤을 하게 합니다.
-		                $('body').css('overflow', '');
-		            }
-
-		            // 라이트박스 제거 이벤트
-		            $('#darken-background').click(function () {
-		                hideLightBox();
-		            });
-
-		              // 클릭 이벤트 연결
-		            $('.paper').click(function () {
-		                showLightBox();
-		            });
-
-		            // 라이트박스 제거 이벤트 보조
-		            $('#lightbox').click(function (event) {
-		                event.stopPropagation()
-		            });
-		        });
-		        
 		</script>
 		
 	</head>
 	
 	<body>
-		
-		<select id="photoArray" size="1" onchange="arrayfun(this)">
+	
+		<nav>
+		<ul>
+			<li>Post </li>
+			<li>Move to  </li>
+			<li>Share Album</li>
+			<li>
+				<select id="photoArray" size="1" onchange="arrayfun(this)">
 			<option value="latest" selected="selected" >최신순</option>
 			<option value="popularity">인기순</option>
-		</select>
+		</select></li>
+		</ul>
+
+		</nav>
+				
+		
+		
 
 		<div id="latest">
 		<h4>최신순</h4>
 		<hr/>
 		
 			<c:forEach  var="photo" items="${laList}">
+				<div class="main_photo"> 
+					<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
+					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
+					<hr/>
+					<i id="like" class="fa fa-heart-o" style="color:white"></i>
+					<i id="share" class="fa fa-share-square-o"></i>
+				</div> 
 			
-				
-				  <section id="main-section"> 	
-         
-			        <div class="paper"> 
-			            <div class="paper-holder"> 
-			               <%-- <a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}"> --%>
-						<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
-						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
-			            </div> 
-			            <p class="paper-description">Lorem ipsum dolor sit amet</p> 
-			            </div> 
-			        </div>
-						<%-- <a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
-						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
-						<i id="like" class="fa fa-heart-o"></i>
-						<i id="share" class="fa fa-share-square-o"></i> --%>
 			</c:forEach>
-			
-					<!-- 라이트박스 --> 
-		    <div id="darken-background"> 
-		        <div id="lightbox"> 
-		                    <h3>User</h3>
-		                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sem mi, egestas a facilisis eget, egestas ut magna.</p>
-		                </div> 
-		            </div>
-		            <hr class="lightbox-splitter" />
-		            <img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" /> 
-		        </div> 
-		    </div> 
-			
-			
-			
 		</div>
 		
 		
@@ -228,7 +145,7 @@
 		
 		
 		
-		<div id="1">
+		
 		<table id="myTable">
 			<tr>
 				<th style="width:50px">사진번호</th>
@@ -260,7 +177,7 @@
 		</table> 
 		</div>
 		
-		</div>
+	
 		
 		
 		
