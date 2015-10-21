@@ -196,7 +196,7 @@
 		      }
 		     
 		     body{
-		      width: 1000px;
+		      min-width: 1083px;
 		      height : 100%;
 		      background-color: white;
 		      margin: 0 auto;
@@ -205,6 +205,8 @@
 		     #pagewrapper{
 		 	  margin: 0px auto;
 		      padding: 0px;
+		      width: 100%;
+		      overflow: none;
 		     }
 		     
 		     
@@ -212,7 +214,7 @@
 		     
 		     #large-header{
 		     	min-width: 1083px;
-		     	position: fixed;
+		     	position: absolute;
 		     	top: 0;
 		     	right: 0;
 		     	left: 0;
@@ -384,9 +386,9 @@
 				float: right;
 				border: none;
 				background-color: rgba(255,255,255,0)/* purple */;
-				padding: 5px;
 				width: 400px;
-				height: 80px; 
+				padding: 5px 0 0 0;
+				height: 80px;
 				margin: 0px auto;
 				display: table-cell;
 				vertical-align: middle;
@@ -470,8 +472,8 @@
 			}
 		
 			#showListBody {
-				position: fixed; width: 100%; height: 100%; top: 110px; left: 0px;
-				border: none;
+				position: absolute; width: 100%; top: 110px; left: 0px;
+				border: none; height: 100%;
 			}
 		</style>
 	
