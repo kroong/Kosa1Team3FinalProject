@@ -126,15 +126,16 @@
 		        // 페이지
 		        $(document).ready(function () {
 		            // 이미지 로드 확인
-		            $('#main-section').imagesLoaded(function () {
+		             $('#main-section').imagesLoaded(function () { 
 		                // jQuery Masonry 플러그인 적용
 		                $('#main-section').masonry({
 		                    itemSelector: '.paper',
 		                    columnWidth: 500,
+		                    height: Math.floor(Math.random()*100)+50,
 		                    isAnimated: true
 		                });
 		            });
-		});
+		 		}); 
 		         
 		     // 라이트 박스
 		        $(document).ready(function () {
