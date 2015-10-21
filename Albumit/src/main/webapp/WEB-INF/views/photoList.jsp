@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -82,7 +83,11 @@
 			
 			
 		</style>
+		
+		<script type="text/javascript"
+		src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
 		<script type="text/javascript">
+		
 			function arrayfun(sel) {
 			    var x = sel.options[sel.selectedIndex].value;
 			    
@@ -99,12 +104,48 @@
 			    	
 			    }
 			}
+			
+			var row= $(this).parents("tr").index();
+	    	  console.log("row1:::::"+row);
+	    	  var like = document.getElementById("myTable").rows[row].cells.namedItem("좋아요").innerHTML;
+	    	  var album_no = document.getElementById("myTable").rows[row].cells.namedItem("앨범번호").innerHTML;
+	    	  var photo_no = document.getElementById("myTable").rows[row].cells.namedItem("사진번호").innerHTML;
+	    	  console.log("like:"+like);
+			
+			 var likephoto = document.getElementById("${photo.photo_no}"); 
+			
+			   likephoto.addEventListener('click', function(){
+			    	
+			        //ajax part
+			  
+			        
+			        
+			        alert($(".likephoto").val());
+			       /*  var album_no = $("input[name=album_no]").val();
+			        var photo_no = $("input[name=photo_no]").val(); */
+			  		alert("ano:"+album_no);
+			  		alert("pno:"+photo_no);
+			        
+			        $.ajax({
+			            type: "get",
+			            url: 'addLike',
+			            data:  { "album_no": album_no, "photo_no": photo_no},
+			            //change button
+			            success: function (msg){ 
+			            	document.getElementById('likephoto').innerHTML=msg.photoLike;
+			            	<%System.out.println("Please");%>
+			            },
+			            error: function (err)
+			            { alert(err.responseText)}
+			        });
+			    }); 
+		
 		
 		</script>
 	</head>
 	
 	<body>
-	
+		
 		<select id="photoArray" size="1" onchange="arrayfun(this)">
 			<option value="latest" selected="selected" >최신순</option>
 			<option value="popularity">인기순</option>
@@ -153,7 +194,11 @@
 		
 		<div id="popularity" style="display: none;">
 		<hr/><h4>좋아요순</h4><hr/>
-		<table>
+		
+		
+		
+		<div id="1">
+		<table id="myTable">
 			<tr>
 				<th style="width:50px">사진번호</th>
 				<th style="width:50px">앨범번호</th>
@@ -166,22 +211,24 @@
 				
 			</tr>
 
-	
+			
 			
 			<c:forEach var="photo" items="${liList}">
 				<tr>
-					<td>${photo.photo_no}</a></td>
-					<td>${photo.album_no}</td>
+					<td>${photo.photo_no}<input name="photo_no" type ="hidden" value="${photo.photo_no}"/></td>
+					<td>${photo.album_no}<input name="album_no" type ="hidden" value="${photo.album_no}"/></td>
 					<td>${photo.photo_title}</td>
 					<td>${photo.photo_content}</td>
 					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_original_file_name}</a></td>
 					<td>${photo.uid}</td>
 					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td>
-					<td><a href="addLike?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_like}</a></td>
+					<td id="${photo.photo_no}">${photo.photo_like}</td>
 					
 				</tr>
 			</c:forEach>
 		</table> 
+		</div>
+		
 		</div>
 		
 		
