@@ -189,7 +189,7 @@
 			<c:forEach  var="photo" items="${laList}">
 			
 				
-					<section id="main-section"> 
+				  <section id="main-section"> 	
          
 			        <div class="paper"> 
 			            <div class="paper-holder"> 
@@ -204,7 +204,6 @@
 						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
 						<i id="like" class="fa fa-heart-o"></i>
 						<i id="share" class="fa fa-share-square-o"></i> --%>
-					
 			</c:forEach>
 			
 					<!-- 라이트박스 --> 
