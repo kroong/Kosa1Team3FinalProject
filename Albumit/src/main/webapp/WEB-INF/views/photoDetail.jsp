@@ -97,7 +97,7 @@
 			</div>
 			
 			<div id="part1_2">
-				<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="100px" height="100px"/>
+				<img src="fileDownload?album_no=${photo.album_no}&&photo_no=${photo.photo_no}" width="100px" height="100px"/>
 				<button>다운로드</button>
 			</div>
 		</div>

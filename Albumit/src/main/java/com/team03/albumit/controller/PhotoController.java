@@ -110,8 +110,14 @@ public class PhotoController {
 	
 	//저장된 사진 보여주기 
 	@RequestMapping("/fileDownload")
-	public void fileDownload(Photo photo, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void fileDownload(int album_no, int photo_no, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//응답헤더(3개: 1)순수파일이름, 2)파일타입, 3)파일크기)
+		
+		Photo photo = photoService.getPhotoBy(photo_no, album_no);
+		
+		logger.info("Photo photo"+photo.getPhoto_filesystem_name());
+		
+		
 		String originalFilename = photo.getAttach().getOriginalFilename();;
 		String saveFilename = photo.getPhoto_filesystem_name();
 		

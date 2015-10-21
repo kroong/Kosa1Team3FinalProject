@@ -76,6 +76,33 @@ public class PhotoDao {
 		return photo;
 	}
 	
+	public Photo selectByPhotoAlbum(int photo_no, int album_no) {
+		String sql = "select * from Photo where photo_no=? and album_no=?";
+		Photo photo = jdbcTemplate.queryForObject(
+			sql,
+			new Object[] {photo_no, album_no},
+			new RowMapper<Photo>() {
+				@Override
+				public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Photo photo = new Photo();
+					photo.setPhoto_no(rs.getInt("photo_no"));
+					photo.setAlbum_no(rs.getInt("album_no"));
+					photo.setPhoto_date(rs.getDate("photo_date"));
+					photo.setPhoto_original_file_name(rs.getString("photo_original_file_name"));
+					photo.setPhoto_filesystem_name(rs.getString("photo_filesystem_name"));
+					photo.setPhoto_content_type(rs.getString("photo_content_type"));  
+					photo.setPhoto_like(rs.getInt("photo_like"));
+					photo.setPhoto_hitcount(rs.getInt("photo_hitcount"));
+					photo.setPhoto_content(rs.getString("photo_content"));
+					photo.setPhoto_title(rs.getString("photo_title"));
+					photo.setUid(rs.getInt("uid"));
+					return photo;
+				}
+			}
+		);
+		return photo;
+	}
+	
 	public int update(Photo photo) {
 		String sql = "update Photo set photo_place=? photo_title=?, photo_content=? where photo_no=?";
 		int rows = jdbcTemplate.update(
