@@ -79,6 +79,9 @@ public class PhotoController {
 			photo.getAttach().transferTo(new File(dirPath + "/" + photo.getPhoto_filesystem_name()));
 		}
 		
+		logger.info("이건되냐ㅠㅠ?"+photo.getAttach().getOriginalFilename());
+		
+		
 		photoService.addPhoto(photo);
 		
 		return "redirect:/photoList?album_no="+photo.getAlbum_no();
@@ -115,10 +118,10 @@ public class PhotoController {
 		
 		Photo photo = photoService.getPhotoBy(photo_no, album_no);
 		
-		logger.info("Photo photo"+photo.getPhoto_filesystem_name());
+		logger.info("여기봐랏"+photo.getAttach());
 		
 		
-		String originalFilename = photo.getAttach().getOriginalFilename();;
+		String originalFilename = photo.getAttach().getOriginalFilename();
 		String saveFilename = photo.getPhoto_filesystem_name();
 		
 		
@@ -232,9 +235,7 @@ public class PhotoController {
 	//좋아요 누르기
 	@RequestMapping(value="/addLike", method=RequestMethod.GET)
 	public String addLike(@RequestParam("album_no")String album_no, @RequestParam("photo_no")int photo_no, Model model, HttpSession session){
-		System.out.println("들어왔져");
 		int ano = Integer.parseInt(album_no);
-		System.out.println("ano:"+ano);
 		photoService.addLike(ano, photo_no);
 		logger.info("photo_no"+photo_no);
 		logger.info("album_no"+album_no);
