@@ -97,9 +97,9 @@
 			</div>
 			
 			<div id="part1_2">
-				<img src="fileDownload?album_no=${photo.album_no}&&photo_no=${photo.photo_no}" width="100px" height="100px"/>
+				<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="100px" height="100px"/>
 				<button>다운로드</button>
-				<a href="fileDownload?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">파일 다운로드</a>
+				
 			</div>
 		</div>
 		
@@ -111,7 +111,7 @@
 		<div id="buttonGroup">
 			<a href="photoList?album_no=${photo.album_no }">목록</a>
 			<a href="photoUpdateForm?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">수정</a>
-			<a href="delete/${photo.album_no }&&${photo.photo_no}">삭제</a>
+			<a href="delete?album_no=${photo.album_no }&&photo_no=${photo.photo_no}">삭제</a>
 		</div>		
 	</body>
 </html>
