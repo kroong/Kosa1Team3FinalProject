@@ -99,6 +99,7 @@
 			<div id="part1_2">
 				<img src="fileDownload?album_no=${photo.album_no}&&photo_no=${photo.photo_no}" width="100px" height="100px"/>
 				<button>다운로드</button>
+				<a href="fileDownload?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">파일 다운로드</a>
 			</div>
 		</div>
 		
