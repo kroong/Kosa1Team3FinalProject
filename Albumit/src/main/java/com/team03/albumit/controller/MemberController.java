@@ -210,7 +210,23 @@ public class MemberController {
 		Member member = (Member) session.getAttribute("loginmember");
 		System.out.println("blockFriend 컨트롤러에서 :"+blockFriend);
 		memberService.block(member, blockFriend);
-		return "friendTable";
+		Friend blocked =  memberService.friendStatus(member, blockFriend);
+		
+		System.out.println("차단상태 컨트롤러에서 "+blocked.isFrined_block());
+		model.addAttribute("blockFriend",blocked.isFrined_block());
+		return "blocked";
+	
+	}
+	
+	@RequestMapping(value="UnBlockFriend", method={RequestMethod.GET,RequestMethod.POST})
+	public String UnBlockFriend (@RequestParam("UnBlockFriend")String UnBlockFriend, Model model, HttpSession session){
+		Member member = (Member) session.getAttribute("loginmember");
+		System.out.println("UnBlockFriend 컨트롤러에서 :"+UnBlockFriend);
+		memberService.UnBlock(member, UnBlockFriend);
+		Friend UnBlocked =  memberService.friendStatus(member, UnBlockFriend);
+		
+		System.out.println("차단해제 컨트롤러에서 "+UnBlocked.isFrined_block());
+		return "blocked";
 	
 	}
 	

@@ -7,13 +7,11 @@
 <tr>
 <td>email</td>
 <td>profile</td>
-<td>block</td>
 </tr>
 	<c:forEach var="fr" items="${friends}" >
 	<tr>
 		<td><c:out value="${fr.member_email }"></c:out></td>
 		<td><c:out value="${fr.member_profile }"></c:out></td>
-		<td> <c:out value="${fr.friend_block }"></c:out></td>
 	</tr>
 	</c:forEach>
 								
