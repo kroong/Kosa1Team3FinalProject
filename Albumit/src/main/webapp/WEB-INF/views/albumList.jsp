@@ -111,6 +111,7 @@
 		function block(){
 			
 		alert("block누름!");
+		$("#friends").css("display","none");
 			var contextpath = $("#contextpath").val();
 			$.ajax({
 				url:contextpath+"/blockPage",

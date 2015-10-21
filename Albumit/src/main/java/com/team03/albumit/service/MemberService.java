@@ -120,6 +120,14 @@ public class MemberService {
 		Member blockmem = memberDao.selectByEmail(blockFriend);
 		friendDao.update(umember, blockmem,block);
 	}
+	
+	//친구 차단해제
+
+	public void UnBlock(Member umember, String UnBlockFriend){
+		Boolean block = true;   //차단
+		Member blockmem = memberDao.selectByEmail(UnBlockFriend);
+		friendDao.update(umember, blockmem,block);
+	}
 
 	//친구 검색
 	public Member searchFriend (Member umember,String friendId){

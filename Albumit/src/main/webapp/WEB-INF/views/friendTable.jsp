@@ -33,40 +33,41 @@ function commitBlock(){
 }
 
 $(function() {
-	
-/* 	 $( ".slider-range-max" ).slider({
+	var row;
+	 $( ".slider-range-max" ).slider({
 	      range: "max",
 	      min: 1,
 	      max: 2,
 	      value: 2,
 	      slide: function( event, ui ) {
-	    	  console.log("this->->"+this);
 	    	  var row= $(this).parents("tr").index();
 	    	  console.log("row1:::::"+row);
 	    	  var email = document.getElementById("myTable").rows[row].cells.namedItem("email").innerHTML;
 	    	  console.log("email:"+email);
+	    	var contextpath = $("#contextpath").val();
 	    	  
 	    	  if(ui.value ==1){
 	    		  $( "input[name=amount]" ).eq(row-1).val("차단");
-	    		  alert("차단을 선택하셨습니다. ");
 	    		  
-	    		  var contextpath = $("#contextpath").val();
-	    			alert("ajax에서 email::"+email);
 	    			$.ajax({
 	    				type: "post",
 	    				url: contextpath+"/blockFriend",
-	    				data: {"blockFriend" : email },
-	    				dataType : "html",
-	    				success : function(data){
-	    					$("#frtable3").html(data);
-	    				}
+	    				data: {"blockFriend" : email }
+	    				
 	    			});
 	    	  }
 	    	  else if(ui.value == 2){
 	    		  $( "input[name=amount]" ).eq(row-1).val("차단해제");
+	    		  
+	    		  $.ajax({
+	    				type: "post",
+	    				url: contextpath+"/UnBlockFriend",
+	    				data: {"UnBlockFriend" : email },
+	    			
+	    			});
 	    	  }
 	      }
-	    }); */
+	    }); 
 	 
  
 	 /* 차단된 친구   */
@@ -76,31 +77,38 @@ $(function() {
 	      max: 2,
 	      value: 1,
 	      slide: function( event, ui ) {
-	    	  console.log("this->->"+this);
-	    	  var row= $(this).parents("tr").index();
+	    	  row= $(this).parents("tr").index();
 	    	  console.log("row1:::::"+row);
 	    	  var email = document.getElementById("myTable").rows[row].cells.namedItem("email").innerHTML;
 	    	  console.log("email:"+email);
+	    		  var contextpath = $("#contextpath").val();
 	    	  
 	    	  if(ui.value ==1){
-	    		  
 	    		 $( "input[name=amount2]" ).eq(row-1).val("차단");
-
-/* 	    		  var contextpath = $("#contextpath").val();
-	    			alert("ajax에서 email::"+email);
-	    			$.ajax({
+				 console.log("차단!");
+					
+				 $.ajax({
 	    				type: "post",
 	    				url: contextpath+"/blockFriend",
 	    				data: {"blockFriend" : email },
-	   
-	    			}); */
-	    	  }
+	    			
+	    			});
+				 
+	    	  }	
 	    	  else {
 	    		  $( "input[name=amount2]" ).eq(row-1).val("차단해제");
+	    		  
+	    		  $.ajax({
+	    				type: "post",
+	    				url: contextpath+"/UnBlockFriend",
+	    				data: {"UnBlockFriend" : email },
+	    			
+	    			});
 	    	  }	     
 			}
 	    }); 
-	  $("input[name=amount2]" ).eq(row-1).val( $( ".slider-range-min" ).slider( "value" ) );
+	    
+	  $("input[name=amount2]" ).eq(row-1).val( $( ".slider-range-min" ).slider( "value" ));
 
   }); 
 </script>
@@ -112,22 +120,23 @@ $(function() {
 	<td>block</td>
 	</tr>
 	
-	
 	<c:forEach var="f" items="${flist}">
 		<tr id="status">
 			<td id="email">${f.member_email}</td>
 			<td>${f.member_nickname}</td>
 			
- 			<td>
+ 			<c:if test="${f.friend_block == false }">	<td>
 			<p>
   				<input type="text" name="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
 			</p>
-			<div class="slider-range-min"></div></td>
-			<td>
-		<!-- 	<p>
+			<div class="slider-range-min"></div></td></c:if>
+			
+			<c:if test="${f.friend_block == true }">	<td>
+			<p>
   				<input type="text" name="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 			</p>
-			<div class="slider-range-max"></div></td> -->
+			<div class="slider-range-max"></div></td></c:if>
+	
 		</tr>
        
 	</c:forEach>
