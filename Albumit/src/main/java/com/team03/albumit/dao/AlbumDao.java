@@ -142,4 +142,28 @@ public class AlbumDao {
 		
 		return rows;
 	}
+	
+	//상단바에서 앨범이름으로 검색
+	public List<Album> selectByName(String album_name) {
+		String sql = "SELECT * FROM Album WHERE album_name=?";
+		
+		List<Album> list = jdbcTemplate.query(
+				sql,
+				new Object[] {album_name},
+				new RowMapper<Album> () {
+					@Override
+					public Album mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Album album = new Album();
+						album.setAlbum_no(rs.getInt("album_no"));
+						album.setAlbum_name(rs.getString("album_name"));
+						album.setAlbum_publicity(rs.getBoolean("album_publicity"));
+						album.setThumbnail_no(rs.getInt("thumbnail_no"));
+						album.setUid(rs.getInt(rs.getInt("uid")));
+						
+						return album;
+					}
+				});
+		
+		return list;
+	}
 }

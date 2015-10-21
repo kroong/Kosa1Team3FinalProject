@@ -107,7 +107,8 @@
 				<div class="main_photo"> 
 					<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
 					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
-					<i id="like" class="fa fa-heart-o"></i>
+					<hr/>
+					<i id="like" class="fa fa-heart-o" style="color:white"></i>
 					<i id="share" class="fa fa-share-square-o"></i>
 				</div> 
 			
@@ -120,7 +121,7 @@
 		
 		
 		
-		<div id="1">
+		
 		<table id="myTable">
 			<tr>
 				<th style="width:50px">사진번호</th>
@@ -152,7 +153,7 @@
 		</table> 
 		</div>
 		
-		</div>
+	
 		
 		
 		
