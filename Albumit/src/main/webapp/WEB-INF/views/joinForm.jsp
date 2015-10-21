@@ -42,16 +42,6 @@
          }
          
          #emailform, #passwordform, #nicknameform, #Smessageform {
-/*          padding: 10px;
-            margin: 3px;
-            width: 90%;
-            height: 10px;
-            border-radius: 5px;
-            background-color: rgba(255,255,255,0);
-            font-family: Verdana,sans-serif;
-            text-align: center;
-            font-color: rgba(255,255,255,1);
-            font-color: rgb(255,255,255); */
 			margin: 5px 0px;
 			height: 30px;
 			width: 100%;

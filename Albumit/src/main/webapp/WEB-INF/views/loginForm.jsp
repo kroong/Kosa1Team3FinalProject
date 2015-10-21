@@ -19,9 +19,6 @@
       height: 100%;
       margin: 0 auto;
       padding: 100px;
-      /*background-image: url('${pageContext.request.contextPath}/resources/image/watercolor.jpg'); 
-      background-repeat: no-repeat;
-      background-size: cover; */
       }      
    
    /* 배경 비디오 */
@@ -89,6 +86,7 @@
       border-radius: 5px;
       font-family: Verdana,sans-serif;
       text-align: center;
+      color: rgba(255,255,255,1);
    }
    
    ::-webkit-input-placeholder{color:rgba(255,255,255,0.7);}
