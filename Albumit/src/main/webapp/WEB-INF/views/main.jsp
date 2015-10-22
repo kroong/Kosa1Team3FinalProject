@@ -354,6 +354,200 @@
 		optionList.forEach(function(other) {
 			other.setAttribute('aria-selected', 'false');
 		});
+	</script>
+	
+		<style type="text/css">
+		
+			* {
+		      margin: 0 auto;
+		      padding: 0px;
+		      }
+		     
+		     body{
+		      min-width: 960px;
+		      height : 100%;
+		      background-color: white;
+		      margin: 0 auto;
+		      /* position: fixed; */
+		      
+		     }
+		      
+		     #pagewrapper{
+		 	  margin: 0px auto;
+		      padding: 0px;
+		      width: 100%;
+		      overflow: none;
+		     }
+		     
+		     
+ /*  메뉴바 부분 -------------------------------------------------------------------------------------------------------------- */
+		     
+		     #large-header{
+		     	min-width: 960px;
+		     	position: fixed;
+		     	top: 0;
+		     	right: 0;
+		     	left: 0;
+		     	z-index: 10; 
+		     	display: block;
+		     	background-color: black;
+		     	/* background-image:url('${pageContext.request.contextPath}/resources/image/menubg.PNG'); 
+		     	background-repeat: no-repeat;
+           		background-size: cover; */
+		     	height: 100px;
+		     	padding: 5px;
+		     }
+		     
+		     #menu_wrapper{
+		     	min-width: 1083px;
+		     	position: fixed;
+		     	top: 5px;
+		     	right: 0;
+		     	left: 0;
+		     	z-index: 10; 
+		     	display: block;
+		     	height: 100px;
+		     	padding: 5px;
+		     }
+		     
+		     #small_wrapper{
+				height: 80px;
+				width: 600px;
+				background-color: rgba(255,255,255,0)/* green */;
+				padding: 5px;
+				/* width: 650px; */
+				float: left;
+				margin: 0px auto;
+				display: table-cell;
+				vertical-align: middle;
+			}
+			
+			
+			.menu {
+				 display: inline; 
+				 float: left; 
+			}
+			
+			#btn_myinfo, #searchContent{
+				float:left;
+			}
+			
+			.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable.ui-resizable{
+				position: relative !important;
+				margin: 0 auto !important;
+				left: 0px !important;
+				top: 30px !important;
+			}
+			
+			#albumit{
+		 	    top: 0;
+			    right: 0;
+			    left: 0;
+			    z-index: 10000;
+			}
+			
+			/* 로고부분  */
+			#albumitlogo{
+				width: 210px;
+				height: 70px;
+				float: left;
+				margin: 5px auto;
+				padding: 5px 5px 5px 15px;
+			}
+			#logo{
+				 width: 200px;
+				 height: 60px;
+				 float:left;
+				 margin: 5px auto;
+			}
+			
+			/* 내정보버튼 */
+			#btn_myinfo{
+				 background-color: rgba(255,255,255,0)/* black */;
+				 width: 200px;
+				 height: 60px;
+				 border: none;
+				 float: left;
+				 margin: 5px auto;
+				 padding: 5px;
+			}
+			#myinfo{
+				height: 35px;
+				width:180px;
+				margin: 0px auto;
+				background-color: rgba(255,255,255,0)/* red */;
+				border: none;
+				text-align: left;
+				color: white;
+				padding: 5px 10px 5px 10px;
+				float: left;
+				left: 5px;
+				margin: 10px 5px 0px 10px;
+				font-size: 20px;
+			}
+			.menu{
+				background-color: none;
+			}
+			
+			/* 검색부분  */
+			#search{
+				padding: 5px;
+				width: 400px;
+				height: 60px; 
+				background-color: rgba(255,255,255,0)/* blue */;
+				border: none;
+				float: left;
+				margin: 5px auto;
+			}
+			#searchContent{
+				width: 300px;
+				height: 35px;
+				padding: 0px 2px 0px 2px;
+				text-align: center;
+				color: rgba(255,255,255,1);
+				background-color: rgba(255,255,255,0.5); 
+				border: none;
+				float: left;
+				margin: 10px 0px 0px 10px;
+			}
+			::-webkit-input-placeholder{color:rgba(255,255,255,1);}
+			 #btn_search{
+				height: 35px;
+				border: none;
+				text-align: center;
+				color: rgba(255,255,255,1);
+				background-color: rgba(255,255,255,0.5); 
+				border: none;
+				float: left;
+				margin: 10px 0px 10px 0px;
+				padding: 0px 2px 0px 2px;
+			} 
+			
+			.album{
+			  display: inline-block;
+			  padding: 5px;
+			  width: 150px;
+			  height: 150px;
+			  margin: 1em;
+			  border: 1px;
+			  border-color: white;
+			}
+			
+			fieldset {padding:0; border:0; margin-top: 5px;}
+			
+			
+			
+			/* 아이콘 */
+			.fa{
+				font-size: 25px;
+				color: white;
+				margin: 5px auto;
+				background-color: rgba(255,255,255,0.0) /* yellow */;
+				margin: 0 auto;
+				padding: 2px;
+			}
+			
+			/* 오른쪽 부분 */
 
 		optionList[index].setAttribute('aria-selected', 'true');
 
@@ -651,6 +845,183 @@ fieldset {
 				vertical-align: middle;
 				
 			} */
+			#addalbumchat{
+				float: right;
+				border:none;
+				background-color: rgba(255,255,255,0)/* fuchsia */;
+				padding: 5px;
+				margin: 5px auto;
+				width: 150px;
+				height: 60px;
+				border: none;
+			}
+				
+			#addalbum{
+				height: 35px;
+				width: 100px;
+				border: none;
+				text-align: right;
+				color: rgba(255,255,255,1);
+				background-color: rgba(255,255,255,0)/* red */; 
+				border: none;
+				float: left;
+				margin: 10px 0px 10px 0px;
+				padding: 0px 2px 0px 2px;
+			}
+			
+			.menu{
+				height: 35px;
+				border: none;
+				text-align: center;
+				color: rgba(255,255,255,1);
+				background-color: rgba(255,255,255,0) /* blue */; 
+				border: none;
+				float: left;
+				margin: 10px 0px 10px 0px;
+				padding: 0px 2px 0px 2px;
+			}
+			
+		
+			#showListBody {
+				position: absolute; width: 100%; top: 110px; left: 0px;
+				border: none; height: 100%;
+			}
+			
+			/* ======= */
+			/* 셀렉트박스 */
+			/* ======= */
+			
+			#menu{
+			 width: 100px;
+			 height: 35px;
+			 float:left; 
+			 margin: 10px 0px 10px 10px;
+			 padding: 0px 2px 0px 2px;
+			}
+			
+			.widget select, .no-widget .select {
+			  position : absolute;
+				left: -5000em;
+			  height   : 0;
+			  overflow : hidden;
+			}
+			 
+			/* 셀렉트 박스 - Required Styles */
+			.select {
+			  position: relative;
+			  display : inline-block;
+			  height: 35px;
+			  margin: 10px 0px 10px 0px;
+			padding: 0px 2px 0px 2px;
+			
+			}
+			 
+			.select.active, .select:focus {
+			  box-shadow: 0 0 3px 1px #227755;
+			  outline: none;
+			}
+			 
+			.select .optList {
+			  position: absolute;
+			  top: 100%;
+			  left: 0;
+			  cursor: pointer;
+			}
+			 
+			.select .optList.hidden {
+			  max-height: 0;
+			  visibility: hidden;
+			}
+			 
+			/* 셀렉트 박스 - Fancy Styles */
+			.select {
+			  font-size   : 15px;
+			  text-align: center;
+			  font-family : Verdana, Arial, sans-serif;
+			  -moz-box-sizing : border-box;
+			  box-sizing : border-box;
+			  padding: 1px 25px 2px 5px; 
+			  width: 100px; 
+			  border: 2px solid #000;
+			  /* border-radius : 4px;  */
+			 
+			  box-shadow : 0 1px 2px rgba(0,0,0,.45); 
+			 
+			  background : #F0F0F0;
+			  background : -webkit-linear-gradient(90deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);
+			  background : linear-gradient(0deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);
+			}
+			 
+			.select .value {
+			  display: inline-block;
+			  width: 100%;
+			  height: 30px;
+			  overflow: hidden;
+			  white-space: nowrap;
+			  text-overflow: ellipsis;
+			  vertical-align: middle;
+			  text-align: center;
+			}
+			 
+			.select:after {
+			  content: "▼";
+			  position: absolute;
+			  z-index: 1;
+			  height: 100%;
+			  width: 25px; 
+			  top: 0;
+			  right: 0;
+			  padding-top: .1em;
+			  -moz-box-sizing: border-box;
+			  box-sizing: border-box;
+			  text-align : center;
+			  border-left  : .2em solid #fff;
+			  border-radius: none/* 0 .1em .1em 0 */;
+			  background-color : #FFF;
+			  color : #000;
+			  cursor: pointer;
+			}
+			 
+			.select .optList {
+			  z-index : 2;
+			  list-style: none;
+			  margin : 0;
+			  padding: 0;
+			  background: #f0f0f0;
+			  border: 2px solid #000;
+			  border-top-width : .1em;
+			  /* border-radius: 0 0 .4em .4em; */
+			  box-shadow: 0 .2em .4em rgba(0,0,0,.4);
+			  -moz-box-sizing : border-box;
+			  box-sizing : border-box;
+			  min-width : 100%;
+			  max-height: 100px; 
+			  overflow-y: auto;
+			  overflow-x: hidden;
+			}
+			 
+			.select .option {
+			  padding: 2px;
+			  height: 28px;
+			  width: 90px;
+			}
+			 
+			.select .highlight {
+			  background: #000;
+			  color: #FFFFFF;
+			}
+						
+		</style>
+	
+	</head>
+	
+	<body>
+		<div id="pagewrapper">
+<!-- ////////////////////////-메뉴바 부분-///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+			
+       <%--              <canvas id="demo-canvas">	</canvas> --%>
+			 <div id="large-header" class="large-header">
+			
 #addalbumchat {
 	float: right;
 	border: none;
@@ -832,6 +1203,13 @@ fieldset {
 			<!-- -------------------------------------------------------------------------------------------------------------------- -->
 			<div id="menu_wrapper">
 				<!-- ------ 1. Albumit 로고 --------------------------------------------------------------------------------------------- -->
+				
+					<div id="albumitlogo">
+						<img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="Albumit" title="Albumit" id="logo" >
+					</div>
+					<!-- -------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- -------2. 내정보----------------------------------------------------------------------------------------------------- -->
 
 				<div id="albumitlogo">
 					<img
@@ -847,6 +1225,11 @@ fieldset {
 							value="Hi, ${member.member_email}" />
 					</div>
 
+		<div id="small_wrapper">
+					
+<!-- -------- 3. album/friend 옵션 선택 ----------------------------------------------------------------------------------- -->
+		<!-- <div id="right"> -->
+
 					<!-- -------- 4. album/friend 옵션 선택 ----------------------------------------------------------------------------------- -->
 					<!-- <div id="right"> -->
 					<!--  <div id="menu" class="menu">
@@ -854,8 +1237,27 @@ fieldset {
 							<option> ALBUM </option>
 							<option> PHOTO </option>
 						</select>
-					</div>
-					  -->
+					</div> -->
+					 
+			<!--스타일적용옵션  -->
+			<form id="menu" class="no-widget">
+			  <select name="styleoption">
+			    <option>ALBUM</option>
+			    <option>PHOTO</option>
+			   </select>
+			  
+			  <div class="select" role="listbox">
+			    <span class="value">ALBUM</span>
+			    <ul class="optList hidden" role="presentation">
+			      <li class="option" role="option" aria-selected="true">ALBUM</li>
+			      <li class="option" role="option">PHOTO</li>
+			    </ul>
+			  </div>
+			</form>
+								
+	
+	<!-- --------4. 검색------------------------------------------------------------------------------------------------------- -->
+				<!-- <div class="input-group margin-bottom-sm menu"> -->
 
 
 					<!--실험용!!  -->
@@ -897,12 +1299,18 @@ fieldset {
 					</div>
 				</div>
 
+				
+				
+<!-- -------------------------------------------------------------------------------------------------------------------- -->
 				<div id="addalbumchat">
+<!-- ------ 5. 앨범추가 --------------------------------------------------------------------------------------------------- -->
+				
 					<!-- ------ 5. 앨범추가 --------------------------------------------------------------------------------------------------- -->
 
 					<div id="addalbum" class="menu">
 						<a href="#" id="addAlbumButton"><i class="fa fa-plus-square"></i></a>
 					</div>
+<!-- ------ 6. 채팅 ------------------------------------------------------------------------------------------------------- -->
 					<!-- ------ 6. 채팅 ------------------------------------------------------------------------------------------------------- -->
 					<div id="chat" class="menu">
 						<a href="#" id="chat_btn"><i class="fa fa-comments-o"></i></a>
