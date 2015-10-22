@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -43,7 +42,7 @@
 	</select>
 
 	<div id="latest">
-	<h4>최신순</h4>
+	<h4>최신순 안되나요</h4>
 	<hr/>
 	
 	<div class="content">
