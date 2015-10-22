@@ -47,7 +47,7 @@
          	nav ul li:nth-child(4){border-left:none;}  
          	nav ul li:last-child{border-left:none;} 
          	 
-		    .menu a{cursor:pointer;}
+		    .menu a{cursor:pointer; color:white !important}
    			 .menu .hide{display:none;}
 	</style>
 
@@ -59,7 +59,7 @@
 	
 	
 	
-		<nav>
+		<nav >
 		<ul>
 			<li>Post </li>
 			<li class="menu"><a>Move to </a> 
