@@ -32,9 +32,19 @@
 		    }
 		    ol, ul {list-style: none;}
 		    
+		    .albumContainer {
+		    	position: relative;
+		    	width: 900px;
+		    	height: 100%;
+		    	left: 50%;
+		    	margin: 0;
+		    	transform: translateX(-50%);
+		    }
+		    
 		    .albumThumbnailList {
 		    	display: inline-block;
 		    	position: relative;
+		    	padding: 0; margin: 0;
 		    }
 		    
 			.albumThumbnail {
@@ -60,23 +70,25 @@
 	
 	<body>
 	<!-- -----앨범 보기 부분 ------------------------------------------------------------------------------------- -->
-		<c:forEach var="albumEntry" items="${albumList}">
-			<div class="albumThumbnailList">
-				<div class="albumThumbnail">
-					<a href="photoList?album_no=${albumEntry.key.album_no}">
-						<img src="${pageContext.request.contextPath}/resources/thumb/${albumEntry.value.thumbnail_original_file_name}"/>
-						<span>${albumEntry.key.album_name}</span>
-					</a>
+		<div class="albumContainer">
+			<c:forEach var="albumEntry" items="${albumList}">
+				<div class="albumThumbnailList">
+					<div class="albumThumbnail">
+						<a href="photoList?album_no=${albumEntry.key.album_no}">
+							<img src="${pageContext.request.contextPath}/resources/thumb/${albumEntry.value.thumbnail_original_file_name}"/>
+							<span>${albumEntry.key.album_name}</span>
+						</a>
+					</div>
+					<div class="albumMenu">
+						<ul>
+							<li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+							<li><a href="#"><i class="fa fa-cog"></i></a></li>
+							<li><a href="#"><i class="fa fa-trash-o"></i></a></li>
+						</ul>
+					</div>
 				</div>
-				<div class="albumMenu">
-					<ul>
-						<li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-						<li><a href="#"><i class="fa fa-cog"></i></a></li>
-						<li><a href="#"><i class="fa fa-trash-o"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</c:forEach>
+			</c:forEach>
+		</div>
 	<!-- --------------------------------------------------------------------------------------------------------- -->
 	</body>
 </html>
