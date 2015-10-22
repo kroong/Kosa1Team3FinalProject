@@ -112,17 +112,13 @@
 			<pre>${photo.photo_content}</pre>
 		</div>
 		
-		<div>
 		
-			${comment.comment_content}
-		
-		</div>
 		
 		댓글<hr/>
 		
 		<div>
 			<c:forEach var="comment" items="${commentList}">
-				<p>${comment.comment_content}</p><a href="removeComment?album_no=${photo.album_no}&&photo_no=${photo.photo_no}&&comment=${comment}">댓글지우기</a>
+				<p>${comment.comment_content}</p><a href="removeComment?album_no=${photo.album_no}&&photo_no=${photo.photo_no}&&comment_no=${comment.comment_no}">댓글지우기</a>
 			</c:forEach>
 		</div>
 		

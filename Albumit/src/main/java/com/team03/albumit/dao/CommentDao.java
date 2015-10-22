@@ -77,11 +77,34 @@ public class CommentDao {
 		
 		// 
 		public int delete(int comment_no) {
-			String sql = "delete from Comment where comment_no=? and cwirter=uid";
+			String sql = "delete from Comment where comment_no=?";
 			int rows = jdbcTemplate.update(
 					sql,
 					comment_no
 				);
 			return rows;
 			}
+
+		
+		
+		public Comment selectByCN(int comment_no) {
+			String sql = "select * from Comment where comment_no=?";
+			Comment comment = jdbcTemplate.queryForObject(
+					sql,
+					new Object[] {comment_no},
+					new RowMapper<Comment> () {
+						@Override
+						public Comment mapRow(ResultSet rs, int rowNum) throws SQLException {
+							Comment comment = new Comment();
+							comment.setPhoto_no(rs.getInt("photo_no"));
+							comment.setComment_no(rs.getInt("comment_no"));
+							comment.setCwriter(rs.getString("cwriter"));
+							comment.setComment_content(rs.getString("comment_content"));
+							return comment;
+						}
+					}
+				);
+			return comment;
+		}
+		
 		}
