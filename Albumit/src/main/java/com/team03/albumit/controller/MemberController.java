@@ -253,7 +253,6 @@ public class MemberController {
 		Member mem = (Member) session.getAttribute("loginmember");
 		List<FriendList> flist= memberService.friendList(mem);
 		model.addAttribute("flist",flist);
-		
 		return "friendTable";
 	}
 	@RequestMapping(value="duplication", method={RequestMethod.GET,RequestMethod.POST})
