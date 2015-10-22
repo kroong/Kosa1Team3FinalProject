@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<style type="text/css">
@@ -21,6 +24,8 @@
 	        	background: gray;
 	        	box_shadow: 0 1px 3px rgba(34,25,25,0.4);
 	        }
+	        
+	        /* nav */
 	        nav {
 	        display:inline;
 	        	width:20%;
@@ -33,6 +38,11 @@
             	padding:0 10px;                        
         	}
          	nav ul li:first-child{border-left:none;}  
+         	nav ul li:nth-child(4){border-left:none;}  
+         	nav ul li:last-child{border-left:none;} 
+         	 
+		    .menu a{cursor:pointer;}
+   			 .menu .hide{display:none;}
 		</style>
 
 		<script type="text/javascript">
@@ -66,16 +76,16 @@
 			    }
 			}
 			
-			var row= $(this).parents("tr").index();
-	    	  console.log("row1:::::"+row);
+		/* 	var row= $(this).parents("tr").index();
+	    	 console.log("row1:::::"+row);
 	    	  var like = document.getElementById("myTable").rows[row].cells.namedItem("좋아요").innerHTML;
 	    	  var album_no = document.getElementById("myTable").rows[row].cells.namedItem("앨범번호").innerHTML;
 	    	  var photo_no = document.getElementById("myTable").rows[row].cells.namedItem("사진번호").innerHTML;
 	    	  console.log("like:"+like);
 			
-			 var likephoto = document.getElementById("${photo.photo_no}"); 
+			 var likephoto = document.getElementById("${photo.photo_no}");  */
 			
-			   likephoto.addEventListener('click', function(){
+			<%--    likephoto.addEventListener('click', function(){
 			    	
 			        //ajax part
 			  
@@ -99,7 +109,19 @@
 			            error: function (err)
 			            { alert(err.responseText)}
 			        });
-			    }); 
+			    });  --%>
+			   
+			   
+			        // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+ $(document).ready(function(){
+        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        $(".menu>a").click(function(){
+            // 현재 클릭한 태그가 a 이기 때문에
+            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+            $(this).next("ul").toggleClass("hide");
+        });
+    });
+			   
 		</script>
 		
 	</head>
@@ -109,8 +131,16 @@
 		<nav>
 		<ul>
 			<li>Post </li>
-			<li>Move to  </li>
+			<li class="menu"><a>Move to </a> 
+				<ul class="hide">
+					<li>1</li>
+					<li>2</li>
+				</ul>
+			
+			</li>
+
 			<li>Share Album</li>
+			<li><button>Confirm</button></li>
 			<li>
 				<select id="photoArray" size="1" onchange="arrayfun(this)">
 			<option value="latest" selected="selected" >최신순</option>

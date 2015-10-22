@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +6,7 @@
 <title>Albumit!</title>
 <!-- 파비콘설정 -->
 <link rel="icon"  href="${pageContext.request.contextPath}/resources/image/favicon.ico" type="image/x-icon"/> 
+	<script type="text/javascript" src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
 
 <style>
    * {
@@ -125,6 +125,29 @@
    }
    
 </style>
+
+<script>
+function login(){
+	var email = $("#uname").val();
+	var pw = $("#upw").val();
+	
+	
+	if((email=="" || email ==null)&&(pw =="" || pw == null)){
+		$("#v_pw").html("아이디와 비밀번호를 입력해주시오!");
+	}
+	else if(pw =="" || pw == null){
+		$("#v_pw").html("비밀번호를 입력해주시오!");
+	}
+	else if(email=="" || email ==null){
+		$("#v_pw").html("아이디를 입력해주시오!");
+	}
+	
+	else{
+	$("#a").submit();
+	}
+}
+
+</script>
 </head>
 
 <body>
@@ -142,17 +165,20 @@
 	            <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="Albumit" title="Albumit" id="logo">
 	         </div>
 	         <div id="login">
-	            <form:form commandName="member">
+	         
+	            <form id="a"method="post" action="login" >
 	               <div id="username">
-	                  <form:input type="e-mail"  id="uname" path="member_email" size="20" placeholder="Your@email.com" style="text-align: center; border-top: rgba(255,255,255,0.3); 1px solid; border-bottom: rgba(255,255,255,0.3);1px solid;"/><br/>
+	                  <input type="email"  id="uname" name="member_email" size="20" placeholder="Your@email.com" style="text-align: center; border-top: rgba(255,255,255,0.3); 1px solid; border-bottom: rgba(255,255,255,0.3);1px solid;"/><br/>
 	               </div>   
+	               
 	               <div id="userpw">   
-	                  <form:password id="upw" path="member_password" size="20"  placeholder="Your password" style="text-align: center"/><br/>
+	                  <input type="password" id="upw" name="member_password" size="20"  placeholder="Your password" style="text-align: center"/><br/>
 	               </div>
+	               <div id="v_pw"></div>
 	               <div id="btn">
-	                  <input id="loginbtn" type="submit" value="login" />
+	                  <input onclick="login()" type="button" value="login" />
 	               </div>
-	            </form:form>
+	            </form>
 	         </div>
 	         <br/>
 	         <div id="findPW">
