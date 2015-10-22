@@ -11,6 +11,21 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style2.css" />
 	<script src="${pageContext.request.contextPath}/resources/js/modernizr-custom.js"></script>
+	<style type="text/css">
+	body{
+		color:white;
+	}
+	
+	.add{
+		font:20px;
+		list-style: none;
+		display: inline-block;
+		float: left;
+		margin: 1px 25px;
+	}
+	</style>
+
+
 </head>
 
 <body class="demo-2">
@@ -19,7 +34,12 @@
 			<%for(int i=1; i<20; i++) {%>
 			<div class="grid__item" data-size="100x100">
 				<a href="${pageContext.request.contextPath}/resources/uploadfiles/<%=i%>.jpg" class="img-wrap"><img src="${pageContext.request.contextPath}/resources/uploadfiles/<%=i%>.jpg"/>
-					<div class="description description--grid">
+				<ul>
+					<li class="add"><a href="#"><i class="fa fa-heart-o"></i></a></li>
+					<li class="add"><a href="#"><i class="fa fa-cog"></i></a></li>
+					<li class="add"><a href="#"><i class="fa fa-trash-o"></i></a></li>
+				</ul>
+				<div class="description description--grid">
 						<h3>Mother's Love</h3>
 						<p>Every time you drink a glass of milk or eat a piece of cheese, you harm a mother. Please go vegan. <em>&mdash; Gary L. Francione</em></p>
 						<div class="details">
@@ -106,6 +126,52 @@
 			});
 		})();
 	</script>
+	<!-- ------------------------------------------------------------------- -->
+	<div id="popularity">
+		<hr/><h4>좋아요순</h4><hr/>
+		
+		
+		
+		
+		<table id="myTable">
+			<tr>
+				<th style="width:50px">사진번호</th>
+				<th style="width:50px">앨범번호</th>
+				<th>제목</th>
+				<th>내용</th>
+				<th style="width:150px">사진</th>
+				<th style="width:60px">글쓴이</th>
+				<th style="width:100px">날짜</th>
+				<th style="width:100px">좋아요</th>
+				
+			</tr>
+
+			
+			
+			<c:forEach var="photo" items="${liList}">
+				<tr>
+					<td>${photo.photo_no}<input name="photo_no" type ="hidden" value="${photo.photo_no}"/></td>
+					<td>${photo.album_no}<input name="album_no" type ="hidden" value="${photo.album_no}"/></td>
+					<td>${photo.photo_title}</td>
+					<td>${photo.photo_content}</td>
+					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_original_file_name}</a></td>
+					<td>${photo.uid}</td>
+					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td>
+					<td id="${photo.photo_no}">${photo.photo_like}</td>
+					
+				</tr>
+			</c:forEach>
+		</table> 
+		</div>
+		
+	
+		
+		
+		
+		<div id="buttonGroup">
+			<a href="addPhoto?album_no=${album_no}">글쓰기</a>
+		</div>
+	
 </body>
 
 </html>
