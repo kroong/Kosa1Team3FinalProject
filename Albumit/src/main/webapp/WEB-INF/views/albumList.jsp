@@ -23,9 +23,12 @@
 		    body{
 			    width: 100%;
 				height : 100%;
-				background-color: white;
 				margin: 0 auto;
 				font-size: 1;
+				color:black;
+				background-color: white;
+				/* color:white;
+				background-color: black; */
 		    }
 		    a, a:hover, a:FOCUS, a:VISITED {
 		    	color: grey;
