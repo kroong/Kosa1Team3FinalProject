@@ -118,13 +118,21 @@
 		
 		</div>
 		
+		댓글<hr/>
+		
 		<div>
-			<form method="post" action="addComment">
-				<textarea name="photo_content" rows="5" cols="50"></textarea>
-			</form>
+			<c:forEach var="comment" items="${commentList}">
+				<p>${comment.comment_content}</p><a href="removeComment?album_no=${photo.album_no}&&photo_no=${photo.photo_no}&&comment=${comment}">댓글지우기</a>
+			</c:forEach>
 		</div>
 		
-		<input type="text" name="comment_content" value="${photo.photo_title}"/>
+		
+		<form method="post" action="addComment">
+			<input type="hidden" name="photo_no" value="${photo.photo_no}">
+			<input type="text" name="comment_content" value="${comment_content}"/>
+			<input type="submit" value="댓글달기"/>
+		</form>
+		
 		
 		<div id="buttonGroup">
 			<a href="photoList?album_no=${photo.album_no }">목록</a>

@@ -42,7 +42,7 @@ public class CommentDao {
 		
 		// 
 		public List<Comment> selectByPN(int photo_no) {
-			String sql = "select * from Comment where comment_no=?";
+			String sql = "select * from Comment where photo_no=?";
 			
 			List<Comment> comment = jdbcTemplate.query(
 					sql,
@@ -54,7 +54,7 @@ public class CommentDao {
 							comment.setPhoto_no(rs.getInt("photo_no"));
 							comment.setComment_no(rs.getInt("comment_no"));
 							comment.setCwriter(rs.getString("cwriter"));
-							comment.setComment_content(rs.getString("comment_no"));
+							comment.setComment_content(rs.getString("comment_content"));
 							return comment;
 						}
 					}

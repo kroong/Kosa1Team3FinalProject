@@ -165,7 +165,13 @@ public class PhotoController {
 		
 		photoService.addHitcount(photo_no, album_no);
 		Photo photo = photoService.getPhoto(photo_no);
+		
+	
+		List<Comment> commentList =photoService.listComment(photo_no);
+		model.addAttribute("commentList", commentList);
+		
 		model.addAttribute("photo",photo);
+		
 		return "/photoDetail";
 		
 	}
@@ -214,18 +220,29 @@ public class PhotoController {
 	//댓글 달기
 	@RequestMapping("/addComment")
 	public String addComment(Comment comment,Photo photo, Model model, HttpSession session){
+		Member m = (Member)session.getAttribute("loginmember");
+		comment.setCwriter(m.getMember_nickname());
 		photoService.addComment(comment);
+		List<Comment> commentList =photoService.listComment(comment.getPhoto_no());
 		
+		logger.info("comment"+commentList.get(1).getComment_content());
 		model.addAttribute("comment", comment);
+		model.addAttribute("commentList", commentList);
 		
-		return "redirect:/photoDetail?photo_no=" + photo.getPhoto_no();
+		return "redirect:/photoDetail?photo_no="+photo.getPhoto_no()+"&&album_no="+photo.getAlbum_no();
 	}
+	
 	//댓글 지우기
 	@RequestMapping("/removeComment")
-	public String removeComment(int comment_no, HttpSession session){
-		photoService.removeComment(comment_no);
+	public String removeComment(Comment comment, int album_no, int photo_no, HttpSession session){
+		Member m = (Member)session.getAttribute("loginmember");
 		
-		return "redirect:/photoList";
+		if(comment.getCwriter().equals(m.getMember_nickname())){
+		photoService.removeComment(comment.getComment_no());
+		}else{
+			
+		}
+		return "redirect:/photoDetail?photo_no="+photo_no+"&&album_no="+album_no;
 	}
 	
 	//댓글 수정

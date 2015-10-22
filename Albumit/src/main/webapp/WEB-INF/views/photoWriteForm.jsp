@@ -144,7 +144,7 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><textarea name="photo_content" rows="5" cols="50""></textarea></td>
+					<td><textarea name="photo_content" rows="5" cols="50"></textarea></td>
 				</tr>
 				<tr>
 					<td><input type="hidden" name="album_no" value="${album_no}"/></td>
