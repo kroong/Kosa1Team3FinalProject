@@ -131,7 +131,7 @@ public class AlbumService {
 	
 	
 	// D
-	public int removeAlbum(List<Album> albumList) {
+	public int removeMultiAlbums(List<Album> albumList) {
 		int row = 0;
 		for(Album album : albumList) {
 			int album_no = album.getAlbum_no();
@@ -139,6 +139,9 @@ public class AlbumService {
 		}
 		
 		return row;
+	}
+	public int removeOneAlbum(int album_no) {
+		return albumDao.delete(album_no); 
 	}
 	
 	// ETC
