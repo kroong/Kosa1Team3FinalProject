@@ -1,190 +1,112 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-		<style type="text/css">
-			body{
-				
-			}
-			
-	        .main_photo{
-	        	display:inline-block;
-	        	width:300px;
-	        	height:500px;
-	        	margin: 10px;
-	        	background: gray;
-	        	box_shadow: 0 1px 3px rgba(34,25,25,0.4);
-	        }
-	        nav {
-	        display:inline;
-	        	width:20%;
-	        }
-	       	nav ul{padding-left:5px; }                   
-         	nav ul li {
-            	display:inline;                        
-            	border-left:1px solid #999;            
-            	font:bold 12px Dotum;                    
-            	padding:0 10px;                        
-        	}
-         	nav ul li:first-child{border-left:none;}  
-		</style>
+<html lang="en" class="no-js">
 
-		<script type="text/javascript">
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/font/font-awesome-4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style2.css" />
+	<script src="${pageContext.request.contextPath}/resources/js/modernizr-custom.js"></script>
+</head>
 
-			/* $(document).ready(function(){
-				
-				for(var i=0; i<100; i++){
-					$('.main_photo').css({
-						width:100,
-						height: Math.floor(Math.random()*100)+50
-					}).appendTo('body');
+<body class="demo-2">
+	<div class="content">
+		<div class="grid">
+			<%for(int i=1; i<20; i++) {%>
+			<div class="grid__item" data-size="100x100">
+				<a href="${pageContext.request.contextPath}/resources/uploadfiles/<%=i%>.jpg" class="img-wrap"><img src="${pageContext.request.contextPath}/resources/uploadfiles/<%=i%>.jpg"/>
+					<div class="description description--grid">
+						<h3>Mother's Love</h3>
+						<p>Every time you drink a glass of milk or eat a piece of cheese, you harm a mother. Please go vegan. <em>&mdash; Gary L. Francione</em></p>
+						<div class="details">
+							<ul>
+								<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
+								<li><i class="icon icon-focal_length"></i><span>22.5mm</span></li>
+								<li><i class="icon icon-aperture"></i><span>&fnof;/5.6</span></li>
+								<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
+								<li><i class="icon icon-iso"></i><span>80</span></li>
+							</ul>
+						</div>
+					</div>
+				</a>
+			</div>
+			<%}%>
+		</div>
+		<!-- /grid -->
+		<div class="preview">
+			<button class="action action--close"><i class="fa fa-times"></i><span class="text-hidden">Close</span></button>
+			<div class="description description--preview"></div>
+		</div>
+		<!-- /preview -->
+	</div>
+	<!-- /container -->
+	<script src="${pageContext.request.contextPath}/resources/js/imagesloaded.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/masonry.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/classie.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script>
+		(function() {
+			var support = { transitions: Modernizr.csstransitions },
+				// transition end event name
+				transEndEventNames = { 'WebkitTransition': 'webkitTransitionEnd', 'MozTransition': 'transitionend', 'OTransition': 'oTransitionEnd', 'msTransition': 'MSTransitionEnd', 'transition': 'transitionend' },
+				transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+				onEndTransition = function( el, callback ) {
+					var onEndCallbackFn = function( ev ) {
+						if( support.transitions ) {
+							if( ev.target != this ) return;
+							this.removeEventListener( transEndEventName, onEndCallbackFn );
+						}
+						if( callback && typeof callback === 'function' ) { callback.call(this); }
+					};
+					if( support.transitions ) {
+						el.addEventListener( transEndEventName, onEndCallbackFn );
+					}
+					else {
+						onEndCallbackFn();
+					}
+				};
+
+			new GridFx(document.querySelector('.grid'), {
+				imgPosition : {
+					x : -0.5,
+					y : 1
+				},
+				onOpenItem : function(instance, item) {
+					instance.items.forEach(function(el) {
+						if(item != el) {
+							var delay = Math.floor(Math.random() * 50);
+							el.style.WebkitTransition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), -webkit-transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+							el.style.transition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+							el.style.WebkitTransform = 'scale3d(0.1,0.1,1)';
+							el.style.transform = 'scale3d(0.1,0.1,1)';
+							el.style.opacity = 0;
+						}
+					});
+				},
+				onCloseItem : function(instance, item) {
+					instance.items.forEach(function(el) {
+						if(item != el) {
+							el.style.WebkitTransition = 'opacity .4s, -webkit-transform .4s';
+							el.style.transition = 'opacity .4s, transform .4s';
+							el.style.WebkitTransform = 'scale3d(1,1,1)';
+							el.style.transform = 'scale3d(1,1,1)';
+							el.style.opacity = 1;
+
+							onEndTransition(el, function() {
+								el.style.transition = 'none';
+								el.style.WebkitTransform = 'none';
+							});
+						}
+					});
 				}
-				
-			}); */
-			
+			});
+		})();
+	</script>
+</body>
 
-			function arrayfun(sel) {
-			    var x = sel.options[sel.selectedIndex].value;
-			    
-			    if(x == "latest"){
-			    	
-			    	document.getElementById("latest").style.display="";
-			    	document.getElementById("popularity").style.display="none";
-			    }
-			    
-			    if(x == "popularity"){
-			    	
-			    	document.getElementById("latest").style.display="none";
-			    	document.getElementById("popularity").style.display="";
-			    	
-			    }
-			}
-			
-			var row= $(this).parents("tr").index();
-	    	  console.log("row1:::::"+row);
-	    	  var like = document.getElementById("myTable").rows[row].cells.namedItem("좋아요").innerHTML;
-	    	  var album_no = document.getElementById("myTable").rows[row].cells.namedItem("앨범번호").innerHTML;
-	    	  var photo_no = document.getElementById("myTable").rows[row].cells.namedItem("사진번호").innerHTML;
-	    	  console.log("like:"+like);
-			
-			 var likephoto = document.getElementById("${photo.photo_no}"); 
-			
-			   likephoto.addEventListener('click', function(){
-			    	
-			        //ajax part
-			  
-			        
-			        
-			        alert($(".likephoto").val());
-			       /*  var album_no = $("input[name=album_no]").val();
-			        var photo_no = $("input[name=photo_no]").val(); */
-			  		alert("ano:"+album_no);
-			  		alert("pno:"+photo_no);
-			        
-			        $.ajax({
-			            type: "get",
-			            url: 'addLike',
-			            data:  { "album_no": album_no, "photo_no": photo_no},
-			            //change button
-			            success: function (msg){ 
-			            	document.getElementById('likephoto').innerHTML=msg.photoLike;
-			            	<%System.out.println("Please");%>
-			            },
-			            error: function (err)
-			            { alert(err.responseText)}
-			        });
-			    }); 
-		</script>
-		
-	</head>
+</html>
 	
-	<body>
-	
-		<nav>
-		<ul>
-			<li>Post </li>
-			<li>Move to  </li>
-			<li>Share Album</li>
-			<li>
-				<select id="photoArray" size="1" onchange="arrayfun(this)">
-			<option value="latest" selected="selected" >최신순</option>
-			<option value="popularity">인기순</option>
-		</select></li>
-		</ul>
-
-		</nav>
-				
-		
-		
-
-		<div id="latest">
-		<h4>최신순</h4>
-		<hr/>
-		
-			<c:forEach  var="photo" items="${laList}">
-				<div class="main_photo"> 
-					<a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">
-					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="300px"/></a>
-					<hr/>
-					<i id="like" class="fa fa-heart-o" style="color:white"></i>
-					<i id="share" class="fa fa-share-square-o"></i>
-				</div> 
-			
-			</c:forEach>
-		</div>
-		
-		
-		<div id="popularity" style="display: none;">
-		<hr/><h4>좋아요순</h4><hr/>
-		
-		
-		
-		
-		<table id="myTable">
-			<tr>
-				<th style="width:50px">사진번호</th>
-				<th style="width:50px">앨범번호</th>
-				<th>제목</th>
-				<th>내용</th>
-				<th style="width:150px">사진</th>
-				<th style="width:60px">글쓴이</th>
-				<th style="width:100px">날짜</th>
-				<th style="width:100px">좋아요</th>
-				
-			</tr>
-
-			
-			
-			<c:forEach var="photo" items="${liList}">
-				<tr>
-					<td>${photo.photo_no}<input name="photo_no" type ="hidden" value="${photo.photo_no}"/></td>
-					<td>${photo.album_no}<input name="album_no" type ="hidden" value="${photo.album_no}"/></td>
-					<td>${photo.photo_title}</td>
-					<td>${photo.photo_content}</td>
-					<td><a href="photoDetail?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">${photo.photo_original_file_name}</a></td>
-					<td>${photo.uid}</td>
-					<td><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></td>
-					<td id="${photo.photo_no}">${photo.photo_like}</td>
-					
-				</tr>
-			</c:forEach>
-		</table> 
-		</div>
-		
-	
-		
-		
-		
-		<div id="buttonGroup">
-			<a href="addPhoto?album_no=${album_no}">글쓰기</a>
-		</div>
-		
-	</body>
-</html>		
-		
