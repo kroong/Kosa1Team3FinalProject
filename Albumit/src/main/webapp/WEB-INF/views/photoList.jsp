@@ -42,7 +42,7 @@
 	</select>
 
 	<div id="latest">
-	<h4>최신순</h4>
+	<h4>최신순 안되나요</h4>
 	<hr/>
 	
 	<div class="content">
