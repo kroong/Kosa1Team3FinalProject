@@ -790,7 +790,6 @@
 							<a href="#">pw ?</a> 
 							<a href="leave">leave Albumit</a>
 							<button id="modifyProfile">modifyProfile</button>
-					</div>
 					
 		<!-- --------------------------------------------------------------------------------------------------------- -->
 					<div id="flist">
@@ -801,6 +800,7 @@
 					<td>profile</td>
 					<td>block</td>
 					</tr>
+					
 						<c:forEach var="fr" items="${sessionScope.friendList}" >
 					<tr>
 						<td><c:out value="${fr.member_email }"></c:out></td>

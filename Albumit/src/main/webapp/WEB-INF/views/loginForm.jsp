@@ -125,6 +125,13 @@
       font-family: Verdana,sans-serif;
       color: white;
    }
+	.find {
+	color:rgba(255, 255, 255, 0.8);
+	}
+
+   	#v_pw{
+   	color: rgba(255, 255, 255, 0.5);
+   	}
    
 </style>
 
@@ -135,13 +142,13 @@ function login(){
 	
 	
 	if((email=="" || email ==null)&&(pw =="" || pw == null)){
-		$("#v_pw").html("아이디와 비밀번호를 입력해주시오!");
+		$("#v_pw").html("Please enter your ID & password!");
 	}
 	else if(pw =="" || pw == null){
-		$("#v_pw").html("비밀번호를 입력해주시오!");
+		$("#v_pw").html("Please enter your password!");
 	}
 	else if(email=="" || email ==null){
-		$("#v_pw").html("아이디를 입력해주시오!");
+		$("#v_pw").html("Please enter your ID!");
 	}
 	
 	else{
@@ -178,15 +185,14 @@ function login(){
 	               </div>
 	               <div id="v_pw"></div>
 	               <div id="btn">
-	                  <input onclick="login()" type="button" value="login" />
+	                  <input onclick="login()" type="button" id="loginbtn" value="login" />
 	               </div>
 	            </form>
 	         </div>
-	         <br/>
 	         <div id="findPW">
-	            <a href="findPWForm">Forgot your Password?</a>
+	            <a href="findPWForm" class="find">Forgot your Password?</a>
 	            <a> | </a>
-	            <a href="join">Sign Up</a>
+	            <a href="join" class="find">Sign Up</a>
 	         </div>
          </div>
       </div> 

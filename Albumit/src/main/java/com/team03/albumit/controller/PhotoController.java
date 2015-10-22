@@ -234,14 +234,20 @@ public class PhotoController {
 	
 	//댓글 지우기
 	@RequestMapping("/removeComment")
-	public String removeComment(Comment comment, int album_no, int photo_no, HttpSession session){
+	public String removeComment(int comment_no, int album_no, int photo_no, HttpSession session){
 		Member m = (Member)session.getAttribute("loginmember");
+		Comment comment = photoService.getComment(comment_no);
+		
 		
 		if(comment.getCwriter().equals(m.getMember_nickname())){
-		photoService.removeComment(comment.getComment_no());
+			photoService.removeComment(comment_no);
+		
 		}else{
 			
 		}
+		
+		logger.info("comment_content"+comment.getComment_content());
+		
 		return "redirect:/photoDetail?photo_no="+photo_no+"&&album_no="+album_no;
 	}
 	

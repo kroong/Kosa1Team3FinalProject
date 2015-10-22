@@ -220,6 +220,11 @@ public class PhotoService {
 		return comment;
 	}
 	
+	public Comment getComment(int comment_no){
+		Comment comment = commentDao.selectByCN(comment_no);
+		return comment;
+	}
+	
 	//댓글삭제
 	public void removeComment(int comment_no){
 		commentDao.delete(comment_no);
