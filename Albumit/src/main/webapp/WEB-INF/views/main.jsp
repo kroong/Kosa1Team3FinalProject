@@ -880,10 +880,10 @@ fieldset {
 
 					<!-- --------3. 검색------------------------------------------------------------------------------------------------------- -->
 					<!-- <div class="input-group margin-bottom-sm menu"> -->
-					<div id="search" class="input-group margin-bottom-sm menu">
-						<!-- 	 <span class="input-group-addon">
+					<!-- <div id="search" class="input-group margin-bottom-sm menu">
+							 <span class="input-group-addon">
 						<i class="fa fa-search fa-fw"></i>
-						</span> -->
+						</span>
 						<input id="searchContent" type="text" placeholder="Search">
 						<button id="btn_search" onclick="search()">
 							<i class="fa fa-search fa-fw"></i>
@@ -894,7 +894,7 @@ fieldset {
 								class="validation"></em>
 						</p>
 						<div id="validation-content"></div>
-					</div>
+					</div> -->
 				</div>
 
 				<div id="addalbumchat">
