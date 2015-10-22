@@ -81,6 +81,7 @@
 	
 	<body>
 	<!-- -----앨범 보기 부분 ------------------------------------------------------------------------------------- -->
+		<input type="hidden" name="curAlbumList" value="${curAlbumList}"/>
 		<div class="albumContainer">
 			<c:forEach var="albumEntry" items="${albumList}">
 				<div class="albumThumbnailList">
