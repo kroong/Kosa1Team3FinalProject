@@ -95,4 +95,16 @@ public class AlbumController {
 		
 		return "albumList";
 	}
+	
+	@RequestMapping("/deleteAlbum")
+	public String deleteAlbum(int album_no) {
+		int row = albumService.removeOneAlbum(album_no);
+		
+		return "albumList";
+	}
+	
+	@RequestMapping("/modifyAlbum")
+	public String modifyAlbum(Album album) {
+		return "albumList";
+	}
 }

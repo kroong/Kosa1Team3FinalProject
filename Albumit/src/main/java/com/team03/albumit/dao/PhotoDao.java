@@ -104,22 +104,34 @@ public class PhotoDao {
 	}
 	
 	public int update(Photo photo) {
-		String sql = "update Photo set photo_place=? photo_title=?, photo_content=? where photo_no=?";
+		String sql = "update Photo set photo_title=?, photo_content=? where photo_no=? and album_no=?";
 		int rows = jdbcTemplate.update(
 			sql,
-			photo.getPhoto_place(),
 			photo.getPhoto_title(),
 			photo.getPhoto_content(),
-			photo.getPhoto_no()
+			photo.getPhoto_no(),
+			photo.getAlbum_no()
 		);
 		return rows;
 	}
 	
 	public int updateUid(Photo photo, int uid) {
-		String sql = "update Photo set uid=? where photo_no=?";
+		String sql = "update Photo set uid=? where photo_no=? and album_no=?";
 		int rows = jdbcTemplate.update(
 			sql,
-			photo.getUid(),
+			uid,
+			photo.getPhoto_no(),
+			photo.getAlbum_no()
+		);
+		return rows;
+	}
+	
+	public int updateAlbum_no(Photo photo, int album_no) {
+		String sql = "update Photo set album_no=? where album_no=? and photo_no=?";
+		int rows = jdbcTemplate.update(
+			sql,
+			album_no,
+			photo.getAlbum_no(),
 			photo.getPhoto_no()
 		);
 		return rows;

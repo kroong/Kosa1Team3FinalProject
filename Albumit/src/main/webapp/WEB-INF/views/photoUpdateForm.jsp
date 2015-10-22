@@ -23,12 +23,12 @@
 				var modifyForm = document.modifyForm;
 				console.log(modifyForm);
 				
-				var title = document.modifyForm.title;
+				var photo_title = document.modifyForm.photo_title;
 				console.log(title);
 				
-				var content = document.modifyForm.content;
+				var photo_content = document.modifyForm.photo_content;
 				
-				if(title.value == "" || content.value == "") {
+				if(photo_title.value == "" || photo_content.value == "") {
 					alert("제목과 내용은 있어야 합니다.");
 					return;
 				}
@@ -41,14 +41,14 @@
 	
 	<body>
 		<h4>게시물 보기</h4>
-		<form id="modifyForm" name="modifyForm" method="post" action="photoUpdateForm">		
+		<form id="modifyForm" name="modifyForm" method="post" action="updatePhoto">		
 			<span class="title">번호:</span> 
 			<span class="content">${photo.photo_no}</span> 
 			<input type="hidden" name="photo_no" value="${photo.photo_no}"/><br/>
-			<input type="hidden" name="album_no" value="${photo.album_no }"/><br/>
+			<input type="hidden" name="album_no" value="${photo.album_no}"/><br/>
 			
 			<span class="title">제목:</span> 
-			<input id="title" type="text" name="title" value="${photo.photo_title}"/> <br/>
+			<input id="title" type="text" name="photo_title" value="${photo.photo_title}"/><br/>
 			
 			<span class="title">글쓴이:</span> 
 			<span class="content">${photo.uid}</span> <br/>
@@ -60,7 +60,7 @@
 			<span class="content">${photo.photo_hitcount}</span> <br/>
 			
 			<span class="title">내용:</span> <br/>
-			<textarea name="content" cols="80" rows="5">${photo.photo_content}</textarea>
+			<textarea name="photo_content" cols="80" rows="5">${photo.photo_content}</textarea>
 		</form>
 		<div id="buttonGroup">
 			<a href="javascript:sendData()">수정</a>

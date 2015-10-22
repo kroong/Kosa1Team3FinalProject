@@ -187,6 +187,125 @@
 	
 	</script>
 	
+	<!-- 셀렉트박스 -->
+	<script type="text/javascript">
+		// HELPERS //
+		NodeList.prototype.forEach = function (callback) {
+		  Array.prototype.forEach.call(this, callback);
+		}
+
+		// Function definitions //
+	
+		function deactivateSelect(select) {
+		  if (!select.classList.contains('active')) return;
+	
+		  var optList = select.querySelector('.optList');
+	
+		  optList.classList.add('hidden');
+		  select.classList.remove('active');
+		}
+	
+		function activeSelect(select, selectList) {
+		  if (select.classList.contains('active')) return;
+	
+		  selectList.forEach(deactivateSelect);
+		  select.classList.add('active');
+		};
+	
+		function toggleOptList(select, show) {
+		  var optList = select.querySelector('.optList');
+	
+		  optList.classList.toggle('hidden');
+		}
+	
+		function highlightOption(select, option) {
+		  var optionList = select.querySelectorAll('.option');
+	
+		  optionList.forEach(function (other) {
+		    other.classList.remove('highlight');
+		  });
+	
+		  option.classList.add('highlight');
+		};
+	
+		function updateValue(select, index) {
+		  var nativeWidget = select.previousElementSibling;
+		  var value = select.querySelector('.value');
+		  var optionList = select.querySelectorAll('.option');
+	
+		  optionList.forEach(function (other) {
+		    other.setAttribute('aria-selected', 'false');
+		  });
+	
+		  optionList[index].setAttribute('aria-selected', 'true');
+	
+		  nativeWidget.selectedIndex = index;
+		  value.innerHTML = optionList[index].innerHTML;
+		  highlightOption(select, optionList[index]);
+		};
+	
+		function getIndex(select) {
+		  var nativeWidget = select.previousElementSibling;
+	
+		  return nativeWidget.selectedIndex;
+		};
+	
+		// Event binding //
+	
+		window.addEventListener("load", function () {
+		  var form = document.querySelector('form');
+		 
+		  form.classList.remove("no-widget");
+		  form.classList.add("widget");
+		});
+	
+		window.addEventListener('load', function () {
+		  var selectList = document.querySelectorAll('.select');
+	
+		  selectList.forEach(function (select) {
+		    var optionList = select.querySelectorAll('.option'),
+		        selectedIndex = getIndex(select);
+	
+		    select.tabIndex = 0;
+		    select.previousElementSibling.tabIndex = -1;
+	
+		    updateValue(select, selectedIndex);
+	
+		    optionList.forEach(function (option, index) {
+		      option.addEventListener('mouseover', function () {
+		        highlightOption(select, option);
+		      });
+	
+		      option.addEventListener('click', function (event) {
+		        updateValue(select, index);
+		      });
+		    });
+	
+		    select.addEventListener('click', function (event) {
+		      toggleOptList(select);
+		    });
+	
+		    select.addEventListener('focus', function (event) {
+		      activeSelect(select, selectList);
+		    });
+	
+		    select.addEventListener('blur', function (event) {
+		      deactivateSelect(select);
+		    });
+	
+		    select.addEventListener('keyup', function (event) {
+		      var length = optionList.length,
+		          index  = getIndex(select);
+	
+		      if (event.keyCode === 40 && index < length - 1) { index++; }
+		      if (event.keyCode === 38 && index > 0) { index--; }
+	
+		      updateValue(select, index);
+		    });
+		  });
+		});
+	</script>
+	
 		<style type="text/css">
 		
 			* {
@@ -195,29 +314,32 @@
 		      }
 		     
 		     body{
-		      width: 1000px;
+		      min-width: 960px;
 		      height : 100%;
 		      background-color: white;
 		      margin: 0 auto;
+		      /* position: fixed; */
+		      
 		     }
 		      
 		     #pagewrapper{
 		 	  margin: 0px auto;
 		      padding: 0px;
+		      width: 100%;
+		      overflow: none;
 		     }
 		     
 		     
 		     /*  메뉴바 부분 -------------------------------------------------------------------------------------------------------------- */
 		     
 		     #large-header{
-		     	min-width: 1083px;
+		     	min-width: 960px;
 		     	position: fixed;
 		     	top: 0;
 		     	right: 0;
 		     	left: 0;
 		     	z-index: 10; 
 		     	display: block;
-		     	/* background-color: #666699;  */
 		     	background-image:url('${pageContext.request.contextPath}/resources/image/menubg.PNG'); 
 		     	background-repeat: no-repeat;
            		background-size: cover;
@@ -241,17 +363,18 @@
 				height: 80px;
 				background-color: rgba(255,255,255,0)/* green */;
 				padding: 5px;
-				width: 650px;
+				/* width: 650px; */
 				float: left;
 				margin: 0px auto;
 				display: table-cell;
 				vertical-align: middle;
 			}
+			
+			
 			.menu {
 				 display: inline; 
 				 float: left; 
 			}
-			
 			
 			#btn_myinfo, #searchContent{
 				float:left;
@@ -360,14 +483,7 @@
 			
 			fieldset {padding:0; border:0; margin-top: 5px;}
 			
-			#small_wapper{
-			 height: 30px;
-			 width: 500px;
-			 margin: 5px auto; 
-			 padding: 10px;
-			 display: block;
-			 float: left;
-			}
+			
 			
 			/* 아이콘 */
 			.fa{
@@ -379,18 +495,18 @@
 				padding: 2px;
 			}
 			/* 오른쪽 부분 */
-			#right{
+		/* 	#right{
 				float: right;
 				border: none;
-				background-color: rgba(255,255,255,0)/* purple */;
-				padding: 5px;
+				background-color: rgba(255,255,255,0) purple;
 				width: 400px;
-				height: 80px; 
+				padding: 5px 0 0 0;
+				height: 80px;
 				margin: 0px auto;
 				display: table-cell;
 				vertical-align: middle;
 				
-			}
+			} */
 			#addalbumchat{
 				float: right;
 				border:none;
@@ -428,50 +544,119 @@
 			}
 			
 		
-			
-			/* 선택박스 */
-			#selectex { 
-			    margin: 22px 10px 10px 10px;
-			    padding: 7px; 
-			    border: none; 
-			    width: 200px;
-			    float: left;
-			    text-align: center;
-			    background-color: /* aqua */rgba(255,255,255,03);
-			    z-index: 15;
-			    font-family: Verdana,sans-serif;
-			}
-			#selectex > ul {
-				 display: none;
-				 background-color: rgba(255,255,255,03);
-				 border: none;
-			  }
-			#selectex:hover > ul {
-				display: block;
-				background: none;
-				border-top: 1px solid rgba(255,255,255,0);
-				list-style:none;
-			 }
-			#selectex:hover > ul > li {
-				 padding: 3px;
-				 border-bottom: 1px solid rgba(255,255,255,0);
-			  }
-			#selectex:hover > ul > li:hover {
-				 background: white;
-				list-style:none; 
-			 }
-			#selectex:hover > ul > li:hover > a {
-				 color: green; 
-			 }
-		
-			.validation{
-				text-align: center;
-			}
-		
 			#showListBody {
-				position: fixed; width: 100%; height: 100%; top: 110px; left: 0px;
-				border: none;
+				position: absolute; width: 100%; top: 110px; left: 0px;
+				border: none; height: 100%;
 			}
+			
+			/* ======= */
+			/* 셀렉트박스 */
+			/* ======= */
+			.widget select,
+			.no-widget .select {
+			  position : absolute;
+			  left     : -5000em;
+			  height   : 0;
+			  overflow : hidden;
+			}
+			 
+			/* Required Styles */
+			 
+			.select {
+			  position: relative;
+			  display : inline-block;
+			}
+			 
+			.select.active,
+			.select:focus {
+			  box-shadow: 0 0 3px 1px #227755;
+			  outline: none;
+			}
+			 
+			.select .optList {
+			  position: absolute;
+			  top     : 100%;
+			  left    : 0;
+			}
+			 
+			.select .optList.hidden {
+			  max-height: 0;
+			  visibility: hidden;
+			}
+			 
+			/* Fancy Styles */
+			.select {
+			  font-size   : 10px;
+			  font-family : Verdana, Arial, sans-serif;
+			  -moz-box-sizing : border-box;
+			  box-sizing : border-box;
+			  padding: 1px 25px 2px 5px; 
+			  width: 100px; 
+			  border: 2px solid #000;
+			  border-radius : 4px; 
+			 
+			  box-shadow : 0 0.1em 0.2em rgba(0,0,0,.45); /* 0 1px 2px */
+			 
+			  background : #F0F0F0;
+			  background : -webkit-linear-gradient(90deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);
+			  background : linear-gradient(0deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);
+			}
+			 
+			.select .value {
+			  display  : inline-block;
+			  width    : 100%;
+			  overflow : hidden;
+			 
+			  white-space   : nowrap;
+			  text-overflow : ellipsis;
+			  vertical-align: top;
+			}
+			 
+			.select:after {
+			  content : "▼";
+			  position: absolute;
+			  z-index : 1;
+			  height  : 100%;
+			  width   : 2em; /* 20px */
+			  top     : 0;
+			  right   : 0;
+			  padding-top : .1em;
+			  -moz-box-sizing : border-box;
+			  box-sizing : border-box;
+			  text-align : center;
+			  border-left  : .2em solid #000;
+			  border-radius: none/* 0 .1em .1em 0 */;
+			  background-color : #000;
+			  color : #FFF;
+			}
+			 
+			.select .optList {
+			  z-index : 2;
+			  list-style: none;
+			  margin : 0;
+			  padding: 0;
+			  background: #f0f0f0;
+			  border: .2em solid #000;
+			  border-top-width : .1em;
+			  border-radius: 0 0 .4em .4em;
+			  box-shadow: 0 .2em .4em rgba(0,0,0,.4);
+			  -moz-box-sizing : border-box;
+			  box-sizing : border-box;
+			  min-width : 100%;
+			  max-height: 10em; /* 100px */
+			  overflow-y: auto;
+			  overflow-x: hidden;
+			}
+			 
+			.select .option {
+			  padding: .2em .3em;
+			}
+			 
+			.select .highlight {
+			  background: #000;
+			  color: #FFFFFF;
+			}
+						
 		</style>
 	
 	</head>
@@ -498,7 +683,39 @@
 					<div id="btn_myinfo"  class="menu">
 						<input type="button"  id="myinfo" value="Hi, ${member.member_email}" />
 					</div>
-				<!-- --------3. 검색------------------------------------------------------------------------------------------------------- -->
+					
+				<!-- -------- 4. album/friend 옵션 선택 ----------------------------------------------------------------------------------- -->
+				<!-- <div id="right"> -->
+					<!--  <div id="menu" class="menu">
+						<select id="option">	
+							<option> ALBUM </option>
+							<option> PHOTO </option>
+						</select>
+					</div>
+					  -->
+					 
+					
+			<!--실험용!!  -->
+			<form class="no-widget">
+			  <select name="myFruit">
+			    <option>ALBUM</option>
+			    <option>PHOTO</option>
+			   </select>
+			 
+			  <div class="select" role="listbox">
+			    <span class="value">Cherry</span>
+			    <ul class="optList hidden" role="presentation">
+			      <li class="option" role="option" aria-selected="true">ALBUM</li>
+			      <li class="option" role="option">PHOTO</li>
+			    </ul>
+			  </div>
+			</form>
+								
+					
+					
+					
+	
+	<!-- --------3. 검색------------------------------------------------------------------------------------------------------- -->
 				<!-- <div class="input-group margin-bottom-sm menu"> -->
 					<div id="search" class="input-group margin-bottom-sm menu">
 					<!-- 	 <span class="input-group-addon">
@@ -513,24 +730,7 @@
 						<div id="validation-content"></div>
 					</div>
 				</div>	
-				<!-- -------- 4. album/friend 옵션 선택 ----------------------------------------------------------------------------------- -->
-				<div id="right">
-					<!-- <div id="menu" class="menu">
-						<select id="option">	
-							<option> ALBUM </option>
-							<option> PHOTO </option>
-						</select>
-					</div>
-					 -->
-					 
-					<div id="selectex">
-					 SELECT
-					    <ul>
-					        <li><a href="#">ALBUM</a></li>
-					        <li><a href="#">PHOTO</a></li>
-					    </ul>
-					</div>
-					<!-- --------------------------------------------------------------------------------------------------------- -->
+				
 				<div id="addalbumchat">
 				<!-- ------ 5. 앨범추가 --------------------------------------------------------------------------------------------------- -->
 				
@@ -545,7 +745,7 @@
 					</div>
 					
 					<!-- --------------------------------------------------------------------------------------------------------------------- -->
-				</div>
+				<!-- </div> -->
 				 <!-- --------------------------------------------------------------------------------------------------------------------- -->
 				 </div>
 			 <!-- --------------------------------------------------------------------------------------------------------------------- -->	

@@ -25,6 +25,7 @@
 				height : 100%;
 				background-color: white;
 				margin: 0 auto;
+				font-size: 1;
 		    }
 		    a, a:hover, a:FOCUS, a:VISITED {
 		    	color: grey;
@@ -32,9 +33,21 @@
 		    }
 		    ol, ul {list-style: none;}
 		    
+		    .albumContainer {
+		    	position: relative;
+		    	width: 960px;
+		    	height: 100%;
+		    	left: 50%;
+		    	margin: 0;
+		    	transform: translateX(-50%);
+		    }
+		    
 		    .albumThumbnailList {
 		    	display: inline-block;
 		    	position: relative;
+		    	padding: 0; margin: 0;
+		    	width: 180px;
+		    	
 		    }
 		    
 			.albumThumbnail {
@@ -46,13 +59,21 @@
 				width: 150px; height: 150px;
 				display: block;
 			}
-			
-			.albumMenu {
-				display: inline-block; position: absolute;
-				left: 25px; top: 130px; z-index: 3;
+			.albumThumbnail span {
+				display: inline-block; position: absolute; width: 150px;
+				top: 135px; left: 50%; transform: translateX(-50%);
 			}
 			
+			.albumThumbnailList .albumMenu {
+				display: inline-block; position: absolute; font-size: 1.2em;
+				left: 18px; top: 100px; z-index: 3; opacity: 0; transition: all 0.5s;
+				background-color: white;
+			}
+			
+			.albumThumbnailList:hover .albumMenu { opacity: 0.7; }
+			
 			.albumMenu ul li {float: left; margin: 1px 15px;}
+			.albumMenu ul li a:hover {color: #6677ff; opacity: 1;}
 			
 		</style>
 	
@@ -60,23 +81,25 @@
 	
 	<body>
 	<!-- -----앨범 보기 부분 ------------------------------------------------------------------------------------- -->
-		<c:forEach var="albumEntry" items="${albumList}">
-			<div class="albumThumbnailList">
-				<div class="albumThumbnail">
-					<a href="photoList?album_no=${albumEntry.key.album_no}">
-						<img src="${pageContext.request.contextPath}/resources/thumb/${albumEntry.value.thumbnail_original_file_name}"/>
-						<span>${albumEntry.key.album_name}</span>
-					</a>
+		<div class="albumContainer">
+			<c:forEach var="albumEntry" items="${albumList}">
+				<div class="albumThumbnailList">
+					<div class="albumThumbnail">
+						<a href="photoList?album_no=${albumEntry.key.album_no}">
+							<img src="${pageContext.request.contextPath}/resources/thumb/${albumEntry.value.thumbnail_original_file_name}"/>
+							<span>${albumEntry.key.album_name}</span>
+						</a>
+					</div>
+					<div class="albumMenu">
+						<ul>
+							<li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+							<li><a href="#"><i class="fa fa-cog"></i></a></li>
+							<li><a href="#"><i class="fa fa-trash-o"></i></a></li>
+						</ul>
+					</div>
 				</div>
-				<div class="albumMenu">
-					<ul>
-						<li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-						<li><a href="#"><i class="fa fa-cog"></i></a></li>
-						<li><a href="#"><i class="fa fa-trash-o"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</c:forEach>
+			</c:forEach>
+		</div>
 	<!-- --------------------------------------------------------------------------------------------------------- -->
 	</body>
 </html>

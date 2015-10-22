@@ -19,16 +19,18 @@
       height: 100%;
       margin: 0 auto;
       padding: 100px;
+     /*  max-width:1024px; 
+      max-height:1024px;  */
       }      
    
    /* 배경 비디오 */
    .vid{
-	   	width: 100%;
+	   	width: 960px;
 	   	height: 100%;
 	   	position: fixed;
-	   	top: -60px;
+	   	top: -1px;
 	   	left: 0px;
-	   	opacity: 0.9; 	 /* 동영상 투명도 조절  */
+	   	opacity: 1.0; 	 /* 동영상 투명도 조절  */
 	   	z-index: -10;
    }
 	.vid video{

@@ -39,14 +39,15 @@ public class PhotoService {
 	//사진삭제
 	public void removePhoto(int photo_no, int album_no) {
 		
+		logger.info("album_no"+album_no);
 		//퍼온 사진인지 확인하기위해  삭제할 사진 가져옴
 		List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
 		
 		//null이면 지울 사진이 퍼온사진이 아님 --> 원본사진임
-		if(sharedphoto == null){
+		if(sharedphoto.size() == 0){
 			//원본사진을 퍼갔는지 확인
 			//퍼간사진이 없으면 원본사진 삭제
-			if(sharedPhotoDao.selectByPhotoNo(photo_no) == null){
+			if(sharedPhotoDao.selectByPhotoNo(photo_no).size() == 0){
 				photoDao.delete(photo_no);
 			}else{//퍼간사진이 있을때
 				
@@ -55,6 +56,11 @@ public class PhotoService {
 				List<SharedPhoto> sharedphoto2 = sharedPhotoDao.selectByPhotoNo(photo_no);
 				//list중 0번째 uid를 가져와서 원본사진의 uid로 만듬ㄱ
 				photoDao.updateUid(photo, sharedphoto2.get(0).getUid());
+				logger.info("Uid"+sharedphoto2.get(0).getUid());
+				
+				photoDao.updateAlbum_no(photo, 18);
+				logger.info("Album_no"+sharedphoto2.get(0).getAlbum_no());
+				logger.info("photoAlbumno"+photo.getAlbum_no());
 			}
 			
 		}else{//퍼간사진 사진임 --> 그냥 삭제
@@ -200,6 +206,7 @@ public class PhotoService {
 				Photo photo = photoDao.selectByPk(photo_no);
 				List<SharedPhoto> sharedphoto2 = sharedPhotoDao.selectByPhotoNo(photo_no);
 				photoDao.updateUid(photo, sharedphoto2.get(0).getUid());
+				photoDao.updateAlbum_no(photo, 18);
 			}
 	
 		}else{
