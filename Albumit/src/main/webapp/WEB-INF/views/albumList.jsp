@@ -10,9 +10,9 @@
 		<!-- 파비콘설정 -->
 		<link rel="icon"  href="${pageContext.request.contextPath}/resources/image/favicon.ico" type="image/x-icon"/> 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		<%-- <script type="text/javascript" src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script> --%>
-		<%--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> --%>
+		<script type="text/javascript" src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 				
 		<style type="text/css">
 			* {
@@ -89,18 +89,54 @@
 						<a href="photoList?album_no=${albumEntry.key.album_no}">
 							<img src="${pageContext.request.contextPath}/resources/thumb/${albumEntry.value.thumbnail_original_file_name}"/>
 							<span>${albumEntry.key.album_name}</span>
+							<input type="hidden" value="${albumEntry.key.album_no}"/>
+							<input type="hidden" value="${albumEntry.key.album_name}"/>
 						</a>
 					</div>
 					<div class="albumMenu">
 						<ul>
-							<li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-							<li><a href="#"><i class="fa fa-cog"></i></a></li>
-							<li><a href="#"><i class="fa fa-trash-o"></i></a></li>
+							<li><a href="#" id="albumLikeButton"><i class="fa fa-heart-o"></i></a></li>
+							<li><a href="#" id="albumModifyButton"><i class="fa fa-cog"></i></a></li>
+							<li><a href="#" id="albumDeleteButton"><i class="fa fa-trash-o"></i></a></li>
 						</ul>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
 	<!-- --------------------------------------------------------------------------------------------------------- -->
+	
+	<!-- -----앨범 삭제 확인 ------------------------------------------------------------------------------------- -->
+		<div id="delete_confirm_window">
+			<p>
+				<span>
+					<i class="fa fa-exclamation" style="display: inline-block; float: left; font-size: 20px; color: red; margin: 0 15px 0 5px"></i>
+				</span>
+				Do you really want to delete this album?
+			</p>
+		</div>
+	<!-- --------------------------------------------------------------------------------------------------------- -->
+	
+		<script>
+			$(function() {
+				$("#albumDeleteButton").on("click", function() {
+					$("#delete_confirm_window").dialog("open");
+				});
+				
+				$("#delete_confirm_window").dialog({
+					resizable: false,
+					autoOpen: false,
+					height: 200,
+					modal: true,
+					buttons: {
+						"OK": function() {
+							$(this).dialog("close");
+						},
+						Cancel: function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
