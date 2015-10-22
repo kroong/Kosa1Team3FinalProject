@@ -30,16 +30,57 @@
 		float: right;
 		margin: 1px 15px;
 	}
+	
+	  /* nav */
+	        nav {
+	        display:inline;
+	        	width:20%;
+	        }
+	       	nav ul{padding-left:5px; }                   
+         	nav ul li {
+            	display:inline;                        
+            	border-left:1px solid #999;            
+            	font:bold 12px Dotum;                    
+            	padding:0 10px;                        
+        	}
+         	nav ul li:first-child{border-left:none;}  
+         	nav ul li:nth-child(4){border-left:none;}  
+         	nav ul li:last-child{border-left:none;} 
+         	 
+		    .menu a{cursor:pointer;}
+   			 .menu .hide{display:none;}
 	</style>
 
 
 </head>
 		
 <body class="demo-2">
-	<select id="photoArray" size="1" onchange="arrayfun(this)">
-		<option value="latest" selected="selected" >최신순</option>
-		<option value="popularity">인기순</option>
-	</select>
+	
+	
+	
+	
+		<nav>
+		<ul>
+			<li>Post </li>
+			<li class="menu"><a>Move to </a> 
+				<ul class="hide">
+					<li>1</li>
+					<li>2</li>
+				</ul>
+			
+			</li>
+
+			<li>Share Album</li>
+			<li><button>Confirm</button></li>
+			<li>
+				<select id="photoArray" size="1" onchange="arrayfun(this)">
+			<option value="latest" selected="selected" >최신순</option>
+			<option value="popularity">인기순</option>
+		</select></li>
+		</ul>
+
+		</nav>
+				
 
 	<div id="latest">
 	<h4>최신순 안되나요</h4>
