@@ -19,8 +19,8 @@ public class CommentDao {
 		// 
 		public Integer insert(Comment comment) {
 			Integer pk = null;
-			String sql = "insert into Comment (photo_no, comment_no, cwriter, comment_content) "
-					+ "values (?,?,?,?)";
+			String sql = "insert into Comment (photo_no, comment_no, cwriter, comment_content, uid) "
+					+ "values (?,?,?,?,?)";
 			
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			jdbcTemplate.update(new PreparedStatementCreator() {
@@ -32,6 +32,7 @@ public class CommentDao {
 					pstmt.setInt(2, comment.getComment_no());
 					pstmt.setString(3, comment.getCwriter());
 					pstmt.setString(4, comment.getComment_content());
+					pstmt.setInt(5, comment.getUid());
 					return pstmt;
 				}
 			}, keyHolder);
@@ -55,6 +56,7 @@ public class CommentDao {
 							comment.setComment_no(rs.getInt("comment_no"));
 							comment.setCwriter(rs.getString("cwriter"));
 							comment.setComment_content(rs.getString("comment_content"));
+							comment.setUid(rs.getInt("uid"));
 							return comment;
 						}
 					}
@@ -64,13 +66,14 @@ public class CommentDao {
 				
 		// 
 		public int update(Comment comment) {
-			String sql = "update Comment set photo_no=?, comment_no=?, cwriter=?, comment_content=? where comment_no=?";
+			String sql = "update Comment set photo_no=?, comment_no=?, cwriter=?, comment_content=?, uid=? where comment_no=?";
 			int rows = jdbcTemplate.update(
 					sql,
 					comment.getPhoto_no(),
 					comment.getComment_no(), 
 					comment.getCwriter(),
-					comment.getComment_content()
+					comment.getComment_content(),
+					comment.getUid()
 				);
 			return rows;
 		}
@@ -100,6 +103,7 @@ public class CommentDao {
 							comment.setComment_no(rs.getInt("comment_no"));
 							comment.setCwriter(rs.getString("cwriter"));
 							comment.setComment_content(rs.getString("comment_content"));
+							comment.setUid(rs.getInt("uid"));
 							return comment;
 						}
 					}

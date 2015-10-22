@@ -6,6 +6,7 @@ public class Comment {
 	private int comment_no;
 	private String cwriter;
 	private String comment_content;
+	private int uid;
 	public int getPhoto_no() {
 		return photo_no;
 	}
@@ -30,6 +31,14 @@ public class Comment {
 	public void setComment_content(String comment_content) {
 		this.comment_content = comment_content;
 	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+	
+	
 	
 
 }
