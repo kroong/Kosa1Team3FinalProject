@@ -58,7 +58,7 @@ public class PhotoService {
 				photoDao.updateUid(photo, sharedphoto2.get(0).getUid());
 				logger.info("Uid"+sharedphoto2.get(0).getUid());
 				
-				photoDao.updateAlbum_no(photo, sharedphoto2.get(0).getAlbum_no());
+				photoDao.updateAlbum_no(photo, 18);
 				logger.info("Album_no"+sharedphoto2.get(0).getAlbum_no());
 				logger.info("photoAlbumno"+photo.getAlbum_no());
 			}
@@ -206,6 +206,7 @@ public class PhotoService {
 				Photo photo = photoDao.selectByPk(photo_no);
 				List<SharedPhoto> sharedphoto2 = sharedPhotoDao.selectByPhotoNo(photo_no);
 				photoDao.updateUid(photo, sharedphoto2.get(0).getUid());
+				photoDao.updateAlbum_no(photo, 18);
 			}
 	
 		}else{
