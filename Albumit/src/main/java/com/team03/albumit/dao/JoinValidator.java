@@ -1,12 +1,17 @@
 package com.team03.albumit.dao;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.validation.*;
 
 import com.team03.albumit.dto.*;
+import com.team03.albumit.service.*;
 
 
 public class JoinValidator implements Validator{
+	@Autowired
 
+	private MemberService memberService;
+	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Member.class.isAssignableFrom(clazz);
@@ -23,5 +28,6 @@ public class JoinValidator implements Validator{
 		
 		if(member.getMember_password().length()<4)
 		errors.rejectValue("member_password", "minlength");
+		
+		}
 	}
-}

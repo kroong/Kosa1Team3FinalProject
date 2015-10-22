@@ -31,13 +31,21 @@ public class MemberController {
 		return "loginForm";
 	}
 
-	@RequestMapping(value="/",method=RequestMethod.POST)
+	@RequestMapping(value="login",method=RequestMethod.POST)
 	public String login(Member loginMember, Model model,HttpSession session){
 		Boolean loginCheck;
-
+	
+		if(loginMember == null){
+			return "loginFailed";		
+		}
 		//로그인 성공시 세션객체에 등록하기!
 		String email = loginMember.getMember_email();
 		String pw = loginMember.getMember_password();
+		
+		if(memberService.findMember(email) ==null){
+			return "notRegisteredId";
+		}
+		
 		loginCheck = memberService.login(email,pw);
 
 
@@ -55,7 +63,7 @@ public class MemberController {
 			return "redirect:/main";
 		}
 		logger.info("로그인 실패");
-		return "redirect:/login";	
+		return "wrongPassword";	
 	}
 
 	@RequestMapping(value="join", method=RequestMethod.GET)
@@ -245,8 +253,16 @@ public class MemberController {
 		Member mem = (Member) session.getAttribute("loginmember");
 		List<FriendList> flist= memberService.friendList(mem);
 		model.addAttribute("flist",flist);
-		
 		return "friendTable";
+	}
+	@RequestMapping(value="duplication", method={RequestMethod.GET,RequestMethod.POST})
+	public String duplication(@RequestParam("checkEmail")String email){
+		Member mem =memberService.findMember(email);
+		if(mem != null){
+			return"duplicate";
+		}
+		return"success";
+		
 	}
 	
 }

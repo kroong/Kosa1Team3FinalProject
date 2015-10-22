@@ -9,6 +9,9 @@
       <title>Albumit</title>
 		<!-- 파비콘설정 -->
 		<link rel="icon"  href="${pageContext.request.contextPath}/resources/image/favicon.ico" type="image/x-icon"/> 
+      	<script type="text/javascript" src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
+      
+      
       <style type="text/css">
          * {
             margin: 0px;
@@ -33,7 +36,7 @@
             background-color: rgba(255,255,255,0);
             border-radius: 30px; 
             width: 400px; 
-            height: 350px;
+            height: 400px;
             text-align: center;
          }
          
@@ -41,7 +44,7 @@
             font-size: 12px;
          }
          
-         #emailform, #passwordform, #nicknameform, #Smessageform {
+         #passwordform, #nicknameform, #Smessageform {
 			margin: 5px 0px;
 			height: 30px;
 			width: 100%;
@@ -55,6 +58,22 @@
 			text-align: center;
 			box-shadow: 2px 2px 10px purple;
          }
+         
+          #emailform {
+          	margin: 5px 0px;
+			height: 30px;
+			width: 70%;
+			background-color: rgba(255,255,255,0.4); 
+			border-bottom: 0.5px solid white;  	 
+			border-left: 0px solid;
+			border-top:0.5px solid white;
+			border-right: 0px solid;
+			border-radius: 5px;
+			font-family: Verdana,sans-serif;
+			text-align: center;
+			box-shadow: 2px 2px 10px purple;
+          
+          }
          
          ::-webkit-input-placeholder{color:rgb(204, 0, 82);}
          
@@ -146,7 +165,69 @@
 		background: rgba(135, 80, 25, 0.3); /* 지금은 브라운임! */
 		text-decoration: none;
 	} 
+	
+	.validationBtn {
+	
+    margin: 5px 3px 5px 3px;
+    height: 30px;
+    width: 27%;
+    background-color: rgba(255,255,255,0.5);
+    border-color: rgba(255,255,255,0);
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: rgba(204, 0, 82, 0.8);
+    font-family: Verdana,sans-serif;
+    font-size: 0.5em;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px purple;
+	}
+	
+	.validationBtn:hover {
+		background-color: rgba(255, 255, 255, 0.7);
+		text-decoration: none;
+		box-shadow: 2px 2px 2px silver;
+	}
+	.validationBtn:active {
+		background: rgba(135, 80, 25, 0.3); /* 지금은 브라운임! */
+		text-decoration: none;
+	} 
+	
+	#btngroup{
+		margin-left:5px;
+	}
+	
+	#emailValidation{
+		color: blue;
+	}
       </style>
+      
+      
+      <script>
+      function dup(){
+    	  var contextpath = $("#contextpath").val();
+    	  var email= $("#emailform").val();
+    	  $.ajax({
+    			url : contextpath+"/duplication",
+    			data : {"checkEmail" : email},
+    			type :"post",
+    			dataType : 'json',
+    			success: function (data){
+    				if(data.result.indexOf("exist!") > -1 ){
+    					
+    					$("#emailValidation").css("color","red");
+    					$("#emailValidation").html(data.result);
+    				}
+    				else{
+    				$("#emailValidation").css("color","blue");
+					$("#emailValidation").html(data.result);
+    				}
+    			}
+    	  });
+      }
+      
+      </script>
    </head>
    
    <body>
@@ -161,6 +242,10 @@
             <h2 class="signup">Create your Albumit Account!</h2>
          </div>
          
+         <input type="hidden" id="contextpath" value="${pageContext.request.contextPath }"/>
+         
+       
+         
          <form:form  commandName ="member" enctype="multipart/form-data" >
             <!-- 입력란 -->
             <div id="textbox">
@@ -168,12 +253,18 @@
                <div id="email">
                   <form:input path="member_email" placeholder="Email address"  id="emailform"/>
                   <form:errors path="member_email"/>
+                    
+                  <input type="button" onclick="dup()" value=" Duplication Check!" class="validationBtn"/>
+                  <div id="emailValidation" ></div>
+                  
+                  
                </div>
                
                <!-- Password -->
                <div id="password">
                   <form:input path="member_password" placeholder="Password"  id="passwordform"/>
                   <form:errors path="member_password"/>
+             
                </div>
                      
                <!-- NickName -->
@@ -188,11 +279,11 @@
                   <form:errors path="member_profile"/>
                </div>
             
-            <!-- 
+            
             	<div id="fileUpload">
             		
             		파일 등록 : <input type="file" name="attach" />
-            	</div> -->
+            	</div> 
             </div>
    <!--  --------------------------------------------------------------------------------- -->
             
@@ -203,7 +294,7 @@
 			</div>
  -->
 
-			<!-- 지인언니 여기서 자꾸 오류가 나내요;;; 주석처리 해놨어요
+			<!-- 지인언니 여기서 자꾸 오류가 나내요 주석처리 해놨어요
 			
 			<h3 id="uploadtitle">Upload your Photo!!</h3>
 			<br/>
@@ -214,17 +305,19 @@
 			  <input type="file"  class="file_input_hidden" onchange="javascript: document.getElementById('fileName').value = this.value" />
 			</div> -->
 			
-            <div class="filebox">
+          <!--   <div class="filebox">
                Upload your Photo<br/>
                <lable for="ex_file">업로드</lable>
                <input type="file" name="attach" id="uploadfile"/>
-            </div>      
+            </div>   -->    
    <!--  --------------------------------------------------------------------------------- -->         
-			<div>
-             	<input type="reset"  value= "Reet"  id="reset" class="btn"/>
+			<div id="btngroup">
+             	<input type="reset"  value= "Rset"  id="reset" class="btn"/>
                <input type="submit" value="Join" id="join" class="btn"/>
             </div>
-         </form:form>
+         </form:form><br/>
+         <br/>
+         
       </div>
    </body>
 </html>

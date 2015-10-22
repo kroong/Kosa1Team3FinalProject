@@ -38,6 +38,9 @@ public class AlbumController {
 		Map<Album, Thumbnail> albumList = albumService.showAllAlbumList();
 		model.addAttribute("albumList", albumList);
 		
+		String curAlbumList = "allAlbumList";
+		model.addAttribute("curAlbumList", curAlbumList);
+		
 		return "albumList";
 	}
 	
@@ -45,6 +48,9 @@ public class AlbumController {
 	public String myAlbumList(@ModelAttribute("member") Member member, Model model) {
 		Map<Album, Thumbnail> albumList = albumService.showMyAlbumList(member);
 		model.addAttribute("albumList", albumList);
+		
+		String curAlbumList = "myAlbumList";
+		model.addAttribute("curAlbumList", curAlbumList);
 		
 		return "albumList";
 	}
@@ -54,6 +60,9 @@ public class AlbumController {
 		Map<Album, Thumbnail> albumList = albumService.showMySharedAlbumList(member);
 		model.addAttribute("albumList", albumList);
 		
+		String curAlbumList = "sharedAlbumList";
+		model.addAttribute("curAlbumList", curAlbumList);
+		
 		return "albumList";
 	}
 	
@@ -61,6 +70,9 @@ public class AlbumController {
 	public String likedAlbumList(@ModelAttribute("member") Member member, Model model) {
 		Map<Album, Thumbnail> albumList = albumService.showMyLikedAlbumList(member);
 		model.addAttribute("albumList", albumList);
+		
+		String curAlbumList = "likedAlbumList";
+		model.addAttribute("curAlbumList", curAlbumList);
 		
 		return "albumList";
 	}
@@ -77,7 +89,8 @@ public class AlbumController {
 			albumService.shareAlbum(album_no, album.getUid(), friends_uid.toArray(new Integer[0]));
 		}
 		
-		return "redirect:/myAlbumList";
+		
+		return "redirect:/main";
 	}
 	
 	@RequestMapping("/showFriendsList")
@@ -93,6 +106,18 @@ public class AlbumController {
 		List<Album> albumList = albumService.searchAlbum(album_name);
 		model.addAttribute("albumList",albumList);
 		
+		return "albumList";
+	}
+	
+	@RequestMapping("/deleteAlbum")
+	public String deleteAlbum(int album_no) {
+		int row = albumService.removeOneAlbum(album_no);
+		
+		return "albumList";
+	}
+	
+	@RequestMapping("/modifyAlbum")
+	public String modifyAlbum(Album album) {
 		return "albumList";
 	}
 }

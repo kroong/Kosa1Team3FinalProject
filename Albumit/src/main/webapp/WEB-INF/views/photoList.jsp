@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -16,45 +18,60 @@
 		color:white;
 	}
 	
-	.add{
-		font:20px;
+	.add_left{
+		font-size:20px;
 		list-style: none;
 		display: inline-block;
 		float: left;
-		margin: 1px 25px;
+	}
+	.add_right{
+		font-size:20px;
+		list-style: none;
+		display: inline-block;
+		float: right;
+		margin: 1px 15px;
 	}
 	</style>
 
 
 </head>
-
+		
 <body class="demo-2">
+	<select id="photoArray" size="1" onchange="arrayfun(this)">
+		<option value="latest" selected="selected" >최신순</option>
+		<option value="popularity">인기순</option>
+	</select>
+
+	<div id="latest">
+	<h4>최신순</h4>
+	<hr/>
+	
 	<div class="content">
 		<div class="grid">
-			<%for(int i=1; i<20; i++) {%>
+			<c:forEach  var="photo" items="${laList}">
 			<div class="grid__item" data-size="100x100">
-				<a href="${pageContext.request.contextPath}/resources/uploadfiles/<%=i%>.jpg" class="img-wrap"><img src="${pageContext.request.contextPath}/resources/uploadfiles/<%=i%>.jpg"/>
-				<ul>
-					<li class="add"><a href="#"><i class="fa fa-heart-o"></i></a></li>
-					<li class="add"><a href="#"><i class="fa fa-cog"></i></a></li>
-					<li class="add"><a href="#"><i class="fa fa-trash-o"></i></a></li>
-				</ul>
-				<div class="description description--grid">
-						<h3>Mother's Love</h3>
-						<p>Every time you drink a glass of milk or eat a piece of cheese, you harm a mother. Please go vegan. <em>&mdash; Gary L. Francione</em></p>
-						<div class="details">
-							<ul>
-								<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
-								<li><i class="icon icon-focal_length"></i><span>22.5mm</span></li>
-								<li><i class="icon icon-aperture"></i><span>&fnof;/5.6</span></li>
-								<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
-								<li><i class="icon icon-iso"></i><span>80</span></li>
-							</ul>
+					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap"><img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/>
+					<ul>
+						<li class="add_left"><a href="#"><i class="fa fa-heart-o"></i></a></li>
+						<li class="add_right"><a href="#"><i class="fa fa-share-square-o"></i></a></li>
+						<li class="add_right"><a href="#"><i class="fa fa-ellipsis-v"></i></a></li>
+					</ul>
+					<div class="description description--grid">
+							<h3>${photo.photo_title }</h3>
+							<p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p>
+							<div class="details">
+								<ul>
+									<li><span><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></span></li>
+									<li><span><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</span></li>
+									<li><span>조회수${photo.photo_hitcount}</span></li>
+									<li><span>1/1000</span></li>
+									<li></i><span>80</span></li>
+								</ul>
+							</div>
 						</div>
-					</div>
-				</a>
-			</div>
-			<%}%>
+					</a>
+				</div>
+			</c:forEach>
 		</div>
 		<!-- /grid -->
 		<div class="preview">
@@ -175,4 +192,3 @@
 </body>
 
 </html>
-	
