@@ -195,10 +195,12 @@
 		      }
 		     
 		     body{
-		      min-width: 1083px;
+		      min-width: 960px;
 		      height : 100%;
 		      background-color: white;
 		      margin: 0 auto;
+		      /* position: fixed; */
+		      
 		     }
 		      
 		     #pagewrapper{
@@ -212,14 +214,13 @@
 		     /*  메뉴바 부분 -------------------------------------------------------------------------------------------------------------- */
 		     
 		     #large-header{
-		     	min-width: 1083px;
+		     	min-width: 960px;
 		     	position: fixed;
 		     	top: 0;
 		     	right: 0;
 		     	left: 0;
 		     	z-index: 10; 
 		     	display: block;
-		     	/* background-color: #666699;  */
 		     	background-image:url('${pageContext.request.contextPath}/resources/image/menubg.PNG'); 
 		     	background-repeat: no-repeat;
            		background-size: cover;
@@ -381,10 +382,12 @@
 				padding: 2px;
 			}
 			/* 오른쪽 부분 */
-			#right{
+		/* 	#right{
 				float: right;
 				border: none;
-				background-color: rgba(255,255,255,0)/* purple */;
+				background-color: rgba(255,255,255,0) purple 
+				
+				;
 				width: 400px;
 				padding: 5px 0 0 0;
 				height: 80px;
@@ -392,7 +395,7 @@
 				display: table-cell;
 				vertical-align: middle;
 				
-			}
+			} */
 			#addalbumchat{
 				float: right;
 				border:none;
@@ -428,8 +431,6 @@
 				margin: 10px 0px 10px 0px;
 				padding: 0px 2px 0px 2px;
 			}
-			
-		
 			
 			/* 선택박스 */
 			#selectex { 
@@ -516,7 +517,7 @@
 					</div>
 				</div>	
 				<!-- -------- 4. album/friend 옵션 선택 ----------------------------------------------------------------------------------- -->
-				<div id="right">
+				<!-- <div id="right"> -->
 					<!-- <div id="menu" class="menu">
 						<select id="option">	
 							<option> ALBUM </option>
@@ -547,7 +548,7 @@
 					</div>
 					
 					<!-- --------------------------------------------------------------------------------------------------------------------- -->
-				</div>
+				<!-- </div> -->
 				 <!-- --------------------------------------------------------------------------------------------------------------------- -->
 				 </div>
 			 <!-- --------------------------------------------------------------------------------------------------------------------- -->	
