@@ -190,31 +190,6 @@ public class PhotoService {
 		photoDao.insert(photo);
 	}
 	
-	//사진삭제
-	public void remove(int photo_no, int album_no) {
-		
-		List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
-		
-		
-		if(sharedphoto.size() == 0){
-			
-			List<SharedPhoto> list= sharedPhotoDao.selectByPhotoNo(photo_no);
-			if(list.size() == 0){
-				photoDao.delete(photo_no);
-			}else{
-				
-				Photo photo = photoDao.selectByPk(photo_no);
-				List<SharedPhoto> sharedphoto2 = sharedPhotoDao.selectByPhotoNo(photo_no);
-				photoDao.updateUid(photo, sharedphoto2.get(0).getUid());
-				photoDao.updateAlbum_no(photo, 18);
-			}
-	
-		}else{
-			
-			sharedPhotoDao.delete(photo_no, album_no);
-		}
-		
-	}
 
 	//퍼간 사진 보기
 	public void showShared(int album_no,int photo_no){
