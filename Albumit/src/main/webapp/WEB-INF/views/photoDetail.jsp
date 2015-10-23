@@ -103,7 +103,8 @@
 			
 		function del(){
 			
-			var c_no = $("#${comment.comment_no}").val();
+			var c_no = $("#<c:out value="${comment.comment_no}"/>").val();
+			alert("comment_no"+c_no);
 			
 			$.ajax({
 			      url: "removeComment",
@@ -113,7 +114,8 @@
 			      dataType: 'json',
 			      success: function(data) {
 			    	  alert("data들어오나?"+data);
-			          $('#commentbox').append("</br>"+data.comment);
+			    	  var commentDiv = document.getElementById(data.c_no);
+			          $('#commentbox').parentNode.removeChild(commentDiv);
 			      },
 			      error: function(jqXHR, textStatus, errorThrown) {
 			          alert("error");
@@ -169,7 +171,7 @@
 			<c:forEach var="comment" items="${commentList}">
 			<div>
 				<p>${comment.comment_content}</p>
-				<input type="hidden" id="${comment.comment_no}" value="${comment.comment_no}"/>
+				<input type="hidden" id="<c:out value="${comment.comment_no}"/>" value="${comment.comment_no}"/>
 				<%--<a href="removeComment?album_no=${photo.album_no}&&photo_no=${photo.photo_no}&&comment_no=${comment.comment_no}">댓글지우기</a> --%>
  				<button id="deleteC" onclick="del()">댓글 지우기</button>	
  			</div>																												
