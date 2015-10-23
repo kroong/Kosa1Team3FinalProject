@@ -81,6 +81,7 @@ public class PhotoController {
 		
 		photoService.addPhoto(photo);
 		
+		logger.info(photo.getPhoto_place());
 		return "redirect:/photoList?album_no="+photo.getAlbum_no();
 	}
 	
@@ -162,7 +163,8 @@ public class PhotoController {
 					int album_no,
 					Model model,
 					HttpSession session){
-		
+		Member m = (Member)session.getAttribute("loginmember");
+		String nickname=m.getMember_nickname();
 		photoService.addHitcount(photo_no, album_no);
 		Photo photo = photoService.getPhoto(photo_no);
 		
@@ -171,6 +173,7 @@ public class PhotoController {
 		model.addAttribute("commentList", commentList);
 		
 		model.addAttribute("photo",photo);
+		model.addAttribute("nickname",nickname);
 		
 		return "/photoDetail";
 		
@@ -285,5 +288,12 @@ public class PhotoController {
 		
 		return "/like";
 	}
+	
+	//detail Design
+		@RequestMapping(value="/detailDesign", method=RequestMethod.GET)
+		public String design(Model model, HttpSession session){
+		
+			return "/detailDesign";
+		}
 	
 }

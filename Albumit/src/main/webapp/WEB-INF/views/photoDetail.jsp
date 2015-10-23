@@ -40,11 +40,12 @@
 				flex: 1;
 			}
 			#part1_2 {
-				width: 120;
+				flex:1;
+				
 				margin-right: 10px;
 				text-align: center;
 			}
-			#part1_2 img {
+			#part1_1 img {
 				display: block;
 				padding: 10px;
 			}
@@ -103,7 +104,7 @@
 			
 		function del(){
 			
-			var c_no = $("#<c:out value="${comment.comment_no}"/>").val();
+			var c_no = $(".${comment.comment_no}").val();
 			alert("comment_no"+c_no);
 			
 			$.ajax({
@@ -130,39 +131,36 @@
 		</script>
 	
 	<body>
-		<h4>게시물 보기</h4>
+		
 		<div id="part1">
-			<div id="part1_1">	
-				<span class="title">사진</span> 
-				<span class="content">${photo.photo_original_file_name}</span> <br/>
-				
-				<span class="title">제목:</span> 
-				<span class="content">${photo.photo_title}</span> <br/>
-				
-				<span class="title">글쓴이:</span> 
-				<span class="content">${photo.uid}</span> <br/>
-				
-				<span class="title">날짜:</span> 
-				<span class="content">${photo.photo_date}</span> <br/>
-				
-				<span class="title">조회수:</span> 
-				<span class="content">${photo.photo_hitcount}</span> <br/>
-				
-				<span class="title">좋아요:</span>
-				<span class="content">${photo.photo_like}</span>
+		
+			<div id="part1_1">
+				<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="400px" height="400px"/>
 			</div>
 			
-			<div id="part1_2">
-				<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" width="100px" height="100px"/>
-				<button>다운로드</button>
-			</div>
-		</div>
+			<div id="part1_2">	
+				<span class="content">${photo.photo_title}</span> <br/>
+				
+				<span class="content">${nickname}</span> <br/>
+				
+				
+				<span class="content">${photo.photo_date}</span> <br/>
+				<span class="content">${photo.photo_place}</span> <br/>
+				<span class="title">조회수:</span> 
+				<span class="content">${photo.photo_hitcount}</span> <br/>
+			
+				
+				<span class="title">내용:</span> <br/>
+				<pre>${photo.photo_content}</pre>
+				
+				<span class="title">좋아요:</span>
+				<span class="content">${photo.photo_like}</span> <br/>
 		
-		<div id="part2">
-			<span class="title">내용:</span> <br/>
-			<pre>${photo.photo_content}</pre>
-		</div>
-		
+			<div id="buttonGroup">
+				<a href="photoList?album_no=${photo.album_no }">목록</a>
+				<a href="photoUpdateForm?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">수정</a>
+				<a href="removePhoto?album_no=${photo.album_no }&&photo_no=${photo.photo_no}">삭제</a>
+		</div>	
 		
 		
 		댓글<hr/>
@@ -171,9 +169,9 @@
 			<c:forEach var="comment" items="${commentList}">
 			<div>
 				<p>${comment.comment_content}</p>
-				<input type="hidden" id="<c:out value="${comment.comment_no}"/>" value="${comment.comment_no}"/>
+				<input type="hidden" class="${comment.comment_no}" value="${comment.comment_no}"/>
 				<%--<a href="removeComment?album_no=${photo.album_no}&&photo_no=${photo.photo_no}&&comment_no=${comment.comment_no}">댓글지우기</a> --%>
- 				<button id="deleteC" onclick="del()">댓글 지우기</button>	
+ 				<input type="button" id="deleteC" onclick="del()" value="댓글 지우기"/>	
  			</div>																												
  			</c:forEach>
 		</div>
@@ -185,11 +183,7 @@
 			<input type="button" id="submitC" onclick="comment()" value="댓글달기"/>
 		</form>
 		
-		
-		<div id="buttonGroup">
-			<a href="photoList?album_no=${photo.album_no }">목록</a>
-			<a href="photoUpdateForm?album_no=${photo.album_no}&&photo_no=${photo.photo_no}">수정</a>
-			<a href="removePhoto?album_no=${photo.album_no }&&photo_no=${photo.photo_no}">삭제</a>
-		</div>		
+		</div>
+	</div>
 	</body>
 </html>
