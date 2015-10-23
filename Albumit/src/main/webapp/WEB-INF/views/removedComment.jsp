@@ -1,12 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-	</head>
-	<body>
-
-	</body>
-</html>
+<%@ page contentType="application/json; charset=UTF-8"%>
+{
+	"c_no":"${c_no}"
+}

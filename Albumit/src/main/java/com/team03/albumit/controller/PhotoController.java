@@ -244,7 +244,7 @@ public class PhotoController {
 	
 	//댓글 지우기
 	@RequestMapping("/removeComment")
-	public String removeComment(@RequestParam("c_no")int c_no, HttpSession session){
+	public String removeComment(@RequestParam("c_no")int c_no, Model model, HttpSession session){
 		Member m = (Member)session.getAttribute("loginmember");
 		Comment comment = photoService.getComment(c_no);
 		
@@ -257,6 +257,8 @@ public class PhotoController {
 		}
 		
 		logger.info("comment_content"+comment.getComment_content());
+		
+		model.addAttribute(c_no);
 		
 		return "removedComment";
 	}
