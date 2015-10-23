@@ -67,10 +67,25 @@
    			 .unlike{
    			 	display:none;
    			 }
+   			 .like{
+   			 display:inline;
+   			 }
+   			 
+   		.grid__item {
+			padding: 10px 20px 20px !important;
+    		margin-bottom: 20px !important;
+    		margin-top: 20px !important;
+        	width: 270px !important;
+		}
+
+		.action {
+    		margin: 10px !important;
+    	}
 	</style>
 
 	<script>
 		$(function() {
+			
 			//사진 아래에 있는 버튼들의 이벤트 없애기 
 			
 			var support = { transitions: Modernizr.csstransitions },
@@ -129,10 +144,44 @@
 					});
 				}
 			});
-		})();
+		});
 		
-		function stopEvent() {
+		function likePhoto(a,b) {
 			event.stopPropagation();
+			var photoNo =a;
+			var albumNo =b;
+			$("."+photoNo+".like").css("display","none"); 
+			$("."+photoNo+".unlike").css("display","inline");
+			 $.ajax({
+				url: 'addLike',
+				data: {"photoNo": photoNo, "albumNo": albumNo},
+				type: 'POST',
+				dataType:'html',
+				success : function(data){
+					$("."+photoNo+".details").html(data);
+
+				}
+				
+			}); 
+		};
+		
+		function unlikePhoto(a,b) {
+			event.stopPropagation();
+			var photoNo =a;
+			var albumNo =b;
+			$("."+photoNo+".unlike").css("display","none"); 
+			$("."+photoNo+".like").css("display","inline");
+
+			 $.ajax({
+				url: 'minusLike',
+				data: {"photoNo": photoNo, "albumNo": albumNo},
+				type: 'POST',
+				dataType:'html',
+				success : function(data){
+					$("."+photoNo+".details").html(data);
+				}
+				
+			}); 
 		};
 		
 		function stopEvent() {
@@ -180,23 +229,25 @@
 					</a>
 					
 					<div class="photoListBtn">
-						<a class="like" onclick="likePhoto()" href=""><i class="fa fa-heart-o"></i> </a>
-						<a class="unlike" onclick="stopEvent()" href=""><i class="fa fa-heart"></i> </a>
-						<a onclick="stopEvent()" href=""><i class="fa fa-share-square-o"></i></a>
-						<a onclick="stopEvent()" href=""><i class="fa fa-ellipsis-v"></i></a>
-					</div>
+						<a class="like ${photo.photo_no}" onclick="likePhoto(${photo.photo_no},${photo.album_no} )" ><i class="fa fa-heart-o fa-lg"></i> </a>
+						<a class="unlike ${photo.photo_no}" onclick="unlikePhoto(${photo.photo_no},${photo.album_no})" ><i class="fa fa-heart fa-lg"></i> </a>
+						<a class="" onclick="take()"><i class="fa fa-share-square-o fa-lg"></i></a>
+						<a onclick="stopEvent()"><i class="fa fa-ellipsis-h fa-lg"></i></a>
 						
+					</div>
+					
 					<div class="description description--grid">
 							<h3>${photo.photo_title }</h3>
 							<%-- <p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p> --%>
-							<div class="details">
-								<ul>
+							<div class="details ${photo.photo_no}">
+								 <ul class="uldetails ${photo.photo_no}">
+									<li>ㅡ</li>
 									<li><span><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></span></li>
 									<li><span><a href="#"><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</a></span></li>
 									<li><span>조회수${photo.photo_hitcount}</span></li>
 									<li><span>1/1000</span></li>
 									<li><span>80</span></li>
-								</ul>
+								</ul>  
 							</div>
 							<p>덧글</p>
 							<iframe width="100%" height="300">

@@ -169,6 +169,12 @@ public class PhotoDao {
 		return rows;
 	}
 	
+	public int updateUnLike(int album_no, int photo_no) {
+		String sql = "update Photo set photo_like=photo_like-1 where album_no=? and photo_no=?";
+		int rows = jdbcTemplate.update(sql, album_no, photo_no);
+		return rows;
+	}
+	
 	public int selectCount() {
 		String sql = "select count(*) from Photo";
 		int rows = jdbcTemplate.queryForObject(sql, Integer.class);

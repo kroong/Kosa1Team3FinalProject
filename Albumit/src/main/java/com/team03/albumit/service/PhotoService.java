@@ -96,19 +96,32 @@ public class PhotoService {
 	public void addLike(int album_no, int photo_no) {
 		List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
 		
-		
-		
 		if(sharedphoto.size() == 0){
 			photoDao.updateLike(album_no,photo_no);
 			logger.info("null");
 			logger.info("photo_no"+photo_no);
 			logger.info("album_no"+album_no);
 		}else{
-			
 			sharedPhotoDao.updateLike(photo_no, album_no);
 			logger.info("not null");
 		}
 	}
+	
+	//사진 좋아요 감소
+		public void minusLike(int album_no, int photo_no) {
+			List<SharedPhoto> sharedphoto = sharedPhotoDao.selectByAlbumPhotoNo(album_no, photo_no);
+			
+			if(sharedphoto.size() == 0){
+				photoDao.updateUnLike(album_no,photo_no);
+				logger.info("null");
+				logger.info("photo_no"+photo_no);
+				logger.info("album_no"+album_no);
+			}else{
+				sharedPhotoDao.updateLike(photo_no, album_no);
+				logger.info("not null");
+			}
+		}
+	
 	
 	//사진신고
 	public void reportPhoto(ReportedPhoto reportedPhoto){
