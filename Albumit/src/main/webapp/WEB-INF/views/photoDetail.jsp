@@ -78,6 +78,55 @@
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
+	<script>
+		function comment(){
+			var c_content =$("#c_content").val();
+			var photo_no = $("#photo_no").val();
+			
+			
+				$.ajax({
+				      url: "addComment",
+				      type: 'POST',
+				      data: {"content": c_content, "photo_no": photo_no},
+				      cache: false,
+				      dataType: 'json',
+				      success: function(data) {
+				    	 
+				          $('#commentbox').append("</br>"+data.comment);
+				      },
+				      error: function(jqXHR, textStatus, errorThrown) {
+				          alert("error");
+				      }
+				});
+				
+		}
+			
+		function del(){
+			
+			var c_no = $("#${comment.comment_no}").val();
+			
+			$.ajax({
+			      url: "removeComment",
+			      type: 'POST',
+			      data: {"c_no": c_no},
+			      cache: false,
+			      dataType: 'json',
+			      success: function(data) {
+			    	  alert("data들어오나?"+data);
+			          $('#commentbox').append("</br>"+data.comment);
+			      },
+			      error: function(jqXHR, textStatus, errorThrown) {
+			          alert("error");
+			      }
+			});
+			
+			
+			
+		}
+		
+		
+		</script>
+	
 	<body>
 		<h4>게시물 보기</h4>
 		<div id="part1">
@@ -116,17 +165,22 @@
 		
 		댓글<hr/>
 		
-		<div>
+		<div id=commentbox>
 			<c:forEach var="comment" items="${commentList}">
-				<p>${comment.comment_content}</p><a href="removeComment?album_no=${photo.album_no}&&photo_no=${photo.photo_no}&&comment_no=${comment.comment_no}">댓글지우기</a>
-			</c:forEach>
+			<div>
+				<p>${comment.comment_content}</p>
+				<input type="hidden" id="${comment.comment_no}" value="${comment.comment_no}"/>
+				<%--<a href="removeComment?album_no=${photo.album_no}&&photo_no=${photo.photo_no}&&comment_no=${comment.comment_no}">댓글지우기</a> --%>
+ 				<button id="deleteC" onclick="del()">댓글 지우기</button>	
+ 			</div>																												
+ 			</c:forEach>
 		</div>
 		
 		
-		<form method="post" action="addComment">
-			<input type="hidden" name="photo_no" value="${photo.photo_no}">
-			<input type="text" name="comment_content" value="${comment_content}"/>
-			<input type="submit" value="댓글달기"/>
+		<form method="post">
+			<input type="hidden" id="photo_no" name="photo_no" value="${photo.photo_no}">
+			<input type="text"  id ="c_content" name="comment_content" value="${comment_content}"/>
+			<input type="button" id="submitC" onclick="comment()" value="댓글달기"/>
 		</form>
 		
 		

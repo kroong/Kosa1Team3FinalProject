@@ -47,8 +47,16 @@
          	nav ul li:nth-child(4){border-left:none;}  
          	nav ul li:last-child{border-left:none;} 
          	 
-		    .menu a{cursor:pointer;}
+		    .menu a{cursor:pointer; color:white !important}
    			 .menu .hide{display:none;}
+   			 
+   			.photoListBtn{
+   			} 
+   			 #a{
+   			 height:500px;
+   			 width:300px;
+   			 background-color: gray;
+   			 }
 	</style>
 
 
@@ -59,7 +67,7 @@
 	
 	
 	
-		<nav>
+		<nav >
 		<ul>
 			<li>Post </li>
 			<li class="menu"><a>Move to </a> 
@@ -89,13 +97,12 @@
 	<div class="content">
 		<div class="grid">
 			<c:forEach  var="photo" items="${laList}">
+				
+			
 			<div class="grid__item" data-size="100x100">
-					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap"><img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/>
-					<ul>
-						<li class="add_left"><a href="#"><i class="fa fa-heart-o"></i></a></li>
-						<li class="add_right"><a href="#"><i class="fa fa-share-square-o"></i></a></li>
-						<li class="add_right"><a href="#"><i class="fa fa-ellipsis-v"></i></a></li>
-					</ul>
+					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap">
+					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
+				
 					<div class="description description--grid">
 							<h3>${photo.photo_title }</h3>
 							<p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p>
@@ -105,12 +112,18 @@
 									<li><span><a href="#"><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</a></span></li>
 									<li><span>조회수${photo.photo_hitcount}</span></li>
 									<li><span>1/1000</span></li>
-									<li></i><span>80</span></li>
+									<li><span>80</span></li>
 								</ul>
 							</div>
-						</div>
-					</a>
+					</div>
+											<div class="photoListBtn ">
+							<a href="login"><i class="fa fa-heart-o"></i></a>
+							<a><i class="fa fa-share-square-o"></i></a>
+							<a ><i class="fa fa-ellipsis-v"></i></a>
+						</div>	
+
 				</div>
+		
 			</c:forEach>
 		</div>
 		<!-- /grid -->
@@ -126,7 +139,12 @@
 	<script src="${pageContext.request.contextPath}/resources/js/classie.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
+	
 		(function() {
+			
+			//사진 아래에 있는 버튼들의 이벤트 없애기 
+			
+			
 			var support = { transitions: Modernizr.csstransitions },
 				// transition end event name
 				transEndEventNames = { 'WebkitTransition': 'webkitTransitionEnd', 'MozTransition': 'transitionend', 'OTransition': 'oTransitionEnd', 'msTransition': 'MSTransitionEnd', 'transition': 'transitionend' },
@@ -186,7 +204,7 @@
 	<!-- ------------------------------------------------------------------- -->
 	<div id="popularity">
 		<hr/><h4>좋아요순</h4><hr/>
-		
+		<div id="1">려ㅣ</div>
 		
 		
 		
