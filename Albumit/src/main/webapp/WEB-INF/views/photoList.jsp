@@ -171,9 +171,9 @@
 					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
 					
 					<div class="photoListBtn">
-						<a onclick="test()" href="${pageContext.request.contextPath}"><i class="fa fa-heart-o"></i></a>
-						<a><i class="fa fa-share-square-o"></i></a>
-						<a ><i class="fa fa-ellipsis-v"></i></a>
+						<a onclick="test()" href=""><i class="fa fa-heart-o"></i></a>
+						<a onclick="test()" href=""><i class="fa fa-share-square-o"></i></a>
+						<a onclick="test()" href=""><i class="fa fa-ellipsis-v"></i></a>
 					</div>
 				
 						
