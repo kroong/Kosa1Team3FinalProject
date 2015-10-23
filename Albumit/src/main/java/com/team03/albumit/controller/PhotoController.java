@@ -275,25 +275,41 @@ public class PhotoController {
 	}
 	
 	//좋아요 누르기
-	@RequestMapping(value="/addLike", method=RequestMethod.GET)
-	public String addLike(@RequestParam("album_no")String album_no, @RequestParam("photo_no")int photo_no, Model model, HttpSession session){
-		int ano = Integer.parseInt(album_no);
-		photoService.addLike(ano, photo_no);
-		logger.info("photo_no"+photo_no);
-		logger.info("album_no"+album_no);
+	@RequestMapping(value="/addLike", method=RequestMethod.POST)
+	public String addLike( @RequestParam("photoNo")int photoNo, @RequestParam("albumNo")int albumNo, Model model, HttpSession session){
+		System.out.println("좋아요 개수 증가!!!");
+
+		photoService.addLike(albumNo, photoNo);
 		
-		Photo photo = photoService.getPhoto(photo_no);
-		int photo_like = photo.getPhoto_like();
-		model.addAttribute("photo_like", photo_like);
+		List<Photo> latest = photoService.showLaPhoto(albumNo);
+		List<Photo> popularest =photoService.showLiPhoto(albumNo);
+		Photo likePhoto = photoService.getPhotoBy(photoNo, albumNo);
 		
-		return "/like";
+		model.addAttribute("laList",latest);
+		model.addAttribute("liList",popularest);
+		model.addAttribute("photo",likePhoto);
+		System.out.println("사진 번호:"+photoNo);
+		
+		return "likePhoto";
 	}
-	
-	//detail Design
-		@RequestMapping(value="/detailDesign", method=RequestMethod.GET)
-		public String design(Model model, HttpSession session){
+
+
+	@RequestMapping(value="/minusLike", method=RequestMethod.POST)
+	public String minusLike( @RequestParam("photoNo")int photoNo, @RequestParam("albumNo")int albumNo, Model model, HttpSession session){
+		System.out.println("좋아요 개수 감소!!!");
+		photoService.minusLike(albumNo, photoNo);
 		
-			return "/detailDesign";
-		}
-	
+		List<Photo> latest = photoService.showLaPhoto(albumNo);
+		List<Photo> popularest =photoService.showLiPhoto(albumNo);
+		
+		Photo UnlikePhoto = photoService.getPhotoBy(photoNo, albumNo);
+		model.addAttribute("photo",UnlikePhoto);
+		model.addAttribute("laList",latest);
+		model.addAttribute("liList",popularest);
+		
+		System.out.println("사진 번호:"+photoNo);
+		
+		return "likePhoto";
+	}
+
 }

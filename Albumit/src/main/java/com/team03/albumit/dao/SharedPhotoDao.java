@@ -50,6 +50,12 @@ public class SharedPhotoDao {
 			return rows;
 		}
 		
+		public int updateUnLike(int photo_no, int album_no) {
+			String sql = "update Sharedphoto set share_like=share_like-1 where photo_no=? and album_no=?";
+			int rows = jdbcTemplate.update(sql, photo_no, album_no);
+			return rows;
+		}
+		
 		public int updateHitcount(int photo_no, int album_no) {
 			String sql = "update Sharedphoto set share_hitcount=share_hitcount+1 where photo_no=? and album_no=?";
 			int rows = jdbcTemplate.update(sql, photo_no, album_no);
