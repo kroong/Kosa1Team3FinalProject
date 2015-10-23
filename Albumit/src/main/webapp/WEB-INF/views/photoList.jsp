@@ -6,12 +6,19 @@
 <html lang="en" class="no-js">
 
 <head>
+
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/font/font-awesome-4.3.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style2.css" />
 	<script src="${pageContext.request.contextPath}/resources/js/modernizr-custom.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/imagesloaded.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/masonry.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/classie.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script type="text/javascript" src='${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js'></script>
+	
 	<style type="text/css">
 	body{
 		color:white;
@@ -50,7 +57,7 @@
 		    .menu a{cursor:pointer; color:white !important}
    			 .menu .hide{display:none;}
    			 
-   			.photoListBtn{
+   			.photoListBtn{ position: absolute
    			} 
    			 #a{
    			 height:500px;
@@ -59,88 +66,9 @@
    			 }
 	</style>
 
-
-</head>
-		
-<body class="demo-2">
-	
-	
-	
-	
-		<nav >
-		<ul>
-			<li>Post </li>
-			<li class="menu"><a>Move to </a> 
-				<ul class="hide">
-					<li>1</li>
-					<li>2</li>
-				</ul>
-			
-			</li>
-
-			<li>Share Album</li>
-			<li><button>Confirm</button></li>
-			<li>
-				<select id="photoArray" size="1" onchange="arrayfun(this)">
-			<option value="latest" selected="selected" >최신순</option>
-			<option value="popularity">인기순</option>
-		</select></li>
-		</ul>
-
-		</nav>
-				
-
-	<div id="latest">
-	<h4>최신순 안되나요</h4>
-	<hr/>
-	
-	<div class="content">
-		<div class="grid">
-			<c:forEach  var="photo" items="${laList}">
-				
-			
-			<div class="grid__item" data-size="100x100">
-					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap">
-					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
-				
-					<div class="description description--grid">
-							<h3>${photo.photo_title }</h3>
-							<p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p>
-							<div class="details">
-								<ul>
-									<li><span><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></span></li>
-									<li><span><a href="#"><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</a></span></li>
-									<li><span>조회수${photo.photo_hitcount}</span></li>
-									<li><span>1/1000</span></li>
-									<li><span>80</span></li>
-								</ul>
-							</div>
-					</div>
-											<div class="photoListBtn ">
-							<a href="login"><i class="fa fa-heart-o"></i></a>
-							<a><i class="fa fa-share-square-o"></i></a>
-							<a ><i class="fa fa-ellipsis-v"></i></a>
-						</div>	
-
-				</div>
-		
-			</c:forEach>
-		</div>
-		<!-- /grid -->
-		<div class="preview">
-			<button class="action action--close"><i class="fa fa-times"></i><span class="text-hidden">Close</span></button>
-			<div class="description description--preview"></div>
-		</div>
-		<!-- /preview -->
-	</div>
-	<!-- /container -->
-	<script src="${pageContext.request.contextPath}/resources/js/imagesloaded.pkgd.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/masonry.pkgd.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/classie.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script>
 	
-		(function() {
+		$(function() {
 			
 			//사진 아래에 있는 버튼들의 이벤트 없애기 
 			
@@ -201,6 +129,77 @@
 			});
 		})();
 	</script>
+
+</head>
+		
+<body class="demo-2">
+		<nav >
+		<ul>
+			<li>Post </li>
+			<li class="menu"><a>Move to </a> 
+				<ul class="hide">
+					<li>1</li>
+					<li>2</li>
+				</ul>
+			
+			</li>
+
+			<li>Share Album</li>
+			<li><button>Confirm</button></li>
+			<li>
+				<select id="photoArray" size="1" onchange="arrayfun(this)">
+			<option value="latest" selected="selected" >최신순</option>
+			<option value="popularity">인기순</option>
+		</select></li>
+		</ul>
+
+		</nav>
+				
+	<div id="latest">
+	<h4>최신순 안되나요</h4>
+	<hr/>
+	
+	<div class="content">
+		<div class="grid">
+			<c:forEach  var="photo" items="${laList}">
+				
+			<div class="photoListBtn ">
+							<a href="login"><i class="fa fa-heart-o"></i></a>
+							<a><i class="fa fa-share-square-o"></i></a>
+							<a ><i class="fa fa-ellipsis-v"></i></a>
+						</div>
+			<div class="grid__item" data-size="100x100">
+					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap">
+					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
+				
+				
+						
+					<div class="description description--grid">
+							<h3>${photo.photo_title }</h3>
+							<p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p>
+							<div class="details">
+								<ul>
+									<li><span><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></span></li>
+									<li><span><a href="#"><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</a></span></li>
+									<li><span>조회수${photo.photo_hitcount}</span></li>
+									<li><span>1/1000</span></li>
+									<li><span>80</span></li>
+								</ul>
+							</div>
+					</div>
+				</div>
+		
+			</c:forEach>
+		</div>
+		<!-- /grid -->
+		<div class="preview">
+			<button class="action action--close"><i class="fa fa-times"></i><span class="text-hidden">Close</span></button>
+			<div class="description description--preview"></div>
+		</div>
+		<!-- /preview -->
+	</div>
+	<!-- /container -->
+	
 	<!-- ------------------------------------------------------------------- -->
 	<div id="popularity">
 		<hr/><h4>좋아요순</h4><hr/>
@@ -220,9 +219,6 @@
 				<th style="width:100px">좋아요</th>
 				
 			</tr>
-
-			
-			
 			<c:forEach var="photo" items="${liList}">
 				<tr>
 					<td>${photo.photo_no}<input name="photo_no" type ="hidden" value="${photo.photo_no}"/></td>
@@ -239,14 +235,9 @@
 		</table> 
 		</div>
 		
-	
-		
-		
-		
 		<div id="buttonGroup">
 			<a href="addPhoto?album_no=${album_no}">글쓰기</a>
 		</div>
-	
+	</div>
 </body>
-
 </html>
