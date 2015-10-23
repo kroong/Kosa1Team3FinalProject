@@ -64,6 +64,9 @@
    			 width:300px;
    			 background-color: gray;
    			 }
+   			 .unlike{
+   			 	display:none;
+   			 }
 	</style>
 
 	<script>
@@ -126,8 +129,11 @@
 			});
 		})();
 		
-		function test() {
-			console.log(event);
+		function stopEvent() {
+			event.stopPropagation();
+		};
+		
+		function stopEvent() {
 			event.stopPropagation();
 		};
 	</script>
@@ -171,9 +177,10 @@
 					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
 					
 					<div class="photoListBtn">
-						<a onclick="test()" href=""><i class="fa fa-heart-o"></i></a>
-						<a onclick="test()" href=""><i class="fa fa-share-square-o"></i></a>
-						<a onclick="test()" href=""><i class="fa fa-ellipsis-v"></i></a>
+						<a class="like" onclick="likePhoto()" href=""><i class="fa fa-heart-o"></i> </a>
+						<a class="unlike" onclick="stopEvent()" href=""><i class="fa fa-heart"></i> </a>
+						<a onclick="stopEvent()" href=""><i class="fa fa-share-square-o"></i></a>
+						<a onclick="stopEvent()" href=""><i class="fa fa-ellipsis-v"></i></a>
 					</div>
 				
 						

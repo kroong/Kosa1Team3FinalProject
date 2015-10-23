@@ -319,7 +319,7 @@
 		      background-color: white;
 		      margin: 0 auto;
 		      /* position: fixed; */
-		      
+		      scroll: no;
 		     }
 		      
 		     #pagewrapper{
