@@ -67,11 +67,8 @@
 	</style>
 
 	<script>
-	
 		$(function() {
-			
 			//사진 아래에 있는 버튼들의 이벤트 없애기 
-			
 			
 			var support = { transitions: Modernizr.csstransitions },
 				// transition end event name
@@ -128,6 +125,11 @@
 				}
 			});
 		})();
+		
+		function test() {
+			console.log(event);
+			event.stopPropagation();
+		};
 	</script>
 
 </head>
@@ -163,15 +165,16 @@
 		<div class="grid">
 			<c:forEach  var="photo" items="${laList}">
 				
-			<div class="photoListBtn ">
-							<a href="login"><i class="fa fa-heart-o"></i></a>
-							<a><i class="fa fa-share-square-o"></i></a>
-							<a ><i class="fa fa-ellipsis-v"></i></a>
-						</div>
+			
 			<div class="grid__item" data-size="100x100">
 					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap">
 					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
-				
+					
+					<div class="photoListBtn">
+						<a onclick="test()" href="${pageContext.request.contextPath}"><i class="fa fa-heart-o"></i></a>
+						<a><i class="fa fa-share-square-o"></i></a>
+						<a ><i class="fa fa-ellipsis-v"></i></a>
+					</div>
 				
 						
 					<div class="description description--grid">
