@@ -30,6 +30,12 @@
 			
 			loadPageinDIV("allAlbumList"); */
 			
+			//스크롤이 생기지 않도록 iframe 높이 조정-----------------------
+			var winHeight = $(window).height();
+			var headerHeight = $("#large-header").height();
+			$("#showListBody").height(winHeight-headerHeight-50);
+			//----------------------------------------------------
+			
 			$("#dialog").dialog({
 				autoOpen : false,
 				height : 500,
