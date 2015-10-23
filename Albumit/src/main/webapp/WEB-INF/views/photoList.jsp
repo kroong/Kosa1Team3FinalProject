@@ -96,6 +96,8 @@
 					y : 1
 				},
 				onOpenItem : function(instance, item) {
+					console.log("aaa");
+					
 					instance.items.forEach(function(el) {
 						if(item != el) {
 							var delay = Math.floor(Math.random() * 50);
@@ -168,18 +170,18 @@
 			
 			<div class="grid__item" data-size="100x100">
 					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap">
-					<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/></a>
+						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/>
+					</a>
 					
 					<div class="photoListBtn">
 						<a onclick="test()" href="${pageContext.request.contextPath}"><i class="fa fa-heart-o"></i></a>
 						<a><i class="fa fa-share-square-o"></i></a>
 						<a ><i class="fa fa-ellipsis-v"></i></a>
 					</div>
-				
 						
 					<div class="description description--grid">
 							<h3>${photo.photo_title }</h3>
-							<p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p>
+							<%-- <p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p> --%>
 							<div class="details">
 								<ul>
 									<li><span><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></span></li>
@@ -189,6 +191,9 @@
 									<li><span>80</span></li>
 								</ul>
 							</div>
+							<p>덧글</p>
+							<iframe width="100%" height="300">
+							</iframe>
 					</div>
 				</div>
 		
