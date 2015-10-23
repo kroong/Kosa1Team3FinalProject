@@ -67,25 +67,10 @@
    			 .unlike{
    			 	display:none;
    			 }
-   			 .like{
-   			 display:inline;
-   			 }
-   			 
-   		.grid__item {
-			padding: 10px 20px 20px !important;
-    		margin-bottom: 20px !important;
-    		margin-top: 20px !important;
-        	width: 270px !important;
-		}
-
-		.action {
-    		margin: 10px !important;
-    	}
 	</style>
 
 	<script>
 		$(function() {
-			
 			//사진 아래에 있는 버튼들의 이벤트 없애기 
 			
 			var support = { transitions: Modernizr.csstransitions },
@@ -114,8 +99,6 @@
 					y : 1
 				},
 				onOpenItem : function(instance, item) {
-					console.log("aaa");
-					
 					instance.items.forEach(function(el) {
 						if(item != el) {
 							var delay = Math.floor(Math.random() * 50);
@@ -124,6 +107,7 @@
 							el.style.WebkitTransform = 'scale3d(0.1,0.1,1)';
 							el.style.transform = 'scale3d(0.1,0.1,1)';
 							el.style.opacity = 0;
+						} else {
 						}
 					});
 				},
@@ -144,44 +128,10 @@
 					});
 				}
 			});
-		});
+		})();
 		
-		function likePhoto(a,b) {
+		function stopEvent() {
 			event.stopPropagation();
-			var photoNo =a;
-			var albumNo =b;
-			$("."+photoNo+".like").css("display","none"); 
-			$("."+photoNo+".unlike").css("display","inline");
-			 $.ajax({
-				url: 'addLike',
-				data: {"photoNo": photoNo, "albumNo": albumNo},
-				type: 'POST',
-				dataType:'html',
-				success : function(data){
-					$("."+photoNo+".details").html(data);
-
-				}
-				
-			}); 
-		};
-		
-		function unlikePhoto(a,b) {
-			event.stopPropagation();
-			var photoNo =a;
-			var albumNo =b;
-			$("."+photoNo+".unlike").css("display","none"); 
-			$("."+photoNo+".like").css("display","inline");
-
-			 $.ajax({
-				url: 'minusLike',
-				data: {"photoNo": photoNo, "albumNo": albumNo},
-				type: 'POST',
-				dataType:'html',
-				success : function(data){
-					$("."+photoNo+".details").html(data);
-				}
-				
-			}); 
 		};
 		
 		function stopEvent() {
@@ -221,37 +171,85 @@
 	<div class="content">
 		<div class="grid">
 			<c:forEach  var="photo" items="${laList}">
-				
-			
-			<div class="grid__item" data-size="100x100">
+		
+				<div class="grid__item" data-size="100x100">
 					<a href="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}" class="img-wrap">
 						<img src="${pageContext.request.contextPath}/resources/uploadfiles/${photo.photo_filesystem_name}"/>
 					</a>
 					
 					<div class="photoListBtn">
-						<a class="like ${photo.photo_no}" onclick="likePhoto(${photo.photo_no},${photo.album_no} )" ><i class="fa fa-heart-o fa-lg"></i> </a>
-						<a class="unlike ${photo.photo_no}" onclick="unlikePhoto(${photo.photo_no},${photo.album_no})" ><i class="fa fa-heart fa-lg"></i> </a>
-						<a class="" onclick="take()"><i class="fa fa-share-square-o fa-lg"></i></a>
-						<a onclick="stopEvent()"><i class="fa fa-ellipsis-h fa-lg"></i></a>
-						
+						<a class="like" onclick="likePhoto()" href=""><i class="fa fa-heart-o"></i> </a>
+						<a class="unlike" onclick="stopEvent()" href=""><i class="fa fa-heart"></i> </a>
+						<a onclick="stopEvent()" href=""><i class="fa fa-share-square-o"></i></a>
+						<a onclick="stopEvent()" href=""><i class="fa fa-ellipsis-v"></i></a>
 					</div>
-					
+						
 					<div class="description description--grid">
-							<h3>${photo.photo_title }</h3>
-							<%-- <p>${photo.photo_content}<em>&mdash; ${photo.uid }</em></p> --%>
-							<div class="details ${photo.photo_no}">
-								 <ul class="uldetails ${photo.photo_no}">
-									<li>ㅡ</li>
-									<li><span><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></span></li>
-									<li><span><a href="#"><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</a></span></li>
-									<li><span>조회수${photo.photo_hitcount}</span></li>
-									<li><span>1/1000</span></li>
-									<li><span>80</span></li>
-								</ul>  
-							</div>
-							<p>덧글</p>
-							<iframe width="100%" height="300">
-							</iframe>
+						<h3 id="desc_title" style="margin-bottom: 20px">${photo.photo_title}</h3>
+						<%-- <div class="details">
+							<ul>
+								<li><span><fmt:formatDate value="${photo.photo_date}" pattern="yyyy-MM-dd"/></span></li>
+								<li><span><a href="#"><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</a></span></li>
+								<li><span>조회수${photo.photo_hitcount}</span></li>
+								<li><span>1/1000</span></li>
+								<li><span>80</span></li>
+							</ul>
+						</div> --%>
+						
+						<table width="100%" style="font-size: small;">
+							<tr style="height:70px"><td style="vertical-align: middle;">
+								<table><tr>
+									<td><img src="${pageContext.request.contextPath}/resources/image/watercolor.jpg" width="50px" height="50px"/></td>
+									<td><span style="margin-left: 20px">${nickname}</span></td>
+								</tr></table>
+							</td></tr>
+							<tr style="height:50px"><td>
+								<span style="width:150px;display:inline-block;">${photo.photo_date}</span>
+								<span style="width:150px;display:inline-block;">조회수: ${photo.photo_hitcount}</span>
+								<span style="width:150px;display:inline-block;">${photo.photo_place}</span>
+							</td></tr>
+							<tr style="height:50px"><td>
+								<div style="width:100%; height:100px; border: 1px solid white;">${photo.photo_content}</div>
+							</td></tr>
+							<tr style="height:50px"><td>
+								<span style="width: 150px; display: inline-block;"><a href="#"><i class="fa fa-heart-o"></i>좋아요${photo.photo_like}</a></span>
+								<span style="width: 150px; display: inline-block;"><a href="#"><i class="fa fa-heart-o"></i>퍼가기${photo.photo_like}</a></span>
+								<span style="width: 150px; display: inline-block;"><a href="#"><i class="fa fa-heart-o"></i>땡땡댕${photo.photo_like}</a></span>
+							</td></tr>
+							<tr style="height:50px"><td>
+								<div style="width:100%; height:200px; padding:10px; overflow-y:auto;">
+									<table style="width:100%; border-bottom: 1px dotted gray;"><tr>
+										<td style="width:40px">
+											<img width="40px" height="40px" src="${pageContext.request.contextPath}/resources/image/watercolor.jpg"/>
+										</td>
+										<td>
+											<table style="width:100%;">
+												<tr><td>
+													<table style="width:100%;">
+														<tr>
+															<td style="width:20px;">홍길동</td>
+															<td style="width:60px;">날짜</td>
+															<td style="width:20px;text-align: right;">삭제</td>
+														</tr>
+													</table>
+												</td></tr>
+												<tr><td>
+													<div>댓글</div>
+												</td></tr>
+											</table>
+										</td>
+									</tr></table>
+								</div>
+								<div>
+									<table style="width:100%; margin-top: 3px;">
+										<tr>
+											<td style="width:100%"><textarea style="width:100%; height:50px;"></textarea></td>
+											<td><button style="width:50px; height:50px;">확인</button></td>
+										</tr>
+									</table>
+								</div>
+							</td></tr>
+						</table>
 					</div>
 				</div>
 		
