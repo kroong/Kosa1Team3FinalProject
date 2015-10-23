@@ -672,19 +672,16 @@
 		<div id="pagewrapper">
 <!-- ////////////////////////-메뉴바 부분-///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 			
-       <%--              <canvas id="demo-canvas">	</canvas> --%>
 			 <div id="large-header" class="large-header">
 			
 			<!-- <div id="header" > -->
 			<!-- -------------------------------------------------------------------------------------------------------------------- -->
 				<div id="menu_wrapper">
 				<!-- ------ 1. Albumit 로고 --------------------------------------------------------------------------------------------- -->
-				
 					<div id="albumitlogo">
-						<img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="Albumit" title="Albumit" id="logo" >
+						<a href="main"><img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="Albumit" title="Albumit" id="logo" ></a>
 					</div>
 					<!-- -------------------------------------------------------------------------------------------------------------------- -->
-
 <!-- -------2. 내정보----------------------------------------------------------------------------------------------------- -->
 					<!-- <div class="menu"> -->
 					<div id="btn_myinfo"  class="menu">

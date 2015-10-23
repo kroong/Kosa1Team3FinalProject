@@ -219,28 +219,38 @@ public class PhotoController {
 	
 	//댓글 달기
 	@RequestMapping("/addComment")
-	public String addComment(Comment comment,Photo photo, Model model, HttpSession session){
+	public String addComment(@RequestParam("content")String c_content,@RequestParam("photo_no")int photo_no, Photo photo, Model model, HttpSession session){
+		System.out.println("로고확인!!!");
+		System.out.println("댓글:"+c_content);
 		Member m = (Member)session.getAttribute("loginmember");
-		comment.setCwriter(m.getMember_nickname());
-		photoService.addComment(comment);
-		List<Comment> commentList =photoService.listComment(comment.getPhoto_no());
+		System.out.println("&&&&&&&&&&&&&&&first");
+		Comment comment =new Comment();
 		
-		logger.info("comment"+commentList.get(1).getComment_content());
+		comment.setUid(m.getUid());
+		comment.setPhoto_no(photo_no);
+		comment.setComment_content(c_content);
+		comment.setCwriter(m.getMember_nickname());
+		System.out.println("&&&&&&&&&&&&&&&front");
+		photoService.addComment(comment);
+		System.out.println("&&&&&&&&&&&&&&&back");
+		
+		List<Comment> commentList =photoService.listComment(comment.getPhoto_no());
+
 		model.addAttribute("comment", comment);
 		model.addAttribute("commentList", commentList);
 		
-		return "redirect:/photoDetail?photo_no="+photo.getPhoto_no()+"&&album_no="+photo.getAlbum_no();
+		return "comment";
 	}
 	
 	//댓글 지우기
 	@RequestMapping("/removeComment")
-	public String removeComment(int comment_no, int album_no, int photo_no, HttpSession session){
+	public String removeComment(@RequestParam("c_no")int c_no, HttpSession session){
 		Member m = (Member)session.getAttribute("loginmember");
-		Comment comment = photoService.getComment(comment_no);
+		Comment comment = photoService.getComment(c_no);
 		
 		
-		if(comment.getCwriter().equals(m.getMember_nickname())){
-			photoService.removeComment(comment_no);
+		if(comment.getUid() == m.getUid()){
+			photoService.removeComment(c_no);
 		
 		}else{
 			
@@ -248,7 +258,7 @@ public class PhotoController {
 		
 		logger.info("comment_content"+comment.getComment_content());
 		
-		return "redirect:/photoDetail?photo_no="+photo_no+"&&album_no="+album_no;
+		return "removedComment";
 	}
 	
 	//댓글 수정
