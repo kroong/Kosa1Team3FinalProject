@@ -123,6 +123,7 @@
 			$(function() {
 				$("#albumDeleteButton").on("click", function() {
 					$("#delete_confirm_window").dialog("open");
+					$(".ui-dialog-titlebar").hide();
 				});
 				
 				$("#delete_confirm_window").dialog({
