@@ -672,6 +672,44 @@
 						
 		</style>
 	
+	<!-- 푸터부분 -->	
+	<style type="text/css">
+	
+	footer{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 30px;
+	background-color: black;
+	border-top: 1px solid #222;
+	z-index: 5;
+	}
+	footer ul{
+	width: 40%;
+	height: 30px;
+	float: left;
+	margin-left: 30px;
+	margin-top: 3px;
+	}
+	footer ul li{
+	float: left;
+	width: 20%;
+	text-align: center;
+	color: white;
+	list-style: none;
+	font: 10px/2 obitron;
+	vertical-align: middle;
+	}
+	footer span{
+	font: 10px/2 obitron;
+	color: white;
+	float: right;
+	letter-spacing: 1px;
+	margin-right: 40px;
+	margin-top: 4px;
+	}	
+		</style>
 	</head>
 	
 	<body>
@@ -763,6 +801,16 @@
 		
 <!-- ////////////////////////-메뉴바 끝///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<iframe id="showListBody" src="allAlbumList"></iframe>
+		
+<!-- //푸터// -->
+	<footer> 
+		<ul>
+			<li>Team3 Project</li>
+			<li>2015-10-31</li>
+			<li>TestVer.</li>
+		</ul>
+		<span>Copyright © 2015 ALBUMIT ALL Rights Reserved.</span>
+	</footer>
 		
 		<!-- -----내정보-------------------------------------------------------------------------------------------- -->
 			<div id="dialog">
